@@ -112,13 +112,14 @@ header {
         margin: 80px 10%;
     }
     header {
-        margin: 0 20px;
+        margin: 0 10px;
     }
     .page-title {
-        font-size: 30px;
+        font-size: 20px;
+        margin-left: 10px;
     }
     .navigator-container {
-        font-size: 25px;
+        font-size: 15px;
         margin-right:20px;
     }
     .main-list-title {
