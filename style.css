@@ -16,6 +16,11 @@ a {
     text-decoration: none;
     color: #F1F6F9;
 }
+ul {
+    margin: 0;
+    padding-left: 0;
+    list-style: none;
+}
 body {
     margin: 0;
     height: 100vh;
@@ -97,13 +102,11 @@ header {
 .main-list-title {
     font-weight: 700;
     min-width: 140px;
+    margin-right: 20px;
+    margin-bottom: 20px;
 }
 .main-list-title > p {
     border-right: #F1F6F9 solid 3px;
-
-}
-.main-list-content {
-    margin-left: 20px;
 }
 /* main end */
 
@@ -123,6 +126,15 @@ header {
         margin-right:20px;
     }
     .main-list-title {
-        min-width: 100px;
+        min-width: 90px;
+    }
+    .main-list-title > p {
+        border-right: none;
+    }
+    .main-list-item {
+        flex-direction: column;
+    }
+    .copyright {
+        margin-left: 30px;
     }
 }
