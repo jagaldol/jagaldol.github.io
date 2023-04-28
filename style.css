@@ -10,7 +10,7 @@
     font-weight: normal;
 }
 p {
-    margin: 0;
+    margin-top: 0;
 }
 a {
     text-decoration: none;
@@ -55,7 +55,7 @@ header {
     flex-grow: 1;
 }
 .page-title {
-    font-size: 40px;
+    font-size: 30px;
     margin-left: 40px;
 }
 .navigator-container {
@@ -63,7 +63,8 @@ header {
     justify-content: right;
     display: flex;
     margin-right:80px;
-    font-size: 30px;
+    font-size: 25px;
+    overflow: hidden;
 }
 .header-bar {
     height: 5px;
@@ -126,7 +127,7 @@ header {
         margin-right:20px;
     }
     .main-list-title {
-        min-width: 90px;
+        min-width: 80px;
     }
     .main-list-title > p {
         border-right: none;
