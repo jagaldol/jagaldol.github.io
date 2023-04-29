@@ -21,6 +21,9 @@ ul {
     padding-left: 0;
     list-style: none;
 }
+.main-list-content {
+    
+}
 body {
     margin: 0;
     height: 100vh;
@@ -85,9 +88,9 @@ header {
     align-items: center;
 }
 .introduction-profile-image {
+    position:relative;
     background-image: url("/assets/images/profile-transparent.png");
     width: 86px;
-    min-width: 86px;
     height: 86px;
     background-size: contain;
     background-color: #F1F6F9;
@@ -107,13 +110,15 @@ header {
     margin-bottom: 20px;
 }
 .main-list-title > p {
+    padding:3px 0 3px 10px;
+    background-color: #00427E;
     border-right: #F1F6F9 solid 3px;
 }
 /* main end */
 
 @media(width<768px) {
     .main {
-        margin: 80px 10%;
+        margin: 80px 5%;
     }
     header {
         margin: 0 10px;
@@ -127,7 +132,8 @@ header {
         margin-right:20px;
     }
     .main-list-title {
-        min-width: 80px;
+        min-width: 86px;
+        margin-right:10px;
     }
     .main-list-title > p {
         border-right: none;
