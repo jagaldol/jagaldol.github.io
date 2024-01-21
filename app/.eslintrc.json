@@ -23,8 +23,9 @@
   "rules": {
     "import/no-absolute-path": "off", // public 폴더 읽기 위해 필요
     "react/react-in-jsx-scope": "off", // react 17부턴 import 안해도돼서 기능 끔
+    "import/no-extraneous-dependencie": "off",
+    "import/extensions" : "off",
     // 경고표시, 파일 확장자를 .ts나 .tsx 모두 허용함
-    "react/jsx-filename-extension": ["warn", { "extensions": [".ts", ".tsx"] }],
-    "import/extensions" : "off"
+    "react/jsx-filename-extension": ["warn", { "extensions": [".ts", ".tsx"] }]
   }
 }
