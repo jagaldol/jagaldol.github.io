@@ -21,8 +21,8 @@
     "prettier" // eslint-config-prettier prettier와 중복된 eslint 규칙 제거
   ],
   "rules": {
+    "import/extensions": "off",
     "import/no-extraneous-dependencies": "off",
-    "react/react-in-jsx-scope": "off", // react 17부턴 import 안해도돼서 기능 끔
     "react/function-component-definition": [
       2,
       { "namedComponents": ["arrow-function", "function-declaration"] }

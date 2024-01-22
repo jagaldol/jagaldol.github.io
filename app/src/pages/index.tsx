@@ -1,8 +1,13 @@
-import * as React from 'react'
 import type { HeadFC, PageProps } from 'gatsby'
+import React from 'react'
+import Navigator from '@/containers/Navigator'
 
 const IndexPage: React.FC<PageProps> = () => {
-  return <main />
+  return (
+    <main>
+      <Navigator />
+    </main>
+  )
 }
 
 export default IndexPage

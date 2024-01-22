@@ -39,6 +39,13 @@ const config: GatsbyConfig = {
       },
       __key: 'pages',
     },
+    {
+      resolve: `gatsby-plugin-alias-imports`,
+      options: {
+        alias: { '@': 'src' },
+        extensions: ['tsx'],
+      },
+    },
   ],
 }
 
