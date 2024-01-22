@@ -16,9 +16,9 @@ export default function Title() {
         </div>
       </div>
       <div className="flex justify-center">
-        <button className="flex flex-col justify-center items-center">
+        <button type="button" className="flex flex-col justify-center items-center">
           <p>더보기</p>
-          <img src="/bottom-arrow.svg" />
+          <img src="/bottom-arrow.svg" alt="아래 화살표" />
         </button>
       </div>
     </div>
