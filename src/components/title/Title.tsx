@@ -2,12 +2,15 @@ import React from 'react'
 
 export default function Title() {
   return (
-    <div className="h-[600px] flex flex-col text-center">
+    <div className="h-[600px] flex flex-col text-center px-5">
       <div className="flex flex-col flex-1 items-center justify-center ">
-        <h1 className="text-5xl">
-          안녕하세요 <b>안혜준</b>입니다.
+        <h1 className="text-5xl flex gap-4 max-md:gap-2 max-md:flex-col max-md:text-3xl">
+          <p>안녕하세요</p>
+          <p>
+            <b>안혜준</b>입니다.
+          </p>
         </h1>
-        <div className="my-10">
+        <div className="my-10 max-md:text-xs flex flex-col gap-2">
           <p>
             <b>무에서 유를 창조하는 개발자</b>, 안혜준입니다.
           </p>

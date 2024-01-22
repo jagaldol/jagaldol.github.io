@@ -8,7 +8,7 @@ const IndexPage: React.FC<PageProps> = () => {
       <Navigator />
       <div className="h-[600px] flex flex-col text-center">
         <div className="flex flex-col flex-1 items-center justify-center ">
-          <h1 className="text-5xl">추가예정입니다.</h1>
+          <h1 className="text-5xl max-md:text-3xl">추가예정입니다.</h1>
         </div>
       </div>
     </main>
