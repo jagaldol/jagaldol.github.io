@@ -5,7 +5,7 @@ import Title from '@/components/title/Title'
 
 const IndexPage: React.FC<PageProps> = () => {
   return (
-    <main>
+    <main className="px-5 pt-5">
       <Navigator />
       <Title />
     </main>

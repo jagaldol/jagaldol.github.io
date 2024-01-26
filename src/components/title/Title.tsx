@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Title() {
   return (
-    <div className="h-[600px] flex flex-col text-center px-5">
+    <div className="h-[600px] flex flex-col text-center">
       <div className="flex flex-col flex-1 items-center justify-center ">
         <h1 className="text-5xl flex gap-4 max-md:gap-2 max-md:flex-col max-md:text-3xl">
           <p>안녕하세요</p>

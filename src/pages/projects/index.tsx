@@ -4,7 +4,7 @@ import Navigator from '@/components/nav/Navigator'
 
 const IndexPage: React.FC<PageProps> = () => {
   return (
-    <main>
+    <main className="px-5 pt-5">
       <Navigator />
       <div className="h-[600px] flex flex-col text-center">
         <div className="flex flex-col flex-1 items-center justify-center ">
