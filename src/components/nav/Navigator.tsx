@@ -8,7 +8,7 @@ export default function Navigator() {
   const [drawer, setDrawer] = useState(false)
   return (
     <>
-      <nav className="hidden max-md:block">
+      <nav className="hidden max-md:block pt-5">
         <button type="button" aria-label="메뉴" onClick={() => setDrawer(true)}>
           <FontAwesomeIcon icon={faBars} size="lg" />
         </button>

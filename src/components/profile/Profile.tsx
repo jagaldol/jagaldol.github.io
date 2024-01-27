@@ -1,7 +1,8 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
-import { faEnvelope, faMobileScreenButton } from '@fortawesome/free-solid-svg-icons'
+import { faMobileScreenButton } from '@fortawesome/free-solid-svg-icons'
+import { faEnvelope } from '@fortawesome/free-regular-svg-icons'
 import Block from '@/components/block/Block'
 import ProfileContent from '@/components/profile/ProfileContent'
 
