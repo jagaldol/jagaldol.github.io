@@ -10,7 +10,7 @@ export default function Title() {
             <b>안혜준</b>입니다.
           </p>
         </h1>
-        <div className="my-10 max-md:text-xs flex flex-col gap-2">
+        <div className="my-10 max-md:text-sm flex flex-col gap-2">
           <p>
             <b>무에서 유를 창조하는 개발자</b>, 안혜준입니다.
           </p>

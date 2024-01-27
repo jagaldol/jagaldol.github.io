@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'gatsby'
-import { faBlog } from '@fortawesome/free-solid-svg-icons'
+import { faBlog, faMobileScreenButton } from '@fortawesome/free-solid-svg-icons'
 import { faEnvelope } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
@@ -19,6 +19,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
         <div className="flex gap-2 items-end">
           <p>Contact.</p>
+          <a href="tel:010-5439-7218" aria-label="휴대폰">
+            <FontAwesomeIcon size="lg" icon={faMobileScreenButton} />
+          </a>
           <a href="mailto:jagaldol.dev@gmail.com" aria-label="이메일">
             <FontAwesomeIcon size="lg" icon={faEnvelope} />
           </a>
