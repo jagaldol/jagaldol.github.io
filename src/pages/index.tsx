@@ -2,12 +2,14 @@ import type { HeadFC, PageProps } from 'gatsby'
 import React from 'react'
 import Navigator from '@/components/nav/Navigator'
 import Title from '@/components/title/Title'
+import Profile from '@/components/profile/Profile'
 
 const IndexPage: React.FC<PageProps> = () => {
   return (
     <main className="px-5 pt-5">
       <Navigator />
       <Title />
+      <Profile />
     </main>
   )
 }
