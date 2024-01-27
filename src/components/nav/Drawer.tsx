@@ -19,10 +19,10 @@ export default function Drawer({ onClose }: { onClose: () => void }) {
             <FontAwesomeIcon icon={faX} size="lg" />
           </button>
         </div>
-        <a href="/" className="text-xl mb-10">
+        <a href="/" className="text-2xl mt-12 mb-20">
           Jagaldol
         </a>
-        <div className="flex flex-col items-center gap-4">
+        <div className="flex flex-col items-center gap-6">
           <Tab url="/projects" title="Project" />
           <Tab url="https://blog.jagaldol.com/" title="Blog" />
         </div>
