@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
 import { faBlog, faMobileScreenButton } from '@fortawesome/free-solid-svg-icons'
 import { faEnvelope } from '@fortawesome/free-regular-svg-icons'
+import { IconProp } from '@fortawesome/fontawesome-svg-core'
 import Block from '@/components/block/Block'
 import ProfileContent from '@/components/profile/ProfileContent'
 
@@ -15,28 +16,25 @@ function Paragraph({ content, description }: { content: string; description: str
   )
 }
 
+function ContactElement({ content, icon, link }: { content: string; icon: IconProp; link: string }) {
+  return (
+    <a href={link} className="flex gap-2 items-center">
+      <FontAwesomeIcon icon={icon} />
+      <p>{content}</p>
+    </a>
+  )
+}
+
 export default function Profile() {
   return (
     <Block title="Profile">
       <div className="grid grid-cols-2 gap-y-10 max-lg:grid-cols-1 px-10 max-md:px-0">
         <div className="flex max-sm:flex-col-reverse">
           <ProfileContent title="Contact">
-            <a href="tel:010-5439-7218" className="flex gap-2 items-center">
-              <FontAwesomeIcon icon={faMobileScreenButton} />
-              <p>010-5439-7218</p>
-            </a>
-            <a href="mailto:jagaldol.dev@gmail.com" className="flex gap-2 items-center">
-              <FontAwesomeIcon icon={faEnvelope} />
-              <p>jagaldol.dev@gmail.com</p>
-            </a>
-            <a href="https://github.com/jagaldol/" className="flex gap-2 items-center">
-              <FontAwesomeIcon icon={faGithub} />
-              <p>@jagadol</p>
-            </a>
-            <a href="https://blog.jagaldol.com/" className="flex gap-2 items-center">
-              <FontAwesomeIcon icon={faBlog} />
-              <p>자갈돌의 devLog</p>
-            </a>
+            <ContactElement content="010-5439-7218" icon={faMobileScreenButton} link="tel:010-5439-7218" />
+            <ContactElement content="jagaldol.dev@gmail.com" icon={faEnvelope} link="mailto:jagaldol.dev@gmail.com" />
+            <ContactElement content="@jagadol" icon={faGithub} link="https://github.com/jagaldol/" />
+            <ContactElement content="자갈돌의 devLog" icon={faBlog} link="https://blog.jagaldol.com/" />
           </ProfileContent>
           <img src="/profile.png" alt="안혜준 사진" className="w-[30%] mx-[10%] pt-5 max-sm:pt-0 max-sm:w-[80%]" />
         </div>
