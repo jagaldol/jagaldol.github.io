@@ -1,14 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faX } from '@fortawesome/free-solid-svg-icons'
 import React from 'react'
-
-function Tab({ url, title }: { url: string; title: string }) {
-  return (
-    <a href={url} className="text-lg">
-      {title}
-    </a>
-  )
-}
+import { Link } from 'gatsby'
 
 export default function Drawer({ onClose }: { onClose: () => void }) {
   return (
@@ -19,12 +12,16 @@ export default function Drawer({ onClose }: { onClose: () => void }) {
             <FontAwesomeIcon icon={faX} size="lg" />
           </button>
         </div>
-        <a href="/" className="text-2xl mt-12 mb-20">
+        <Link to="/" className="text-2xl mt-12 mb-20">
           Jagaldol
-        </a>
+        </Link>
         <div className="flex flex-col items-center gap-6">
-          <Tab url="/projects" title="Project" />
-          <Tab url="https://blog.jagaldol.com/" title="Blog" />
+          <Link to="/projects" className="text-lg">
+            Project
+          </Link>
+          <a href="https://blog.jagaldol.com/" className="text-lg">
+            Blog
+          </a>
         </div>
       </div>
     </div>
