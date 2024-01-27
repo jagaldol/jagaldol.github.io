@@ -14,8 +14,10 @@ export default function Title() {
           <p>
             <b>무에서 유를 창조하는 개발자</b>, 안혜준입니다.
           </p>
-          <p>부산대학교 정보컴퓨터공학부에서 졸업을 앞둔 채, 백엔드 개발자로 활동하고 있습니다.</p>
-          <p>웹 개발자로써 여러 프로젝트를 수행해 왔습니다. 더욱 다양한 경험을 통해 성장해나가고 싶습니다!</p>
+          <div className="max-md:block flex flex-col">
+            <span> 부산대학교 정보컴퓨터공학부에서 졸업을 앞둔 채, 백엔드 개발자로 활동하고 있습니다. </span>
+            <span> 웹 개발자로써 여러 프로젝트를 수행해 왔습니다. 더욱 다양한 경험을 통해 성장해나가고 싶습니다! </span>
+          </div>
         </div>
       </div>
       <div className="flex justify-center">
