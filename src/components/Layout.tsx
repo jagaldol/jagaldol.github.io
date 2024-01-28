@@ -8,7 +8,7 @@ import Navigator from '@/components/nav/Navigator'
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <main className="px-5 min-h-screen h-auto relative pb-16 max-md:pb-10">
+    <main className="px-5 min-h-screen h-auto relative pb-40">
       <Navigator />
       {children}
 

@@ -18,10 +18,12 @@ function Paragraph({ content, description }: { content: string; description: str
 
 function ContactElement({ content, icon, link }: { content: string; icon: IconProp; link: string }) {
   return (
-    <a href={link} className="flex gap-2 items-center">
-      <FontAwesomeIcon icon={icon} />
-      <p>{content}</p>
-    </a>
+    <div className="flex">
+      <a href={link} className="flex gap-1 items-center underline-animate">
+        <FontAwesomeIcon icon={icon} width="20" />
+        <p>{content}</p>
+      </a>
+    </div>
   )
 }
 
