@@ -13,9 +13,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       {children}
 
       <footer className="absolute bottom-0 left-0 h-16 max-md:h-10 bg-white w-full px-20 max-sm:px-10 flex items-center text-xs">
-        <Link to="/" className="underline flex-1">
-          &copy;Hyejun An.
-        </Link>
+        <div className=" flex-1">
+          <Link to="/" className="underline flex-1">
+            &copy;Hyejun An.
+          </Link>
+        </div>
 
         <div className="flex gap-2 items-end">
           <p>Contact.</p>
