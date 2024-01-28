@@ -16,18 +16,21 @@ module.exports = {
           "Helvetica",
           "sans-serif",
         ],
-        GmarketSans: [
-          "GmarketSans",
-          "Arial",
-          "Helvetica",
-          "sans-serif",
-        ],
         SUITRegular: [
           "SUIT-Regular",
           "Arial",
           "Helvetica",
           "sans-serif",
         ],
+      },
+      keyframes: {
+        moveUpDown: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(10px)' },
+        }
+      },
+      animation: {
+        moveUpDown: 'moveUpDown 2s ease-in-out infinite',
       },
     },
   },

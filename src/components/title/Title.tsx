@@ -1,6 +1,14 @@
 import React from 'react'
 
 export default function Title() {
+  const scrollDown = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const button = event.target as HTMLButtonElement
+
+    window.scrollBy({
+      top: button.getBoundingClientRect().bottom + 40,
+      behavior: 'smooth',
+    })
+  }
   return (
     <>
       <div className="absolute left-0 top-0 w-full h-[1000px] -z-30 bg-[url('/cloud.jpg')] bg-cover bg-center opacity-60" />
@@ -25,7 +33,11 @@ export default function Title() {
           </div>
         </div>
         <div className="flex justify-center">
-          <button type="button" className="flex flex-col justify-center items-center">
+          <button
+            type="button"
+            className="flex flex-col justify-center items-center animate-moveUpDown"
+            onClick={scrollDown}
+          >
             <p>더보기</p>
             <img src="/bottom-arrow.svg" alt="아래 화살표" />
           </button>
