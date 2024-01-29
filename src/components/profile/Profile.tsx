@@ -7,11 +7,22 @@ import { IconProp } from '@fortawesome/fontawesome-svg-core'
 import Block from '@/components/block/Block'
 import ProfileContent from '@/components/profile/ProfileContent'
 
-function Paragraph({ content, description }: { content: string; description: string }) {
+const paragraphDescriptionClassName = 'text-black/60 pl-1'
+
+function Paragraph({
+  content,
+  description,
+  children,
+}: {
+  content: string
+  description: string
+  children?: React.ReactNode
+}) {
   return (
     <div>
       <p>{content}</p>
-      <p className="text-black/60 pl-1">{description}</p>
+      <p className={paragraphDescriptionClassName}>{description}</p>
+      {children}
     </div>
   )
 }
@@ -37,18 +48,21 @@ export default function Profile() {
             <ContactElement content="@jagadol" icon={faGithub} link="https://github.com/jagaldol/" />
             <ContactElement content="자갈돌의 devLog" icon={faBlog} link="https://blog.jagaldol.com/" />
           </ProfileContent>
-          <img src="/profile.png" alt="안혜준 사진" className="w-[30%] mx-[10%] pt-5 max-sm:pt-0 max-sm:w-[80%]" />
+          <img src="/profile.png" alt="프로필 사진" className="w-[30%] mx-[10%] pt-5 max-sm:pt-0 max-sm:w-[80%]" />
         </div>
 
         <ProfileContent title="Education">
-          <Paragraph content="부산대학교 정보컴퓨터공학부" description="2018.03. ~ 2024.02." />
+          <Paragraph content="부산대학교 정보컴퓨터공학부" description="2018.03. ~ 2024.02.">
+            <p className={paragraphDescriptionClassName}>학점: 4.00 / 4.5</p>
+          </Paragraph>
+
           <Paragraph content="카카오 테크 캠퍼스 1기" description="2023.04. ~ 2023.11." />
         </ProfileContent>
 
         <ProfileContent title="Awards">
           <Paragraph content="카카오 테크 캠퍼스 신규 서비스 개발 프로젝트 - 대상" description="2023.11.17." />
           <Paragraph content="2023년 TOPCIT 성적우수자 - 한국정보산업연합회장상" description="2023.12.22." />
-          <Paragraph content="제 1회 PNU Coding Challenge - 우수상" description="" />
+          <Paragraph content="제 1회 PNU Coding Challenge - 우수상" description="2023.12." />
         </ProfileContent>
 
         <ProfileContent title="Certificate">
