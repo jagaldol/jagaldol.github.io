@@ -1,6 +1,19 @@
 import React from 'react'
+import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import { graphql, useStaticQuery } from 'gatsby'
 
 export default function Title() {
+  const data = useStaticQuery(graphql`
+    query Title {
+      file(relativePath: { eq: "cloud.jpg" }) {
+        childImageSharp {
+          gatsbyImageData(placeholder: BLURRED)
+        }
+      }
+    }
+  `)
+  const titleBackgroundImage = getImage(data.file)
+
   const scrollDown = (event: React.MouseEvent<HTMLButtonElement>) => {
     const button = event.target as HTMLButtonElement
 
@@ -11,7 +24,11 @@ export default function Title() {
   }
   return (
     <>
-      <div className="absolute left-0 top-0 w-full h-[1000px] -z-30 bg-[url('/cloud.jpg')] bg-cover bg-center opacity-60" />
+      <div className="absolute left-0 top-0 w-full h-[1000px] -z-30 bg-cover bg-center opacity-60">
+        {titleBackgroundImage ? (
+          <GatsbyImage className="w-full h-full object-cover" alt="배경 구름 이미지" image={titleBackgroundImage} />
+        ) : null}
+      </div>
       <div className="absolute left-0 top-0 w-full h-[1000px] bg-gradient-to-b from-transparent to-bg -z-20" />
 
       <div className="h-[600px] flex flex-col text-center z-30">
