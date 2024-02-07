@@ -45,7 +45,7 @@ export default function Profile() {
     query Profile {
       file(relativePath: { eq: "profile.png" }) {
         childImageSharp {
-          gatsbyImageData(placeholder: BLURRED, aspectRatio: 1)
+          gatsbyImageData(placeholder: BLURRED, width: 400, height: 400)
         }
       }
     }
@@ -63,12 +63,9 @@ export default function Profile() {
             <ContactElement content="자갈돌의 devLog" icon={faBlog} link="https://blog.jagaldol.com/" />
           </ProfileContent>
           {profileImage ? (
-            <GatsbyImage
-              className="ml-[10%] max-sm:mx-[10%]"
-              alt="프로필 사진"
-              image={profileImage}
-              objectFit="contain"
-            />
+            <div>
+              <GatsbyImage className="ml-[10%] max-sm:mx-[10%] rounded-xl" alt="프로필 사진" image={profileImage} />
+            </div>
           ) : null}
         </div>
 
