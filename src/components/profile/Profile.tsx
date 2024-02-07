@@ -4,6 +4,8 @@ import { faGithub } from '@fortawesome/free-brands-svg-icons'
 import { faBlog } from '@fortawesome/free-solid-svg-icons'
 import { faEnvelope } from '@fortawesome/free-regular-svg-icons'
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
+import { graphql, useStaticQuery } from 'gatsby'
+import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import Block from '@/components/block/Block'
 import ProfileContent from '@/components/profile/ProfileContent'
 
@@ -39,6 +41,18 @@ function ContactElement({ content, icon, link }: { content: string; icon: IconPr
 }
 
 export default function Profile() {
+  const data = useStaticQuery(graphql`
+    query Profile {
+      file(relativePath: { eq: "profile.png" }) {
+        childImageSharp {
+          gatsbyImageData(placeholder: BLURRED, aspectRatio: 1)
+        }
+      }
+    }
+  `)
+
+  const profileImage = getImage(data.file)
+
   return (
     <Block title="Profile">
       <div className="grid grid-cols-2 gap-y-10 max-lg:grid-cols-1 px-10 max-md:px-0">
@@ -48,7 +62,14 @@ export default function Profile() {
             <ContactElement content="@jagadol" icon={faGithub} link="https://github.com/jagaldol/" />
             <ContactElement content="자갈돌의 devLog" icon={faBlog} link="https://blog.jagaldol.com/" />
           </ProfileContent>
-          <img src="/profile.png" alt="프로필 사진" className="w-[30%] mx-[10%] pt-5 max-sm:pt-0 max-sm:w-[80%]" />
+          {profileImage ? (
+            <GatsbyImage
+              className="ml-[10%] max-sm:mx-[10%]"
+              alt="프로필 사진"
+              image={profileImage}
+              objectFit="contain"
+            />
+          ) : null}
         </div>
 
         <ProfileContent title="Education">
