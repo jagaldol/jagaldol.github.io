@@ -1,6 +1,7 @@
 import React from 'react'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { graphql, useStaticQuery } from 'gatsby'
+import BottomArrow from '@/svgs/bottom-arrow.inline.svg'
 
 export default function Title() {
   const data = useStaticQuery(graphql`
@@ -56,7 +57,7 @@ export default function Title() {
             onClick={scrollDown}
           >
             <p>더보기</p>
-            <img src="/bottom-arrow.svg" alt="아래 화살표" />
+            <BottomArrow />
           </button>
         </div>
       </div>
