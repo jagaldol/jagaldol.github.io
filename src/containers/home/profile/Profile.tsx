@@ -6,8 +6,8 @@ import { faEnvelope } from '@fortawesome/free-regular-svg-icons'
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
 import { graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
-import Block from '@/components/block/Block'
-import ProfileContent from '@/components/profile/ProfileContent'
+import Block from '@/containers/home/Block'
+import ProfileContent from '@/containers/home/profile/ProfileContent'
 
 const paragraphDescriptionClassName = 'text-black/60 pl-1'
 

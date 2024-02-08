@@ -1,7 +1,7 @@
 import type { HeadFC, PageProps } from 'gatsby'
 import React from 'react'
-import Title from '@/components/title/Title'
-import Profile from '@/components/profile/Profile'
+import Title from '@/containers/home/title/Title'
+import Profile from '@/containers/home/profile/Profile'
 import Layout from '@/components/Layout'
 
 const IndexPage: React.FC<PageProps> = () => {
