@@ -17,9 +17,14 @@ const IndexPage: React.FC<PageProps> = ({ data }: { data: any }) => {
             return (
               <div key={project.id} className="flex flex-col">
                 <div className="w-full p-5 flex-1">
-                  <div className="h-full p-5 bg-gray-200 drop-shadow-lg flex items-center justify-center">
+                  <div className="h-full p-5 bg-gray-200 drop-shadow-lg flex items-center justify-center max-h-96">
                     {image ? (
-                      <GatsbyImage className="" alt={`${project.frontmatter.title} 대표 이미지`} image={image} />
+                      <GatsbyImage
+                        alt={`${project.frontmatter.title} 대표 이미지`}
+                        image={image}
+                        className="h-full"
+                        objectFit="contain"
+                      />
                     ) : null}
                   </div>
                 </div>
@@ -47,7 +52,7 @@ export const query = graphql`
           stack
           image {
             childImageSharp {
-              gatsbyImageData(placeholder: BLURRED)
+              gatsbyImageData(placeholder: BLURRED, transformOptions: { fit: CONTAIN, cropFocus: ATTENTION })
             }
           }
         }
