@@ -35,10 +35,10 @@ const config: GatsbyConfig = {
     {
       resolve: 'gatsby-source-filesystem',
       options: {
-        name: 'pages',
-        path: './src/pages/',
+        name: 'projects',
+        path: './src/projects/',
       },
-      __key: 'pages',
+      __key: 'projects',
     },
     {
       resolve: `gatsby-plugin-alias-imports`,
