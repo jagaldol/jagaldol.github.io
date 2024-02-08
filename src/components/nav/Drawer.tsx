@@ -5,7 +5,7 @@ import { Link } from 'gatsby'
 
 export default function Drawer({ onClose }: { onClose: () => void }) {
   return (
-    <div className="absolute left-0 top-0 w-full h-screen z-30 bg-black/10">
+    <div className="fixed left-0 top-0 w-full h-screen z-30 bg-black/10">
       <div className="bg-bg w-[80%] h-full p-5 flex flex-col items-center">
         <div className="w-full text-end">
           <button type="button" aria-label="닫기" onClick={onClose}>
