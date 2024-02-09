@@ -11,7 +11,7 @@ const IndexPage: React.FC<PageProps> = ({ data }: { data: any }) => {
     <Layout>
       <div className="mt-5 flex flex-col text-center">
         <h1 className="text-3xl my-5">Project List</h1>
-        <div className="grid grid-cols-3 max-lg:grid-cols-2 max-md:grid-cols-1">
+        <div className="grid grid-cols-3 max-lg:grid-cols-2 max-md:grid-cols-1 bg-white">
           {projects.map((project: any) => {
             const image = getImage(project.frontmatter.image)
             return (
@@ -21,6 +21,7 @@ const IndexPage: React.FC<PageProps> = ({ data }: { data: any }) => {
                     {image ? (
                       <GatsbyImage
                         alt={`${project.frontmatter.title} 대표 이미지`}
+                        loading="eager"
                         image={image}
                         className="h-full"
                         objectFit="contain"
@@ -52,7 +53,7 @@ export const query = graphql`
           stack
           image {
             childImageSharp {
-              gatsbyImageData(placeholder: BLURRED, transformOptions: { fit: CONTAIN, cropFocus: ATTENTION })
+              gatsbyImageData(placeholder: BLURRED)
             }
           }
         }

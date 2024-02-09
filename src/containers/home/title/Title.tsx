@@ -27,7 +27,12 @@ export default function Title() {
     <>
       <div className="absolute left-0 top-0 w-full h-[1000px] -z-30 bg-cover bg-center opacity-60">
         {titleBackgroundImage ? (
-          <GatsbyImage className="w-full h-full object-cover" alt="배경 구름 이미지" image={titleBackgroundImage} />
+          <GatsbyImage
+            className="w-full h-full object-cover"
+            loading="eager"
+            alt="배경 구름 이미지"
+            image={titleBackgroundImage}
+          />
         ) : null}
       </div>
       <div className="absolute left-0 top-0 w-full h-[1000px] bg-gradient-to-b from-transparent to-bg -z-20" />
