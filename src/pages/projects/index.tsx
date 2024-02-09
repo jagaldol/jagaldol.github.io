@@ -1,5 +1,5 @@
 import type { HeadFC, PageProps } from 'gatsby'
-import { graphql } from 'gatsby'
+import { graphql, Link } from 'gatsby'
 import React from 'react'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import Layout from '@/components/Layout'
@@ -18,7 +18,10 @@ const IndexPage: React.FC<PageProps> = ({ data }: { data: any }) => {
             return (
               <div key={project.id} className="flex flex-col">
                 <div className="w-full p-5 flex-1">
-                  <div className="h-full p-5 bg-gray-200 drop-shadow-lg flex items-center justify-center max-h-96">
+                  <Link
+                    to={project.frontmatter.slug}
+                    className="h-full p-5 bg-gray-200 drop-shadow-lg flex items-center justify-center max-h-96"
+                  >
                     {image ? (
                       <GatsbyImage
                         alt={`${project.frontmatter.title} 대표 이미지`}
@@ -28,9 +31,11 @@ const IndexPage: React.FC<PageProps> = ({ data }: { data: any }) => {
                         objectFit="contain"
                       />
                     ) : null}
-                  </div>
+                  </Link>
                 </div>
-                <h3>{project.frontmatter.title}</h3>
+                <Link to={project.frontmatter.slug}>
+                  <h3>{project.frontmatter.title}</h3>
+                </Link>
                 <div className="flex gap-1 justify-center items-center flex-wrap">
                   {project.frontmatter.stack.map((value: string) => (
                     <Badge name={value} key={value} />
