@@ -54,7 +54,7 @@ export default IndexPage
 
 export const query = graphql`
   query Projects {
-    allMdx {
+    allMdx(sort: { frontmatter: { end_date: DESC } }) {
       nodes {
         id
         frontmatter {
