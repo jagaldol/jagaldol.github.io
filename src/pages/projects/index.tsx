@@ -3,6 +3,7 @@ import { graphql } from 'gatsby'
 import React from 'react'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import Layout from '@/components/Layout'
+import Badge from '@/components/Badge'
 
 const IndexPage: React.FC<PageProps> = ({ data }: { data: any }) => {
   const projects = data.allMdx.nodes
@@ -11,7 +12,7 @@ const IndexPage: React.FC<PageProps> = ({ data }: { data: any }) => {
     <Layout>
       <div className="mt-5 flex flex-col text-center">
         <h1 className="text-3xl my-5">Project List</h1>
-        <div className="grid grid-cols-3 max-lg:grid-cols-2 max-md:grid-cols-1 bg-white">
+        <div className="grid grid-cols-3 max-lg:grid-cols-2 py-5 max-md:grid-cols-1 bg-white mx-20 max-2xl:mx-10 max-md:mx-0">
           {projects.map((project: any) => {
             const image = getImage(project.frontmatter.image)
             return (
@@ -30,7 +31,11 @@ const IndexPage: React.FC<PageProps> = ({ data }: { data: any }) => {
                   </div>
                 </div>
                 <h3>{project.frontmatter.title}</h3>
-                <p>{project.frontmatter.stack}</p>
+                <div className="flex gap-1 justify-center items-center flex-wrap">
+                  {project.frontmatter.stack.map((value: string) => (
+                    <Badge name={value} key={value} />
+                  ))}
+                </div>
               </div>
             )
           })}
