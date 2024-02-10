@@ -18,8 +18,7 @@
 
 @layer base {
     body {
-        @apply bg-bg;
-        @apply font-SUITRegular;
+        @apply bg-bg font-SUITRegular;
     }
 
     h1, h2, h3, h4, h5, h6, nav {

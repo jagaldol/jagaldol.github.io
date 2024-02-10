@@ -20,14 +20,26 @@ export default function Navigator() {
             Jagaldol
           </Link>
         </div>
-        <div>
-          <Link to="/projects" className="mx-3 text-2xl pb-1 underline-animate">
-            Project
-          </Link>
-          <a href="https://blog.jagaldol.com/" className="mx-3 text-2xl pb-1 underline-animate">
-            Blog
-          </a>
-        </div>
+        <Link
+          to="/"
+          className="mx-3 text-2xl pb-1 transition-all hover:text-main-theme hover:-translate-y-px"
+          activeClassName="text-main-theme"
+        >
+          Home
+        </Link>
+        <Link
+          to="/projects"
+          className="mx-3 text-2xl pb-1 transition-all hover:text-main-theme hover:-translate-y-px"
+          activeClassName="text-main-theme"
+        >
+          Project
+        </Link>
+        <a
+          href="https://blog.jagaldol.com/"
+          className="mx-3 text-2xl pb-1 word-highlight transition-all hover:text-main-theme hover:-translate-y-px"
+        >
+          Blog
+        </a>
       </nav>
     </>
   )

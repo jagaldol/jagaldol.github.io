@@ -16,12 +16,23 @@ export default function Drawer({ onClose }: { onClose: () => void }) {
           Jagaldol
         </Link>
         <div className="flex flex-col items-center gap-6">
-          <Link to="/projects" className="text-lg pb-1 border-b-2 border-b-transparent hover:border-b-main-theme">
+          <Link
+            to="/"
+            className="text-lg pb-1 transition-all hover:text-main-theme hover:-translate-y-px"
+            activeClassName="text-main-theme"
+          >
+            Home
+          </Link>
+          <Link
+            to="/projects"
+            className="text-lg pb-1 transition-all hover:text-main-theme hover:-translate-y-px"
+            activeClassName="text-main-theme"
+          >
             Project
           </Link>
           <a
             href="https://blog.jagaldol.com/"
-            className="text-lg pb-1 border-b-2 border-b-transparent hover:border-b-main-theme"
+            className="text-lg pb-1 transition-all hover:text-main-theme hover:-translate-y-px"
           >
             Blog
           </a>
