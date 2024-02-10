@@ -11,7 +11,9 @@ export default function ProjectDetails({ data, children }: any) {
         <h1>{data.mdx.frontmatter.title}</h1>
         <div className="flex gap-1 justify-center items-center flex-wrap">
           {data.mdx.frontmatter.stack.map((value: string) => (
-            <Badge name={value} key={value} />
+            <div className="h-7" key={value}>
+              <Badge name={value} />
+            </div>
           ))}
         </div>
         {children}

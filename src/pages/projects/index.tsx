@@ -20,26 +20,30 @@ const IndexPage: React.FC<PageProps> = ({ data }: { data: any }) => {
                 <div className="w-full flex-1 mb-5">
                   <Link
                     to={project.frontmatter.slug}
-                    className="h-full p-5 bg-gradient-to-bl to-gray-300 from-gray-100 drop-shadow-lg flex items-center justify-center max-h-96"
+                    className="h-full p-5 bg-gradient-to-bl to-gray-300 from-gray-100 drop-shadow-lg flex items-center justify-center max-h-96 group"
                   >
                     {image ? (
                       <GatsbyImage
                         alt={`${project.frontmatter.title} 대표 이미지`}
                         loading="eager"
                         image={image}
-                        className="h-full"
+                        className="h-full group-hover:scale-90 transition-all duration-500"
                         objectFit="contain"
                       />
                     ) : null}
+                    <div className="absolute w-full h-full opacity-0 group-hover:opacity-100 bg-main-theme/85 z-30 transition-all duration-500 text-white flex">
+                      <h3 className="absolute right-0 bottom-0 text-3xl -translate-x-8 -translate-y-10">
+                        {project.frontmatter.title}
+                      </h3>
+                      <div className="absolute right-0 bottom-0 -translate-x-7 -translate-y-3 flex gap-1 justify-end items-center flex-wrap">
+                        {project.frontmatter.stack.map((value: string) => (
+                          <div key={value} className="h-6">
+                            <Badge name={value} />
+                          </div>
+                        ))}
+                      </div>
+                    </div>
                   </Link>
-                </div>
-                <Link to={project.frontmatter.slug}>
-                  <h3>{project.frontmatter.title}</h3>
-                </Link>
-                <div className="flex gap-1 justify-center items-center flex-wrap">
-                  {project.frontmatter.stack.map((value: string) => (
-                    <Badge name={value} key={value} />
-                  ))}
                 </div>
               </div>
             )
