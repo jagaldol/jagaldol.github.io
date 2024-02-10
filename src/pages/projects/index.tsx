@@ -12,12 +12,12 @@ const IndexPage: React.FC<PageProps> = ({ data }: { data: any }) => {
     <Layout>
       <div className="mt-5 flex flex-col text-center">
         <h1 className="text-3xl my-5">Project List</h1>
-        <div className="grid grid-cols-3 max-lg:grid-cols-2 py-5 max-md:grid-cols-1 bg-white mx-20 max-2xl:mx-10 max-md:mx-0">
+        <div className="grid grid-cols-3 max-lg:grid-cols-2 py-5 max-md:grid-cols-1 mx-20 max-2xl:mx-10 max-md:mx-0 gap-x-3 gap-y-10">
           {projects.map((project: any) => {
             const image = getImage(project.frontmatter.image)
             return (
               <div key={project.id} className="flex flex-col">
-                <div className="w-full p-5 flex-1">
+                <div className="w-full flex-1 mb-5">
                   <Link
                     to={project.frontmatter.slug}
                     className="h-full p-5 bg-gray-200 drop-shadow-lg flex items-center justify-center max-h-96"
