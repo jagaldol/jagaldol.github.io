@@ -20,7 +20,7 @@ const IndexPage: React.FC<PageProps> = ({ data }: { data: any }) => {
                 <div className="w-full flex-1 mb-5">
                   <Link
                     to={project.frontmatter.slug}
-                    className="h-full p-5 bg-gray-200 drop-shadow-lg flex items-center justify-center max-h-96"
+                    className="h-full p-5 bg-gradient-to-bl to-gray-300 from-gray-100 drop-shadow-lg flex items-center justify-center max-h-96"
                   >
                     {image ? (
                       <GatsbyImage

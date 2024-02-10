@@ -18,21 +18,21 @@ export default function Drawer({ onClose }: { onClose: () => void }) {
         <div className="flex flex-col items-center gap-6">
           <Link
             to="/"
-            className="text-lg pb-1 transition-all hover:text-main-theme hover:-translate-y-px"
+            className="text-lg pb-1 transition-all hover:text-main-theme duration-1000"
             activeClassName="text-main-theme"
           >
             Home
           </Link>
           <Link
             to="/projects"
-            className="text-lg pb-1 transition-all hover:text-main-theme hover:-translate-y-px"
+            className="text-lg pb-1 transition-all hover:text-main-theme duration-1000"
             activeClassName="text-main-theme"
           >
             Project
           </Link>
           <a
             href="https://blog.jagaldol.com/"
-            className="text-lg pb-1 transition-all hover:text-main-theme hover:-translate-y-px"
+            className="text-lg pb-1 transition-all hover:text-main-theme duration-1000"
           >
             Blog
           </a>

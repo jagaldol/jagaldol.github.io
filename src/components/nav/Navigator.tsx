@@ -22,21 +22,21 @@ export default function Navigator() {
         </div>
         <Link
           to="/"
-          className="mx-3 text-2xl pb-1 transition-all hover:text-main-theme hover:-translate-y-px"
-          activeClassName="text-main-theme"
+          className="mx-3 text-2xl pb-1 transition-all hover:text-main-theme hover:-translate-y-1 duration-1000"
+          activeClassName="text-main-theme -translate-y-1"
         >
           Home
         </Link>
         <Link
           to="/projects"
-          className="mx-3 text-2xl pb-1 transition-all hover:text-main-theme hover:-translate-y-px"
-          activeClassName="text-main-theme"
+          className="mx-3 text-2xl pb-1 transition-all hover:text-main-theme hover:-translate-y-1 duration-1000"
+          activeClassName="text-main-theme -translate-y-1"
         >
           Project
         </Link>
         <a
           href="https://blog.jagaldol.com/"
-          className="mx-3 text-2xl pb-1 word-highlight transition-all hover:text-main-theme hover:-translate-y-px"
+          className="mx-3 text-2xl pb-1 word-highlight transition-all hover:text-main-theme hover:-translate-y-1 duration-1000"
         >
           Blog
         </a>

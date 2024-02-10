@@ -25,7 +25,7 @@ export default function Title() {
   }
   return (
     <>
-      <div className="absolute left-0 top-0 w-full h-[1000px] -z-30 bg-cover bg-center opacity-60">
+      <div className="absolute left-0 top-0 w-full h-[1000px] -z-30 bg-cover bg-center opacity-60 select-none pointer-events-none">
         {titleBackgroundImage ? (
           <GatsbyImage
             className="w-full h-full object-cover"
