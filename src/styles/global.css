@@ -71,22 +71,25 @@
     }
 
     .markdown-body h1 {
-        @apply text-3xl font-bold my-4;
+        @apply text-3xl max-md:text-xl font-bold mt-6 mb-4;
     }
 
     .markdown-body h2 {
-        @apply text-2xl font-semibold my-3;
+        @apply text-2xl max-md:text-lg font-semibold mt-5 mb-3;
     }
 
     .markdown-body h3 {
-        @apply text-xl font-semibold my-2;
+        @apply text-xl max-md:text-base font-semibold mt-4 mb-2;
     }
 
     .markdown-body p {
-        @apply my-5 indent-2;
+        @apply my-3 indent-2;
     }
 
     .markdown-body ul {
+        @apply list-disc ml-5;
+    }
+    .markdown-body ul:first-child {
         @apply list-disc ml-5;
     }
 
@@ -108,6 +111,10 @@
     }
     .markdown-body blockquote {
         @apply border-l-4 border-gray-400 pl-4 italic;
+    }
+
+    .markdown-body summary {
+        @apply hover:cursor-pointer;
     }
 
 }

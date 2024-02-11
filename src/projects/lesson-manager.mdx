@@ -3,24 +3,278 @@ title: 레슨 매니저
 subtitle: 피아노 학원 레슨 관리 시스템(웹 어플리케이션)
 slug: lesson-manager
 stack: ["Express", "React"]
-image: ../images/projects/lesson-manager.png
-banner: ../images/projects/banner/lesson-manager.png
+image: ../images/projects/lesson-manager/thumbnail.png
+banner: ../images/projects/lesson-manager/banner.png
 start_date: 2022-12-26 00:00:00 +0900
 end_date: 2023-02-28 00:00:00 +0900
 ---
 
-부산대/경성대 2개 지점을 운영 중인 피아노 학원, 피아노투게더의 레슨 관리 시스템을 웹 어플리케이션으로 제작하였습니다.
-친구가 다니던 피아노 학원의 레슨 관리 시스템이 너무 느리고, 불편하며, 디자인이 이쁘지 않았습니다. 학원 대표님께 저희가 직접 더 나은 시스템과 디자인으로 만들 수 있다고 설득하였고, 일을 수주받아 친구와 2인 팀을 결성하여 개발을 진행하였습니다.
 
-레슨 매니저는 학원의 레슨 시간표를 관리할 수 있는 웹 어플리케이션입니다. 수강생은 자신의 아이디를 사용하여 레슨 시간표 조회/ 레슨 예약/ 레슨 취소 등을 직접 할 수 있습니다. 관리자(매니저/강사)는 추가로 수강생의 레슨을 대신 예약해줄 수 있으며, 수강생 관리(등록/탈퇴, 검색, 상세정보 조회, 결재 내역 조회 및 환불, 안내 문자 전송 등), 강사 관리(등록/퇴사 처리, 상세정보 조회, 담당학생 조회, 출근 시간표 관리 등), 결제 정보 등록이 가능합니다. 즉, 수강생에게는 웹을 통해 쉽게 학원의 레슨을 예약/조회 할 수 있고, 매니저에게는 학원의 강사, 수강생, 결제 등 전체적인 학원 시스템을 일원화하여 관리할 수 있는 프로그램입니다.
 
-해당 프로젝트는 2인 팀으로 둘 다 풀스택 개발자로 참여하였습니다. 먼저 백엔드 쪽에서 직접 맡은 부분은 database 설계, 관리자 전용 api 설계 및 구현, 문자 전송입니다. 프론트 쪽에서는 수강생 관리 페이지, 강사 관리 페이지, 모바일 대응 반응형 화면 구성을 맡았습니다.
-
-2개월 간의 개발 기간 이후, 실제 학원의 서비스로 연결시켰고 2주일 동안 자잘한 버그 수정(ui 버그, 레슨 신청 버그)과 추가 요구 기능 개발을 진행하였습니다. 그렇게 개발 완료 후, 한달이 지나자 서비스가 완전히 안정화되어 2023년 5월 이후로 버그가 발생하지 않은 채 현재까지 정상적으로 서비스가 운영되고 있습니다.
-
-이후 2023년 8월 피아노 투게더의 시스템을 보고 저희 프로그램을 사용하고 싶다는 다른 음악 학원이 연락이 와 추가 개발을 진행하게 되었습니다. 해당 음악 학원은 음악/미술 종합학원으로 지점이 하나인 대신 과목이 많았습니다. 따라서 피아노 투게더의 경우와 다르게 지점을 없애고 과목을 만들었습니다. 또한, 기존 지점은 변경 불가 정보였지만, 과목은 관리자가 직접 조작 가능하도록 db에 추가 할 필요가 존재했습니다. 이외에도 강사의 수가 많아 ui가 깨지는 문제 등 클라이언트의 상황에 맞춰 변경사항을 적용하여 기존 프로그램을 일부 수정하여 개발하였습니다. 계약 이후 2주간의 개발 후, 클라이언트에게 전달하였고 1달간의 추가 유지보수 기간 끝에 정상 운영되고 있습니다.
-
+부산대/경성대 2개 지점을 운영 중인 피아노 학원, [Piano Together](https://pianotogether.co.kr)의 레슨 관리 시스템입니다.
 
 - 웹 링크: [https://pianotogether.co.kr/admin](https://pianotogether.co.kr/admin)
-- 웹 링크: [https://doremisketch.com](https://doremisketch.com)
-- 관련 포트폴리오: [https://fast-kilogram-f15.notion.site/38cd8462261f4843abf4802d55e4435d?pvs=4](https://fast-kilogram-f15.notion.site/38cd8462261f4843abf4802d55e4435d?pvs=4)
+
+## 👥 팀원
+
+
+## 🔧 사용 기술
+
+- Front-End - `React`
+- Back-End  - `Node.js` `Express` `MySQL` `Apache`
+
+## 🗄️️ ERD
+
+![ER Diagram](../images/projects/lesson-manager/erd.png)
+
+## 🗒️ 주요 기능
+
+- 수강생
+  - 레슨 시간표 조회 및 예약/취소
+  - 본인 레슨 목록 조회
+  - 잔여 레슨 횟수 조회
+  - 개인 정보 변경
+- 관리자
+  - 레슨 시간표 조회 및 강제 예약/취소
+  - 수강생 관리
+  - 수강생 등록/탈퇴
+  - 수강생 검색 및 필터
+  - 수강생 상세정보 조회
+  - 결제 내역 조회 및 환불
+  - 안내 문자 전송(레슨 알림, 재등록 알림)
+  - 강사 관리
+  - 강사 등록/퇴사
+  - 강사 상세정보 조회
+  - 강사 별 담당 학생 조회
+  - 강사 출근 시간표 관리
+  - 결제 정보 등록
+
+![실제 서비스 되고 있는 페이지(학원 수강생-mobile)](../images/projects/lesson-manager.png)
+
+실제 서비스 되고 있는 페이지(학원 수강생-mobile)
+
+![실제 서비스 되고 있는 화면(학원 관리자-pc)](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/4af77e12-5e84-4c67-891a-c45b4749ce42/%ED%94%BC%EC%95%84%EB%85%B8_%ED%88%AC%EA%B2%8C%EB%8D%94_%EB%AA%A8%EC%9E%90%EC%9D%B4%ED%81%AC_%ED%99%94%EB%A9%B4.png)
+
+실제 서비스 되고 있는 화면(학원 관리자-pc)
+
+## 🔗 링크
+
+- https://pianotogether.co.kr/admin/
+- 로그인이 필수인 페이지여서 자세한 내용은 [아래](https://www.notion.so/38cd8462261f4843abf4802d55e4435d?pvs=21)를 참고해주세요.
+
+<details>
+  <summary><h2 className="inline-block">🔍 상세 내용 보기</h2></summary>
+
+### DB 설계
+
+![간략화한 데이터베이스 형태](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/33170f28-995f-4ce1-b8f7-4262a447c3dc/%ED%94%BC%EC%95%84%EB%85%B8_%ED%88%AC%EA%B2%8C%EB%8D%94_db.drawio.png)
+
+간략화한 데이터베이스 형태
+
+### 접속 및 로그인
+
+![로그인 화면](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/d61ee678-e2fa-4e23-a47f-5e7c6daad5fb/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7_2023-03-18_153607.png)
+
+로그인 화면
+
+- https 보안 접속(`OpenSSL` 사용)
+- CORS(Cross-Origin Resouce Sharing) 적용
+- 세션 쿠키를 통한 로그인 정보 유지
+- 패스워드 암호화 저장(SHA-512)
+
+### 레슨 시간표
+
+![스크린샷 2023-03-18 165924.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/3bb80729-5c62-4628-903f-35bf6b9c557d/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7_2023-03-18_165924.png)
+
+- 화면 생성
+- 해당 날짜들에 출근하는 선생님들에 맞게 테이블 레이아웃 구성
+- 해당 날짜들에 존재하는 레슨을 테이블에 추가
+- 현재 시간 이후의 셀은 선생님 스케쥴에 맞춰 예약 가능함을 `+` 로 표시
+- 주요 기능
+- `+` 를 눌렀을 때 레슨 신규예약 모달 출력
+- 예약된 셀을 눌렀을 때 레슨 상세 정보 모달 출력
+
+(관리자 레슨 강제 취소/ 완료 처리 가능)
+
+- 레슨 상태는 초/빨/갈/노 색으로 구분
+- **더 보기**
+
+![레슨 상세 정보 모달(관리자) - 레슨 완료와 레슨 취소가 가능](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/7f65991a-2e1c-46d9-aef2-44347ac7933c/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7_2023-03-18_224447.png)
+
+레슨 상세 정보 모달(관리자) - 레슨 완료와 레슨 취소가 가능
+
+![DatePicker와 선생님 선택 기능](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/d96454d9-9d08-4592-9054-6fb44a97f576/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7_2023-03-18_225227.png)
+
+DatePicker와 선생님 선택 기능
+
+![선생님 날짜 별 레슨 불가 시간 선택(관리자)](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/b1ea698d-f829-4de9-aa31-d845e7d7db95/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7_2023-03-18_225436.png)
+
+선생님 날짜 별 레슨 불가 시간 선택(관리자)
+
+![좌측 네비게이션 바에서 타 지점 확인(관리자)](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/24f23e37-b35e-482a-a4e1-08ac31219731/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7_2023-03-19_123649.png)
+
+좌측 네비게이션 바에서 타 지점 확인(관리자)
+
+
+### 수강생 관리(관리자)
+
+![스크린샷 2023-03-18 165955.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/a419a404-b2b3-4dae-bf2f-c513d131e259/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7_2023-03-18_165955.png)
+
+- 수강생 필터(현재 수강생, 레슨 전날 대상자, 생일자 등)
+- 수강생 검색(이름, 생일, 전화번호)
+- 수강생 등록
+- 수강생 정보 상세보기
+- 수강생 탈퇴 처리
+- 비밀번호 재설정
+- 수강생 정보 수정
+- 수강생 별 레슨 내역 확인
+- 수강생 별 결제 내역 확인
+- **더 보기**
+
+![수강생 등록 창 - 잘못된 입력으로 등록버튼 누른 경우](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/71fa6a63-7f16-4933-94e9-ac51f4a14eed/Untitled.png)
+
+수강생 등록 창 - 잘못된 입력으로 등록버튼 누른 경우
+
+![상세보기 창](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/3f265506-c7ec-452d-847a-17203123eeee/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7_2023-03-19_124324.png)
+
+상세보기 창
+
+![비밀번호 재설정](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/ae266832-8e5b-479d-a919-fbd981c151cd/Untitled.png)
+
+비밀번호 재설정
+
+![레슨 목록](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/5ebfbae6-dbbc-4241-a503-44a1e5b9c389/Untitled.png)
+
+레슨 목록
+
+![레슨 예약/취소 내역](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/d4d2d3ce-279f-45f5-a3fa-1ac98d62ee6a/Untitled.png)
+
+레슨 예약/취소 내역
+
+![결제 내역](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/bac4a761-4cbd-4b54-9255-4b3315c9e320/Untitled.png)
+
+결제 내역
+
+
+### 문자 전송
+
+[수강생 관리](https://www.notion.so/38cd8462261f4843abf4802d55e4435d?pvs=21) → 수강생 목록 체크 → 문자 전송 버튼
+
+![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/025231cf-f33f-44ec-a5a9-a24b918df76c/Untitled.png)
+
+`cafe24 문자 전송 api`를 사용하였습니다.
+
+- 받는 사람 지정
+- 체크 박스 리스트(수강생 번호를 index로 가지는 Map)로 기본 지정
+- 수강생 검색으로 추가
+- 전화번호 추가(수강생 외에도 문자 전송 가능)
+- 레슨 전날 확인 문자
+- 레슨 전날 대상자 filter에서 진입
+- 지정된 레슨 확인 문구 발송
+- 재등록 일주일 전 문자
+- 재등록 일주일 전 filter에서 진입
+- 지정된 재등록 기간 안내 문구 발송
+- **더 보기**
+
+![레슨 전날 확인 문자 전송](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/14c93f8b-643c-415a-9c17-438b47764311/Untitled.png)
+
+레슨 전날 확인 문자 전송
+
+![재등록 일주일 전 문자 전송](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/82ce49b9-b361-4828-a492-cf42c6977efe/Untitled.png)
+
+재등록 일주일 전 문자 전송
+
+
+### 강사 관리
+
+![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/f1f8947e-b081-4eaf-868b-34201c90b64e/Untitled.png)
+
+- 강사 시간표 관리(출근 시간대 설정)
+- 강사 등록
+- 강사 정보 상세보기
+- 퇴사 처리
+- 비밀번호 재설정
+- 강사 정보 수정
+- 기간 내 강사 별 레슨 통계
+- 재등록률(담당 학생이 다시 등록했는지)
+- 레슨 횟수(예약된 레슨 횟수와 레슨 완료 횟수)
+- 강사 별 담당학생 확인
+- **더 보기**
+
+![출근 시간-레슨 예약 가능 시간(흰색)](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/0eab9b61-9cf3-44da-bd00-e600320972d9/Untitled.png)
+
+출근 시간-레슨 예약 가능 시간(흰색)
+
+![강사 등록](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/76c3280f-275f-4d58-8f30-bdff2f1a8a09/Untitled.png)
+
+강사 등록
+
+![강사 별 상세 정보 ](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/f21ddb7c-aac8-427c-a180-c2b00e19382b/Untitled.png)
+
+강사 별 상세 정보
+
+![강사 별 담당 학생 목록](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/21d0c320-2b04-452e-8ee2-7e2fbd51715f/Untitled.png)
+
+강사 별 담당 학생 목록
+
+
+### 결제 정보 등록
+
+![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/277a815a-cedd-41d7-9331-eb1386a2ea05/Untitled.png)
+
+결제 내역을 데이터베이스에 등록
+
+### 모바일 환경
+
+`react-responsive` 를 활용하여 화면 크기에 따른 반응형 디자인 구성
+
+![로그인 화면](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/6f30d35e-8bf8-44c4-9783-cb1354c4f20f/KakaoTalk_20230319_141646556.jpg)
+
+로그인 화면
+
+![레슨 시간표](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/8945b1b8-5cd9-49cb-9634-33a38998d803/KakaoTalk_20230319_141215288_01.jpg)
+
+레슨 시간표
+
+![레슨 예약](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/5e30393a-b302-4cb6-8dce-8f341dc5bdc7/KakaoTalk_20230319_141615041.jpg)
+
+레슨 예약
+
+![네비게이션](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/991ff176-9158-4383-854f-1d14cd223fa8/KakaoTalk_20230319_141215288_02.jpg)
+
+네비게이션
+
+![내 정보 수정](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/58e3c5cf-1483-4f4b-bc44-9c516b1ec093/KakaoTalk_20230319_141215288_03.jpg)
+
+내 정보 수정
+
+![내 레슨 내역](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/57d2f57c-26b2-4287-a36a-93f11fc0062f/KakaoTalk_20230319_141215288_04.jpg)
+
+내 레슨 내역
+
+---
+</details>
+
+
+
+## 배포 및 운영
+
+- `React app`을 번들링하여 `Apache`로 웹 페이지 배포
+- https 보안 접속(`OpenSSL` 사용)
+- `Express`로 백엔드 서버 구동(`Apache`와 `CORS` 허용을 통한 연결)
+- api call log 기록(`tracer` 라이브러리 사용)
+
+## 👨🏻‍💻 담당 기능
+
+*개발자 친구와 함께 매일 소통하며 작업 구간에 대한 구분 없이 제작하였기에 담당한 부분이 명확하게 나눠지지 않았습니다. 아래는 일정 이상 관여한 내용에 대하여 작성하였습니다.*
+
+- 직접 맡은 부분
+  - 관리자 전용 rest api 설계 및 작성
+  - 수강생 관리 페이지 구현
+  - 문자 전송 기능 구현
+- 일정 이상 참여한 부분
+  - 강사 관리 페이지 구현
+  - 모바일에 대응한 반응형 화면 구성
+  - 화면 디자인
+- 기타 전반적인 버그 수정 및 리팩토링, 모듈화
+- 유지보수 관리(3. 1. ~ )

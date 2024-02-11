@@ -5,8 +5,14 @@ import Layout from '@/components/Layout'
 import Badge from '@/components/Badge'
 
 export default function ProjectDetails({ data, children }: any) {
-  const { title, subtitle, stack, banner } = data.mdx.frontmatter
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  const { title, subtitle, stack, banner, start_date, end_date } = data.mdx.frontmatter
   const bannerImage = getImage(banner)
+  const start = new Date(start_date)
+  const end = new Date(end_date)
+
+  const dateString = `${start.getFullYear()}.${start.getMonth() + 1}.${start.getDate()}. ~ ${end.getFullYear()}.${end.getMonth() + 1}.${end.getDate()}.`
+
   return (
     <Layout>
       <div className="mt-10 w-full flex justify-center">
@@ -14,6 +20,7 @@ export default function ProjectDetails({ data, children }: any) {
           <div className="mb-8">
             <h1>{title}</h1>
             <p>{subtitle}</p>
+            <p className="text-end">{dateString}</p>
           </div>
 
           {bannerImage ? (
@@ -48,6 +55,8 @@ export const query = graphql`
         stack
         title
         subtitle
+        start_date
+        end_date
         banner {
           childImageSharp {
             gatsbyImageData(placeholder: BLURRED)
