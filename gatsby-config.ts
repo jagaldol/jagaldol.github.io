@@ -27,9 +27,9 @@ const config: GatsbyConfig = {
         gatsbyRemarkPlugins: [
           {
             resolve: `gatsby-remark-prismjs`,
-            options: {
-              languageDisplay: 'dialect',
-            },
+          },
+          {
+            resolve: `gatsby-remark-images`,
           },
         ],
       },

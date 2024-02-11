@@ -24,6 +24,19 @@
     h1, h2, h3, h4, h5, h6, nav {
         @apply font-GmarketSansMedium;
     }
+
+    h1 {
+        @apply text-3xl max-md:text-xl;
+    }
+
+
+    p, a {
+        @apply max-md:text-sm;
+    }
+
+    footer a, footer p {
+        @apply text-xs;
+    }
 }
 
 @layer utilities {
@@ -70,7 +83,7 @@
     }
 
     .markdown-body p {
-        @apply my-2;
+        @apply my-5 indent-2;
     }
 
     .markdown-body ul {
@@ -87,11 +100,11 @@
         @apply max-w-full h-auto;
     }
     .markdown-body pre {
-        @apply bg-gray-900 p-3 rounded m-5;
+        @apply rounded;
     }
 
-    .markdown-body code {
-        @apply font-mono text-white text-sm;
+    .markdown-body span > code {
+        @apply !bg-slate-50 text-teal-700;
     }
     .markdown-body blockquote {
         @apply border-l-4 border-gray-400 pl-4 italic;
