@@ -33,6 +33,9 @@ const config = {
           },
           {
             resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 1300,
+            }
           },
         ],
       },

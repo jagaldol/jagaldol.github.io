@@ -1,12 +1,12 @@
 import React from 'react'
-import { graphql, HeadFC } from 'gatsby'
+import { graphql, HeadFC, Link } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import Layout from '@/components/Layout'
 import Badge from '@/components/Badge'
 
 export default function ProjectDetails({ data, children }: any) {
   // eslint-disable-next-line @typescript-eslint/naming-convention
-  const { title, subtitle, stack, banner, start_date, end_date } = data.mdx.frontmatter
+  const { title, subtitle, stack, banner, start_date, end_date, deploy_link } = data.mdx.frontmatter
   const bannerImage = getImage(banner)
   const start = new Date(start_date)
   const end = new Date(end_date)
@@ -22,16 +22,23 @@ export default function ProjectDetails({ data, children }: any) {
             <p>{subtitle}</p>
             <p className="text-end">{dateString}</p>
           </div>
-
-          {bannerImage ? (
-            <GatsbyImage
-              alt={`${title} 대표 이미지`}
-              loading="eager"
-              image={bannerImage}
-              className="mb-2"
-              objectFit="contain"
-            />
-          ) : null}
+          <div className="group relative mb-2">
+            {bannerImage ? (
+              <>
+                <GatsbyImage alt={`${title} 대표 이미지`} loading="eager" image={bannerImage} objectFit="contain" />
+                {deploy_link ? (
+                  <Link
+                    to={deploy_link}
+                    className="absolute top-0 left-0 w-full h-full opacity-0 group-hover:opacity-100 bg-gradient-to-tl from-main-theme to-main-theme/60 z-10 transition-all duration-500 text-white flex drop-shadow-2xl"
+                  >
+                    <h3 className="absolute right-0 bottom-0 text-3xl max-md:text-2xl max-sm:text-lg max-sm:-translate-y-3 -translate-x-8 -translate-y-5">
+                      바로가기
+                    </h3>
+                  </Link>
+                ) : null}
+              </>
+            ) : null}
+          </div>
 
           <div className="flex gap-1 justify-end items-center flex-wrap">
             {stack.map((value: string) => (
@@ -57,9 +64,10 @@ export const query = graphql`
         subtitle
         start_date
         end_date
+        deploy_link
         banner {
           childImageSharp {
-            gatsbyImageData(placeholder: BLURRED)
+            gatsbyImageData(placeholder: BLURRED, width: 1300)
           }
         }
       }

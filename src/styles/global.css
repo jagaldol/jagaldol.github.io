@@ -18,7 +18,7 @@
 
 @layer base {
     body {
-        @apply bg-bg font-SUITRegular;
+        @apply bg-bg font-SUITRegular max-md:text-sm;
     }
 
     h1, h2, h3, h4, h5, h6, nav {
@@ -29,13 +29,15 @@
         @apply text-3xl max-md:text-xl;
     }
 
-
-    p, a {
-        @apply max-md:text-sm;
-    }
-
     footer a, footer p {
         @apply text-xs;
+    }
+
+    table {
+        @apply border-collapse border border-gray-200 bg-slate-50;
+    }
+    th, td {
+        @apply border border-gray-300 px-3;
     }
 }
 
@@ -75,7 +77,7 @@
     }
 
     .markdown-body h2 {
-        @apply text-2xl max-md:text-lg font-semibold mt-5 mb-3;
+        @apply text-2xl max-md:text-lg font-semibold mt-20 mb-3;
     }
 
     .markdown-body h3 {
@@ -83,7 +85,7 @@
     }
 
     .markdown-body p {
-        @apply my-3 indent-2;
+        @apply my-3;
     }
 
     .markdown-body ul {
@@ -100,14 +102,14 @@
         @apply text-blue-600 hover:text-blue-800;
     }
     .markdown-body img {
-        @apply max-w-full h-auto;
+        @apply max-w-full h-auto inline-block ;
     }
     .markdown-body pre {
         @apply rounded;
     }
 
     .markdown-body span > code {
-        @apply !bg-slate-50 text-teal-700;
+        @apply !bg-gray-50 text-teal-700 font-SUITRegular !px-1 font-semibold;
     }
     .markdown-body blockquote {
         @apply border-l-4 border-gray-400 pl-4 italic;
