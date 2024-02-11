@@ -1,6 +1,6 @@
-import type { GatsbyConfig } from 'gatsby'
+import remarkGfm from 'remark-gfm'
 
-const config: GatsbyConfig = {
+const config = {
   siteMetadata: {
     title: `안혜준 - 백엔드 개발자 포트폴리오`,
     siteUrl: `https://jagaldol.com/`,
@@ -24,6 +24,9 @@ const config: GatsbyConfig = {
       resolve: `gatsby-plugin-mdx`,
       options: {
         extensions: [`.mdx`, `.md`],
+        mdxOptions: {
+          remarkPlugins: [remarkGfm],
+        },
         gatsbyRemarkPlugins: [
           {
             resolve: `gatsby-remark-prismjs`,
