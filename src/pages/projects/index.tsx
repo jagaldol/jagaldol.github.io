@@ -76,4 +76,4 @@ export const query = graphql`
   }
 `
 
-export const Head: HeadFC = () => <title>Hyejun An - project</title>
+export const Head: HeadFC = () => <title>Project | Hyejun An</title>

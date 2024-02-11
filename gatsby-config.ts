@@ -20,7 +20,20 @@ const config: GatsbyConfig = {
         icon: 'src/images/icon.png',
       },
     },
-    'gatsby-plugin-mdx',
+    {
+      resolve: `gatsby-plugin-mdx`,
+      options: {
+        extensions: [`.mdx`, `.md`],
+        gatsbyRemarkPlugins: [
+          {
+            resolve: `gatsby-remark-prismjs`,
+            options: {
+              languageDisplay: 'dialect',
+            },
+          },
+        ],
+      },
+    },
     'gatsby-plugin-sharp',
     'gatsby-transformer-sharp',
     `gatsby-plugin-cname`,

@@ -1,22 +1,28 @@
 import React from 'react'
-import { graphql } from 'gatsby'
+import { graphql, HeadFC } from 'gatsby'
 import Layout from '@/components/Layout'
 import Badge from '@/components/Badge'
 
 export default function ProjectDetails({ data, children }: any) {
-  console.log(data)
+  const { title, subtitle, stack } = data.mdx.frontmatter
   return (
     <Layout>
-      <div>
-        <h1>{data.mdx.frontmatter.title}</h1>
-        <div className="flex gap-1 justify-center items-center flex-wrap">
-          {data.mdx.frontmatter.stack.map((value: string) => (
-            <div className="h-7" key={value}>
-              <Badge name={value} />
-            </div>
-          ))}
+      <div className="mt-10 w-full flex justify-center">
+        <div className="w-[1300px] max-2xl:w-[1000px] max-xl:w-[1000px] max-lg:w-[700px] max-md:w-full max-md:px-5">
+          <div className="mb-8">
+            <h1 className="text-3xl max-md:text-xl">{title}</h1>
+            <p>{subtitle}</p>
+          </div>
+
+          <div className="flex gap-1 justify-end items-center flex-wrap mb-8">
+            {stack.map((value: string) => (
+              <div className="h-7" key={value}>
+                <Badge name={value} />
+              </div>
+            ))}
+          </div>
+          <div className="markdown-body">{children}</div>
         </div>
-        {children}
       </div>
     </Layout>
   )
@@ -25,9 +31,6 @@ export default function ProjectDetails({ data, children }: any) {
 export const query = graphql`
   query ProjectsDetailPage($id: String!) {
     mdx(id: { eq: $id }) {
-      internal {
-        content
-      }
       frontmatter {
         stack
         title
@@ -36,3 +39,5 @@ export const query = graphql`
     }
   }
 `
+
+export const Head: HeadFC = ({ data }: any) => <title>{data.mdx.frontmatter.title} | Hyejun An</title>

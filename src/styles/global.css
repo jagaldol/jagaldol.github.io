@@ -56,4 +56,45 @@
     .underline-animate:hover:after {
         width: 50%
     }
+
+    .markdown-body h1 {
+        @apply text-3xl font-bold my-4;
+    }
+
+    .markdown-body h2 {
+        @apply text-2xl font-semibold my-3;
+    }
+
+    .markdown-body h3 {
+        @apply text-xl font-semibold my-2;
+    }
+
+    .markdown-body p {
+        @apply my-2;
+    }
+
+    .markdown-body ul {
+        @apply list-disc ml-5;
+    }
+
+    .markdown-body ol {
+        @apply list-decimal ml-5;
+    }
+    .markdown-body a {
+        @apply text-blue-600 hover:text-blue-800;
+    }
+    .markdown-body img {
+        @apply max-w-full h-auto;
+    }
+    .markdown-body pre {
+        @apply bg-gray-900 p-3 rounded m-5;
+    }
+
+    .markdown-body code {
+        @apply font-mono text-white text-sm;
+    }
+    .markdown-body blockquote {
+        @apply border-l-4 border-gray-400 pl-4 italic;
+    }
+
 }

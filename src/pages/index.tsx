@@ -15,4 +15,4 @@ const IndexPage: React.FC<PageProps> = () => {
 
 export default IndexPage
 
-export const Head: HeadFC = () => <title>Hyejun An - Backend Developer</title>
+export const Head: HeadFC = () => <title>Backend Developer | Hyejun An</title>

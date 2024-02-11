@@ -1,7 +1,7 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
-import { faBlog } from '@fortawesome/free-solid-svg-icons'
+import { faBlog, faUser } from '@fortawesome/free-solid-svg-icons'
 import { faEnvelope } from '@fortawesome/free-regular-svg-icons'
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
 import { graphql, useStaticQuery } from 'gatsby'
@@ -29,13 +29,20 @@ function Paragraph({
   )
 }
 
-function ContactElement({ content, icon, link }: { content: string; icon: IconProp; link: string }) {
+function ContactElement({ content, icon, link }: { content: string; icon: IconProp; link?: string }) {
   return (
     <div className="flex">
-      <a href={link} className="flex gap-1 items-center underline-animate">
-        <FontAwesomeIcon icon={icon} width="20" />
-        <p>{content}</p>
-      </a>
+      {link ? (
+        <a href={link} className="flex gap-1 items-center underline-animate">
+          <FontAwesomeIcon icon={icon} width="20" />
+          <span>{content}</span>
+        </a>
+      ) : (
+        <p className="flex gap-1 items-center">
+          <FontAwesomeIcon icon={icon} width="20" />
+          <span>{content}</span>
+        </p>
+      )}
     </div>
   )
 }
@@ -58,6 +65,7 @@ export default function Profile() {
       <div className="grid grid-cols-2 gap-y-10 max-lg:grid-cols-1 px-10 max-md:px-0">
         <div className="flex max-sm:flex-col-reverse">
           <ProfileContent title="Contact">
+            <ContactElement content="안혜준(2000.1.29)" icon={faUser} />
             <ContactElement content="jagaldol.dev@gmail.com" icon={faEnvelope} link="mailto:jagaldol.dev@gmail.com" />
             <ContactElement content="@jagadol" icon={faGithub} link="https://github.com/jagaldol/" />
             <ContactElement content="자갈돌의 devLog" icon={faBlog} link="https://blog.jagaldol.com/" />
