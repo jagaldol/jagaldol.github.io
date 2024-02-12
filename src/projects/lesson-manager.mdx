@@ -7,13 +7,13 @@ image: ../images/projects/lesson-manager/thumbnail.png
 banner: ../images/projects/lesson-manager/banner.png
 start_date: 2022-12-26 00:00:00 +0900
 end_date: 2023-02-28 00:00:00 +0900
-deploy_link: https://pianotogether.co.kr/admin
+deploy_link: https://pianotogether.co.kr
 ---
 
 
-import Member from '../containers/project/Member'
-import MemberContainer from '../containers/project/MemberContainer'
 import Stacks from '../containers/project/Stacks'
+import MemberContainer from '../containers/project/MemberContainer'
+import MemberGrid from '../containers/project/MemberGrid'
 
 부산대/경성대 2개 지점을 운영 중인 피아노 학원, [Piano Together](https://pianotogether.co.kr)의 레슨 관리 시스템입니다.
 
@@ -62,9 +62,17 @@ import Stacks from '../containers/project/Stacks'
   - 강사 출근 시간표 관리
   - 결제 정보 등록
 
-
-
 <MemberContainer>
-  <Member imageSrc="https://github.com/jagaldol.png" alt="안혜준 프로필 사진" name="안혜준" description="강사/수강생 관리 담당" />
-  <Member imageSrc="https://github.com/cla6shade.png" alt="이세형 프로필 사진" name="이세형" description="레슨 예약 담당" />
+  <MemberGrid members={[
+    {
+      imageSrc: 'https://github.com/jagaldol.png',
+      name: '안혜준',
+      description: '강사/수강생 관리 담당'
+    },
+    {
+      imageSrc: 'https://github.com/cla6shade.png',
+      name: '이세형',
+      description: '레슨 예약 담당'
+    }
+  ]} />
 </MemberContainer>

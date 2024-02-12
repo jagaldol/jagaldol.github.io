@@ -121,7 +121,7 @@ export const query = graphql`
         deploy_link
         banner {
           childImageSharp {
-            gatsbyImageData(placeholder: BLURRED, width: 1300)
+            gatsbyImageData(placeholder: BLURRED, width: 1500)
           }
         }
       }
