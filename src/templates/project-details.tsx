@@ -7,6 +7,7 @@ import Badge from '@/components/Badge'
 function BannerLink({ deploy_link }: { deploy_link: string }) {
   const [enableHover, setEnableHover] = useState(false)
   const [applyClass, setApplyClass] = useState(false)
+  const [isTop, setIsTop] = useState(false)
 
   const elementRef = useRef<HTMLDivElement | null>(null) // 요소의 참조를 저장합니다.
   const timeoutRef = useRef<NodeJS.Timeout | null>(null) // 요소의 참조를 저장합니다.
@@ -15,20 +16,24 @@ function BannerLink({ deploy_link }: { deploy_link: string }) {
     if (elementRef.current) {
       const elementTop = elementRef.current.getBoundingClientRect().top
 
-      if (elementTop <= 0) {
-        if (!applyClass) {
-          // 최상단에 도달하면 1초간 클래스 적용
-          setApplyClass(true)
-          if (timeoutRef.current) {
-            clearTimeout(timeoutRef.current)
-          }
-          timeoutRef.current = setTimeout(() => {
-            setApplyClass(false) // 1초 후 클래스 제거
-          }, 1000)
-        }
-      }
+      setIsTop(elementTop <= 50)
     }
   }
+
+  useEffect(() => {
+    if (isTop) {
+      if (!applyClass) {
+        // 최상단에 도달하면 1초간 클래스 적용
+        setApplyClass(true)
+        if (timeoutRef.current) {
+          clearTimeout(timeoutRef.current)
+        }
+        timeoutRef.current = setTimeout(() => {
+          setApplyClass(false) // 1초 후 클래스 제거
+        }, 1000)
+      }
+    }
+  }, [isTop])
 
   useEffect(() => {
     // 컴포넌트가 마운트된 후 3초 후에 hover를 활성화
