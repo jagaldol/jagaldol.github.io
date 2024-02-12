@@ -3,7 +3,7 @@ import remarkGfm from 'remark-gfm'
 const config = {
   siteMetadata: {
     title: `안혜준 - 백엔드 개발자 포트폴리오`,
-    siteUrl: `https://jagaldol.com/`,
+    siteUrl: `https://jagaldol.com`,
   },
   // More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.
   // If you use VSCode you can also use the GraphQL plugin
@@ -13,6 +13,13 @@ const config = {
     'gatsby-plugin-postcss',
     'gatsby-plugin-image',
     'gatsby-plugin-sitemap',
+    {
+      resolve: 'gatsby-plugin-robots-txt',
+      options: {
+        sitemap: 'https://jagaldol.com/sitemap-index.xml',
+        policy: [{userAgent: '*', allow: '/'}]
+      }
+    },
     {
       resolve: 'gatsby-plugin-manifest',
 
