@@ -13,6 +13,8 @@ deploy_link: https://github.com/Step3-kakao-tech-campus/Team3_BE
 import Stacks from '../containers/project/Stacks'
 import MemberContainer from '../containers/project/MemberContainer'
 import MemberGrid from '../containers/project/MemberGrid'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faGithub } from '@fortawesome/free-brands-svg-icons'
 
 카카오 테크 캠퍼스에서 진행한 4월부터 11월까지 7개월간의 교육 끝의 최종 팀 프로젝트 결과물입니다. 프론트엔드 2인, 백엔드 4인의 팀으로 기획부터 개발, 배포까지 모든 과정을 수행하였고, **카카오 테크 캠퍼스 최종 심사에서 우수 조로 선발**되어 상을 받게 되었습니다.
 
@@ -50,11 +52,23 @@ import MemberGrid from '../containers/project/MemberGrid'
 
 ### 전체 구성도
 
-<img src="https://github.com/Step3-kakao-tech-campus/Team3_BE/assets/84557643/fe733f3f-168d-4fd0-a55e-4c5c66561cab" alt="Logo" width="100%"/>
+<div className={"flex justify-center w-full"}>
+  <div className={"max-w-[1000px]"}>
+    ![전체 구성도](https://github.com/Step3-kakao-tech-campus/Team3_BE/assets/84557643/fe733f3f-168d-4fd0-a55e-4c5c66561cab)
+  </div>
+</div>
+
 
 ### 백엔드 구성도
 
-<img src="https://github.com/Step3-kakao-tech-campus/Team3_BE/assets/81746373/5742bd39-f728-4d9c-94a8-7cd13f9ded09" alt="Logo" width="100%"/>
+<div className={"flex justify-center w-full"}>
+  <div className={"max-w-[1000px]"}>
+    ![백엔드 구성도](https://github.com/Step3-kakao-tech-campus/Team3_BE/assets/81746373/5742bd39-f728-4d9c-94a8-7cd13f9ded09)
+  </div>
+</div>
+
+
+
 
 > 카테캠 과정 중 카카오 크램폴린을 통해 배포를 하였습니다.
 >
@@ -62,12 +76,6 @@ import MemberGrid from '../containers/project/MemberGrid'
 
 <details>
   <summary><h2 className="inline-block">FEATURES</h2></summary>
-
-
-
-  개발한 API들의 핵심 특성을 서술합니다.
-
-  > 각 api들의 상세한 명세는 [Swagger 문서](https://bungae.jagaldol.dev:8080/api/docs/swagger)를 확인 부탁드립니다.
 
   ### 인증
 
@@ -150,15 +158,15 @@ import MemberGrid from '../containers/project/MemberGrid'
   Pageable pageable = PageRequest.of(0, size, Sort.by(Sort.Order.desc("id")));
 
   Specification<Post> spec = Specification.where(conditionEqual(condition, userId))
-  .and(statusEqual(status))
-  .and(cityIdEqual(cityId))
-  .and(createdAtBetween(start, end));
+      .and(statusEqual(status))
+      .and(cityIdEqual(cityId))
+      .and(createdAtBetween(start, end));
 
   if (cursorRequest.hasKey()) {
-  spec = spec.and(postIdLessThan(cursorRequest.key()));
-}
-  return postRepository.findAll(spec, pageable).getContent();
-}
+      spec = spec.and(postIdLessThan(cursorRequest.key()));
+  }
+      return postRepository.findAll(spec, pageable).getContent();
+  }
   ```
 
   > 해당 부분에서 동적쿼리를 사용하지 않으면 30개가 넘는 조건을 처리해야 했기 때문에 `JPA Specification`을 도입하게 되었습니다.
@@ -231,7 +239,7 @@ import MemberGrid from '../containers/project/MemberGrid'
 ## 🔗 둘러보기
 
 - Swagger: [https://server.jagaldol.com/api/docs/swagger](https://server.jagaldol.com/api/docs/swagger)
-- github: [https://github.com/Step3-kakao-tech-campus/Team3_BE](https://github.com/Step3-kakao-tech-campus/Team3_BE)
+- github: [https://github.com/Step3-kakao-tech-campus/Team3_BE](https://github.com/Step3-kakao-tech-campus/Team3_BE) <FontAwesomeIcon size="lg" icon={faGithub} />
 
 <MemberContainer>
   <h3 className="text-center">Backend</h3>
@@ -271,5 +279,3 @@ import MemberGrid from '../containers/project/MemberGrid'
     }
   ]} />
 </MemberContainer>
-
-
