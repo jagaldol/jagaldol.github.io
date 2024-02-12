@@ -8,7 +8,7 @@ export default function Title() {
     query Title {
       file(relativePath: { eq: "cloud.jpg" }) {
         childImageSharp {
-          gatsbyImageData(placeholder: BLURRED, width: 1500)
+          gatsbyImageData(placeholder: BLURRED, width: 1000)
         }
       }
     }
