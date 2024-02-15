@@ -48,6 +48,7 @@
     "tailwindcss": "^3.4.1"
   },
   "devDependencies": {
+    "@babel/types": "7.20.7",
     "@types/node": "^20.10.6",
     "@types/react": "^18.2.46",
     "@types/react-dom": "^18.2.18",
