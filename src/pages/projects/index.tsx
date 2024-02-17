@@ -44,7 +44,10 @@ export default IndexPage
 
 export const query = graphql`
   query Projects {
-    allMdx(sort: { frontmatter: { end_date: DESC } }) {
+    allMdx(
+      sort: { frontmatter: { end_date: DESC } }
+      filter: { internal: { contentFilePath: { glob: "**/src/projects/main/*.mdx" } } }
+    ) {
       nodes {
         id
         frontmatter {
