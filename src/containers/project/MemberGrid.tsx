@@ -1,5 +1,6 @@
 import React from 'react'
 import Member from '@/containers/project/Member'
+import { MemberType } from '@/types/project'
 
 export default function MemberGrid({ members }: { members: MemberType[] }) {
   return (

@@ -1,5 +1,5 @@
 export interface MemberType {
-  imageSrc: string
+  imageSrc?: string
   name: string
   description: string
   link?: string
