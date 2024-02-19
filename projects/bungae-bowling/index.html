@@ -17,7 +17,38 @@
 <img src="https://img.shields.io/badge/KUBERNETES%201.28.0-326CE5?style=for-the-badge&amp;logo=Kubernetes&amp;logoColor=white" alt="Kubernates 1.28.0"/>
 <img src="https://img.shields.io/badge/GITHUB%20ACTIONS-2088FF?style=for-the-badge&amp;logo=github-actions&amp;logoColor=white" alt="github action"/></div></div>
 <h2>🗄️️ ERD</h2>
-<img src="../images/projects/bungae-bowling/erd.png" alt="ER Diagram"/>
+<span><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 1300px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/96272e2a6050d13940788e02759139d4/922e6/erd.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 41.23076923076923%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAICAYAAAD5nd/tAAAACXBIWXMAAAsTAAALEwEAmpwYAAABb0lEQVR42j1R25ajMAzjW7bQXMkNaKHQmXYeZ+b/f0crm7P7oOPEcWxJ7kLw8M7Amut/OGcV3hqYoYe9DjBE0LyDsXxjDN4x2vMPc5bo5lbwOjbs64K5ZkUrGTLo9dyw3Sa8Pnbk6BXBexhjeHZYSkRLAcFc0HJQEp1MM9bhyiLvJek5ySmTMReMKaPUyreIfrhqnTBpJUHIlBRVxRj8ybCVEdtSMTNWTsvR4tYq0hhRyMJzuuSTNwh2QBlZQ6z8M9WEiY296ZnzJ0ORtswTMbOgIacRkbIK4+vzA8e+4/fnG9t6R84JrRakGDFPDZXnxuHipzRThtJwIOXL5Q+pi/GODelLCMpSTM8p6ZAYzrz4KHVSP/S94l/Tbl2a0t/vsy4gUpaYX8nw4KKej7siBatynQ7kwo4VX58H/06UTTXPg9s26HLmZucFy+2GXArNP82V+KDc9/uNx4Nb5oJiHLWhvMu9tQmJS/NkLRDJfwE07PT9dslxrAAAAABJRU5ErkJggg=='); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="ER Diagram"
+        title=""
+        src="/static/96272e2a6050d13940788e02759139d4/3c492/erd.png"
+        srcset="/static/96272e2a6050d13940788e02759139d4/ff46a/erd.png 325w,
+/static/96272e2a6050d13940788e02759139d4/a6d36/erd.png 650w,
+/static/96272e2a6050d13940788e02759139d4/3c492/erd.png 1300w,
+/static/96272e2a6050d13940788e02759139d4/d544a/erd.png 1950w,
+/static/96272e2a6050d13940788e02759139d4/922e6/erd.png 2140w"
+        sizes="(max-width: 1300px) 100vw, 1300px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+        decoding="async"
+      />
+  </a>
+    </span></span>
 <h2>System Structure</h2>
 <h3>전체 구성도</h3>
 <div class="flex justify-center w-full"><div class="max-w-[1000px]"><img src="https://github.com/Step3-kakao-tech-campus/Team3_BE/assets/84557643/fe733f3f-168d-4fd0-a55e-4c5c66561cab" alt="전체 구성도"/></div></div>
@@ -41,7 +72,7 @@
 </ul><p><strong>회원가입을 한 유저는 아래의 기능을 추가로 사용할 수 있습니다.</strong></p><ul>
 <li>자신의 회원정보 조회 및 수정</li>
 <li>쪽지 조회</li>
-</ul><p><strong>회원 가입 후 이메일인증을 받은 유저는 아래의 기능을 포함하여 모든 기능을 사용할 수 있습니다.</strong></p><ul>
+</ul><p><strong>회원 가입 후 이메일인증을 받은 유저는   아래의 기능을 포함하여 모든 기능을 사용할 수 있습니다.</strong></p><ul>
 <li>모집글 관련 모든 기능</li>
 <li>신청 관련 모든 기능</li>
 <li>댓글 관련 모든 기능</li>
@@ -62,7 +93,7 @@
 <li>참가희망자들은 참가신청 기능을 이용하여 참가신청을 할 수 있고, 모집글 게시자가 참가수락 여부를 결정할 수 있습니다.</li>
 <li>댓글 기능이 있어 정보 교환 및 소통이 가능합니다.</li>
 <li>이후 모집글을 베이스로 참여기록, 별점, 점수등록 등이 이루어 지기 때문에모임 확정 이후에는 모집글 내용을 수정하거나 삭제할 수 없습니다.</li>
-</ul><h4>JPA Specification</h4><p>모집글 데이터가 필요한 API를 구현하는 도중, 복잡한 조건처리가 필요한 로직이 있어 동적 쿼리가 필요했습니다. <span><code class="language-text">queryDSL</code></span>을 학습하여 도입하기에는 프로젝트 기간이 한정적이라 비교적 사용이  쉬운 JPA Specification을 사용하였습니다.</p><ul>
+</ul><h4>JPA Specification</h4><p>모집글 데이터가 필요한 API를 구현하는 도중, 복잡한 조건처리가 필요한 로직이 있어 동적 쿼리가 필요했습니다. <span><code class="language-text">queryDSL</code></span>을 학습하여 도입하기에는 프로젝트 기간이 한정적이라 비교적 사용이 쉬운 JPA Specification을 사용하였습니다.</p><ul>
 <li>참여기록 데이터에 적용된 <span><code class="language-text">JPA Specification</code></span>의 일부 로직입니다.</li>
 </ul><span><div class="gatsby-highlight" data-language="java"><pre class="language-java"><code class="language-java"><span class="token keyword">private</span> <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Post</span><span class="token punctuation">></span></span> <span class="token function">loadPosts</span><span class="token punctuation">(</span><span class="token class-name">CursorRequest</span> cursorRequest<span class="token punctuation">,</span> <span class="token class-name">Long</span> userId<span class="token punctuation">,</span> <span class="token class-name">String</span> condition<span class="token punctuation">,</span> <span class="token class-name">String</span> status<span class="token punctuation">,</span> <span class="token class-name">Long</span> cityId<span class="token punctuation">,</span> <span class="token class-name">String</span> start<span class="token punctuation">,</span> <span class="token class-name">String</span> end<span class="token punctuation">)</span> <span class="token punctuation">{</span>
 <span class="token keyword">int</span> size <span class="token operator">=</span> cursorRequest<span class="token punctuation">.</span><span class="token function">hasSize</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">?</span> cursorRequest<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token constant">DEFAULT_SIZE</span><span class="token punctuation">;</span>
@@ -140,6 +171,6 @@
           <script
             id="gatsby-chunk-mapping"
           >
-            window.___chunkMapping="{\"app\":[\"/app-1ca0655e06ea977acb01.js\"],\"component---src-pages-404-tsx\":[\"/component---src-pages-404-tsx-0c8f2563b68ef47f1a9c.js\"],\"component---src-pages-index-tsx\":[\"/component---src-pages-index-tsx-c06dc64859c63cf86ff5.js\"],\"component---src-pages-projects-index-tsx\":[\"/component---src-pages-projects-index-tsx-d44d65f6067840dec7dd.js\"],\"component---src-templates-project-details-tsx-content-file-path-src-projects-etc-im-home-mdx\":[\"/component---src-templates-project-details-tsx-content-file-path-src-projects-etc-im-home-mdx-16a1d4cacb1b051b49ad.js\"],\"component---src-templates-project-details-tsx-content-file-path-src-projects-main-bungae-bowling-mdx\":[\"/component---src-templates-project-details-tsx-content-file-path-src-projects-main-bungae-bowling-mdx-12b7067012a09018cc22.js\"],\"component---src-templates-project-details-tsx-content-file-path-src-projects-main-chat-foodie-mdx\":[\"/component---src-templates-project-details-tsx-content-file-path-src-projects-main-chat-foodie-mdx-d38721b2c28965b82a43.js\"],\"component---src-templates-project-details-tsx-content-file-path-src-projects-main-lesson-manager-mdx\":[\"/component---src-templates-project-details-tsx-content-file-path-src-projects-main-lesson-manager-mdx-5b8f7d56d558a9db9040.js\"]}";
+            window.___chunkMapping="{\"app\":[\"/app-b56b083d2b9019ba8e04.js\"],\"component---src-pages-404-tsx\":[\"/component---src-pages-404-tsx-0c8f2563b68ef47f1a9c.js\"],\"component---src-pages-index-tsx\":[\"/component---src-pages-index-tsx-c06dc64859c63cf86ff5.js\"],\"component---src-pages-projects-index-tsx\":[\"/component---src-pages-projects-index-tsx-d44d65f6067840dec7dd.js\"],\"component---src-templates-project-details-tsx-content-file-path-src-projects-etc-im-home-mdx\":[\"/component---src-templates-project-details-tsx-content-file-path-src-projects-etc-im-home-mdx-16a1d4cacb1b051b49ad.js\"],\"component---src-templates-project-details-tsx-content-file-path-src-projects-etc-running-alarm-mdx\":[\"/component---src-templates-project-details-tsx-content-file-path-src-projects-etc-running-alarm-mdx-06a4505b736763526715.js\"],\"component---src-templates-project-details-tsx-content-file-path-src-projects-main-bungae-bowling-mdx\":[\"/component---src-templates-project-details-tsx-content-file-path-src-projects-main-bungae-bowling-mdx-c252e1baf42285fab2b8.js\"],\"component---src-templates-project-details-tsx-content-file-path-src-projects-main-chat-foodie-mdx\":[\"/component---src-templates-project-details-tsx-content-file-path-src-projects-main-chat-foodie-mdx-f1fdf93edb5d21a7d1f8.js\"],\"component---src-templates-project-details-tsx-content-file-path-src-projects-main-lesson-manager-mdx\":[\"/component---src-templates-project-details-tsx-content-file-path-src-projects-main-lesson-manager-mdx-264fd785299fd209308e.js\"]}";
           </script>
-        <script>window.___webpackCompilationHash="a1a21aab956c3dc7c099";</script><script src="/webpack-runtime-cb18c56d4a01831d2fce.js" async></script><script src="/framework-c6f14893a9d91af58fef.js" async></script><script src="/app-1ca0655e06ea977acb01.js" async></script><!-- slice-end id="_gatsby-scripts-1" --></body></html>
+        <script>window.___webpackCompilationHash="52dc19072779637a8c24";</script><script src="/webpack-runtime-1d0a7ebbe42bb44fd3d2.js" async></script><script src="/framework-c6f14893a9d91af58fef.js" async></script><script src="/app-b56b083d2b9019ba8e04.js" async></script><!-- slice-end id="_gatsby-scripts-1" --></body></html>
