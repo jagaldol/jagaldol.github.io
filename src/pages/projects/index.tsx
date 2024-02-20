@@ -20,7 +20,7 @@ const IndexPage: React.FC<PageProps> = ({ data }: { data: any }) => {
             return (
               <Link
                 key={project.id}
-                to={project.frontmatter.slug}
+                to={`/projects/${project.frontmatter.slug}`}
                 className="relative w-full h-full bg-gradient-to-bl to-gray-300 from-gray-100 drop-shadow-lg flex items-center justify-center max-h-96 group"
               >
                 {image ? (
@@ -44,7 +44,7 @@ const IndexPage: React.FC<PageProps> = ({ data }: { data: any }) => {
             return (
               <Link
                 key={project.id}
-                to={project.frontmatter.slug}
+                to={`/projects/${project.frontmatter.slug}`}
                 className="relative w-full h-full bg-gradient-to-bl to-gray-300 from-gray-100 drop-shadow-lg flex items-center justify-center max-h-96 group"
               >
                 {image ? (

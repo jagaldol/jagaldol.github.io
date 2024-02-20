@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { graphql, HeadFC, Link } from 'gatsby'
+import { graphql, HeadFC } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import Layout from '@/components/Layout'
 import Badge from '@/components/Badge'
@@ -55,14 +55,14 @@ function BannerLink({ deploy_link }: { deploy_link: string }) {
 
   return (
     <div ref={elementRef} className="absolute top-0 left-0 w-full h-full">
-      <Link
-        to={deploy_link}
+      <a
+        href={deploy_link}
         className={`w-full h-full opacity-0 ${applyClass ? 'opacity-100' : ''} ${enableHover ? 'group-hover:opacity-100' : ''} bg-gradient-to-tl from-main-theme to-main-theme/60 z-10 transition-all duration-500 text-white flex drop-shadow-2xl`}
       >
         <h3 className="absolute right-0 bottom-0 text-3xl max-md:text-2xl max-sm:text-lg max-sm:-translate-y-3 -translate-x-8 -translate-y-5">
           바로가기
         </h3>
-      </Link>
+      </a>
     </div>
   )
 }

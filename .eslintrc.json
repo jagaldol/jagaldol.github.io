@@ -30,6 +30,7 @@
       { "namedComponents": ["arrow-function", "function-declaration"] }
     ],
     // 경고표시, 파일 확장자를 .ts나 .tsx 모두 허용함
-    "react/jsx-filename-extension": ["warn", { "extensions": [".ts", ".tsx"] }]
+    "react/jsx-filename-extension": ["warn", { "extensions": [".ts", ".tsx"] }],
+    "prettier/prettier": ["error", {"endOfLine": "auto"}]
   }
 }

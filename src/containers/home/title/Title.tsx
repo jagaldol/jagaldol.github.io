@@ -37,7 +37,7 @@ export default function Title() {
       </div>
       <div className="absolute left-0 top-0 w-full h-[1000px] bg-gradient-to-b from-transparent to-bg -z-20" />
 
-      <div className="h-[600px] flex flex-col text-center z-30">
+      <div className="h-[600px] flex flex-col text-center">
         <div className="flex flex-col flex-1 items-center justify-center ">
           <h1 className="text-5xl flex gap-4 max-md:gap-2 max-md:flex-col max-md:text-3xl">
             <span>안녕하세요</span>

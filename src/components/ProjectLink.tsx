@@ -50,7 +50,7 @@ export default function ProjectLink({ title, stacks }: { title: string; stacks: 
       ref={elementRef}
       className={`absolute left-0 top-0 w-full h-full opacity-0 ${applyClass ? 'opacity-100' : ''} group-hover:opacity-100 bg-gradient-to-tl from-main-theme to-main-theme/40 z-10 transition-all duration-500 text-white`}
     >
-      <h3 className="absolute right-0 bottom-0 text-3xl max-md:text-2xl -translate-x-8 max-md:-translate-x-6 -translate-y-10">
+      <h3 className="absolute right-0 bottom-0 text-3xl max-xl:text-2xl -translate-x-8 max-md:-translate-x-6 -translate-y-10">
         {title}
       </h3>
       <div className="absolute right-0 bottom-0 -translate-x-7 max-md:-translate-x-5 -translate-y-3 flex gap-1 justify-end items-center flex-wrap">
