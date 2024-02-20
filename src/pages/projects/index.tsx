@@ -37,7 +37,9 @@ const IndexPage: React.FC<PageProps> = ({ data }: { data: any }) => {
             )
           })}
         </div>
-        <h2 className="text-xl my-4">ETC</h2>
+        <h2 className="text-xl my-4" id="etc">
+          ETC
+        </h2>
         <div className="grid grid-cols-3 max-lg:grid-cols-2 py-5 mb-20 max-md:grid-cols-1 mx-20 max-2xl:mx-10 max-md:mx-0 gap-x-3 gap-y-10">
           {etcProjects.map((project: any) => {
             const image = getImage(project.frontmatter.image)

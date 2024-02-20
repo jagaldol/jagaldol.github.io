@@ -2,6 +2,7 @@
 module.exports = {
   content: [
     `./src/**/*.{js,jsx,ts,tsx,mdx}`,
+    'gatsby-browser.js',
   ],
   theme: {
     extend: {
