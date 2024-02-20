@@ -1,6 +1,7 @@
 import { graphql, Link, useStaticQuery } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import React from 'react'
+import { AnchorLink } from 'gatsby-plugin-anchor-links'
 import Block from '@/containers/home/Block'
 import ProjectLink from '@/components/ProjectLink'
 
@@ -56,8 +57,8 @@ export default function Project() {
         })}
       </div>
 
-      <Link
-        to="/projects"
+      <AnchorLink
+        to="/projects/#etc"
         className={`
         flex justify-center items-center rounded-full
         text-lg max-md:text-base
@@ -65,9 +66,10 @@ export default function Project() {
         mx-20 my-10 max-2xl:mx-10 max-md:mx-0
         drop-shadow text-white bg-main-theme hover:bg-main-theme/70 transition-all
         `}
+        stripHash
       >
         View More
-      </Link>
+      </AnchorLink>
     </Block>
   )
 }

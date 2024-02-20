@@ -27,6 +27,7 @@
     "autoprefixer": "^10.4.17",
     "gatsby": "^5.13.1",
     "gatsby-plugin-alias-imports": "^1.0.5",
+    "gatsby-plugin-anchor-links": "^1.2.1",
     "gatsby-plugin-cname": "^1.0.0",
     "gatsby-plugin-image": "^3.13.0",
     "gatsby-plugin-manifest": "^5.13.0",
