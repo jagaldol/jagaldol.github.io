@@ -3,6 +3,7 @@ import { graphql, HeadFC } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import Layout from '@/components/Layout'
 import Badge from '@/components/Badge'
+import SEO from '@/components/SEO'
 
 function BannerLink({ deploy_link }: { deploy_link: string }) {
   const [enableHover, setEnableHover] = useState(false)
@@ -119,6 +120,7 @@ export const query = graphql`
         start_date
         end_date
         deploy_link
+        slug
         banner {
           childImageSharp {
             gatsbyImageData(placeholder: BLURRED, width: 1500)
@@ -129,4 +131,11 @@ export const query = graphql`
   }
 `
 
-export const Head: HeadFC = ({ data }: any) => <title>{data.mdx.frontmatter.title} | Hyejun An</title>
+export const Head: HeadFC = ({ data }: any) => (
+  <SEO
+    title={data.mdx.frontmatter.title}
+    description={data.mdx.frontmatter.subtitle}
+    pathname={`/projects/${data.mdx.frontmatter.slug}/`}
+    image={`/og-image/${data.mdx.frontmatter.slug}/thumbnail.png`}
+  />
+)

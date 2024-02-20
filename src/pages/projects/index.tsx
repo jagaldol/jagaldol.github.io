@@ -4,6 +4,7 @@ import React from 'react'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import Layout from '@/components/Layout'
 import ProjectLink from '@/components/ProjectLink'
+import SEO from '@/components/SEO'
 
 const IndexPage: React.FC<PageProps> = ({ data }: { data: any }) => {
   const mainProjects = data.main.nodes
@@ -111,4 +112,11 @@ export const query = graphql`
   }
 `
 
-export const Head: HeadFC = () => <title>Project | Hyejun An</title>
+export const Head: HeadFC = ({ data }: any) => (
+  <SEO
+    title="Project"
+    description="지금까지 수행해온 프로젝트 모음입니다."
+    pathname="/projects/"
+    image={`/og-image/${data.main.nodes[0].frontmatter.slug}/thumbnail.png`}
+  />
+)
