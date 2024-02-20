@@ -33,9 +33,9 @@ function ContactElement({ content, icon, link }: { content: string; icon: IconPr
   return (
     <div className="flex">
       {link ? (
-        <a href={link} className="flex gap-1 items-center underline-animate">
+        <a href={link} className="flex gap-1 items-center group">
           <FontAwesomeIcon icon={icon} width="20" />
-          <span>{content}</span>
+          <span className="underline-animate">{content}</span>
         </a>
       ) : (
         <p className="flex gap-1 items-center">
