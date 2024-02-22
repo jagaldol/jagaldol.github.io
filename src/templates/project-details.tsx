@@ -80,7 +80,7 @@ export default function ProjectDetails({ data, children }: any) {
   return (
     <Layout>
       <div className="mt-10 w-full flex justify-center">
-        <div className="w-[1300px] max-2xl:w-[1000px] max-xl:w-[1000px] max-lg:w-[700px] max-md:w-full max-md:px-5">
+        <div className="w-[1300px] max-2xl:w-[1000px] max-xl:w-[1000px] max-lg:w-[700px] max-md:w-full">
           <div className="mb-8">
             <h1>{title}</h1>
             <p>{subtitle}</p>
