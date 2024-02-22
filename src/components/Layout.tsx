@@ -1,15 +1,54 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'gatsby'
 import { faBlog } from '@fortawesome/free-solid-svg-icons'
 import { faEnvelope } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
 import Navigator from '@/components/nav/Navigator'
+import BottomArrow from '@/svgs/bottom-arrow.inline.svg'
 
 export default function Layout({ children }: { children: React.ReactNode }) {
+  const [atBottom, setAtBottom] = useState(false)
+
+  const toggleScroll = () => {
+    if (atBottom) {
+      // 최상단으로 스크롤
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    } else {
+      // 최하단으로 스크롤
+      window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' })
+    }
+  }
+
+  const checkScroll = () => {
+    if (
+      document.documentElement.clientHeight >=
+      document.documentElement.scrollHeight - document.documentElement.scrollTop
+    ) {
+      setAtBottom(true)
+    } else {
+      setAtBottom(false)
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener('scroll', checkScroll)
+    return () => window.removeEventListener('scroll', checkScroll)
+  }, [])
   return (
-    <main className="px-5 min-h-screen h-auto absolute w-full pb-40">
+    <main className="px-5 min-h-screen h-auto absolute left-0 top-0 w-full pb-40">
       <Navigator />
+      <button
+        type="button"
+        aria-label={atBottom ? '맨 위로' : '맨 밑으로'}
+        className={`fixed right-10 bottom-28 z-50 w-12 h-12 rounded-full drop-shadow bg-main-theme
+          flex justify-center items-center  
+          hover:bg-main-theme-70 ${atBottom ? 'hover:-translate-y-1' : 'hover:translate-y-1'} transition-all
+          max-xl:right-7 max-xl:w-10 max-xl:h-10 max-lg:bottom-20 max-md:bottom-12`}
+        onClick={toggleScroll}
+      >
+        <BottomArrow className={`stroke-white h-6 max-2xl:h-5 transition-all ${atBottom ? 'rotate-180' : ''}`} />
+      </button>
       {children}
 
       <footer className="absolute bottom-0 left-0 h-16 max-md:h-10 bg-white w-full px-20 max-sm:px-10 flex items-center">
