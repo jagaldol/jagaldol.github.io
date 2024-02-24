@@ -102,7 +102,9 @@
     .markdown-body pre {
         @apply rounded;
     }
-
+    .markdown-body hr {
+        @apply border border-b-gray-400 rounded-full;
+    }
     .markdown-body span > code {
         @apply !bg-gray-50 text-teal-700 font-SUITRegular !px-1 font-semibold;
     }
