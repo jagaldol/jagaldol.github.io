@@ -4,7 +4,7 @@ import { faBlog } from '@fortawesome/free-solid-svg-icons'
 import { faEnvelope } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
-import Navigator from '@/components/nav/Navigator'
+import Header from '@/components/nav/Header'
 import BottomArrow from '@/svgs/bottom-arrow.inline.svg'
 
 export default function Layout({ children }: { children: React.ReactNode }) {
@@ -37,7 +37,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   }, [])
   return (
     <div className="min-h-screen h-auto absolute left-0 top-0 w-full">
-      <Navigator />
+      <Header />
       <button
         type="button"
         aria-label={atBottom ? '맨 위로' : '맨 밑으로'}
