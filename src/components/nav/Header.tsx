@@ -25,6 +25,17 @@ export default function Header() {
       })
   }, [isNavOpen])
 
+  useEffect(() => {
+    const handleResize = () => {
+      setIsNavOpen(false)
+    }
+
+    window.addEventListener('resize', handleResize)
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
+
   return (
     <>
       <header className="w-full h-14 py-3 flex 2xl:justify-center max-md:px-0 bg-bg/90 backdrop-blur sticky top-0 left-0 z-50">
