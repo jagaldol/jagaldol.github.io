@@ -36,12 +36,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     return () => window.removeEventListener('scroll', checkScroll)
   }, [])
   return (
-    <main className="px-5 min-h-screen h-auto absolute left-0 top-0 w-full pb-40">
+    <div className="min-h-screen h-auto absolute left-0 top-0 w-full">
       <Navigator />
       <button
         type="button"
         aria-label={atBottom ? '맨 위로' : '맨 밑으로'}
-        className={`fixed right-10 bottom-28 z-50 w-12 h-12 rounded-full drop-shadow bg-main-theme
+        className={`fixed right-10 bottom-28 z-40 w-12 h-12 rounded-full drop-shadow bg-main-theme
           flex justify-center items-center  
           hover:bg-main-theme-70 ${atBottom ? 'hover:-translate-y-1' : 'hover:translate-y-1'} transition-all
           max-xl:right-7 max-xl:w-10 max-xl:h-10 max-lg:bottom-20 max-md:bottom-12`}
@@ -49,7 +49,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       >
         <BottomArrow className={`stroke-white h-6 max-2xl:h-5 transition-all ${atBottom ? 'rotate-180' : ''}`} />
       </button>
-      {children}
+
+      <main className="px-5 pb-40">{children}</main>
 
       <footer className="absolute bottom-0 left-0 h-16 max-md:h-10 bg-white w-full px-20 max-sm:px-10 flex items-center">
         <div className=" flex-1">
@@ -71,6 +72,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </a>
         </div>
       </footer>
-    </main>
+    </div>
   )
 }
