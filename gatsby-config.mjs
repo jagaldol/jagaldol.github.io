@@ -17,6 +17,19 @@ const config = {
     'gatsby-plugin-image',
     'gatsby-plugin-sitemap',
     {
+      resolve: "gatsby-plugin-breakpoints",
+      options: {
+        queries: {
+          xs: '(max-width: 320px)',
+          sm: '(max-width: 640px)',
+          md: '(max-width: 768px)',
+          lg: '(max-width: 1024px)',
+          xl: '(max-width: 1280px)',
+          xxl: '(max-width: 1536px)',
+        },
+      },
+    },
+    {
       resolve: 'gatsby-plugin-robots-txt',
       options: {
         sitemap: 'https://jagaldol.com/sitemap-index.xml',
