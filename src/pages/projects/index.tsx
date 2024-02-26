@@ -1,69 +1,22 @@
 import type { HeadFC, PageProps } from 'gatsby'
-import { graphql, Link } from 'gatsby'
+import { graphql } from 'gatsby'
 import React from 'react'
-import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import Layout from '@/components/Layout'
-import ProjectLink from '@/components/ProjectLink'
 import SEO from '@/components/SEO'
+import ProjectContainer from '@/containers/project/ProjectConatiner'
 
 const IndexPage: React.FC<PageProps> = ({ data }: { data: any }) => {
   const mainProjects = data.main.nodes
-  const etcProjects = data.etc.nodes
+  const minorProjects = data.minor.nodes
+  const toyProjects = data.toy.nodes
 
   return (
     <Layout>
       <div className="mt-5 flex flex-col text-center">
         <h1 className="text-3xl my-8">Project List</h1>
-        <h2 className="text-xl my-4">Main Project</h2>
-        <div className="grid grid-cols-3 max-lg:grid-cols-2 py-5 mb-20 max-md:grid-cols-1 mx-20 max-2xl:mx-10 max-md:mx-0 gap-x-3 gap-y-10">
-          {mainProjects.map((project: any) => {
-            const image = getImage(project.frontmatter.image)
-            return (
-              <Link
-                key={project.id}
-                to={`/projects/${project.frontmatter.slug}`}
-                className="relative w-full h-full bg-gradient-to-bl to-gray-300 from-gray-100 drop-shadow-lg flex items-center justify-center max-h-96 group"
-              >
-                {image ? (
-                  <GatsbyImage
-                    alt={`${project.frontmatter.title} 대표 이미지`}
-                    loading="eager"
-                    image={image}
-                    className="h-full group-hover:scale-90 transition-all duration-500"
-                    objectFit="contain"
-                  />
-                ) : null}
-                <ProjectLink title={project.frontmatter.title} stacks={project.frontmatter.stack} />
-              </Link>
-            )
-          })}
-        </div>
-        <h2 className="text-xl my-4" id="etc">
-          ETC
-        </h2>
-        <div className="grid grid-cols-3 max-lg:grid-cols-2 py-5 mb-20 max-md:grid-cols-1 mx-20 max-2xl:mx-10 max-md:mx-0 gap-x-3 gap-y-10">
-          {etcProjects.map((project: any) => {
-            const image = getImage(project.frontmatter.image)
-            return (
-              <Link
-                key={project.id}
-                to={`/projects/${project.frontmatter.slug}`}
-                className="relative w-full h-full bg-gradient-to-bl to-gray-300 from-gray-100 drop-shadow-lg flex items-center justify-center max-h-96 group"
-              >
-                {image ? (
-                  <GatsbyImage
-                    alt={`${project.frontmatter.title} 대표 이미지`}
-                    loading="eager"
-                    image={image}
-                    className="h-full group-hover:scale-90 transition-all duration-500"
-                    objectFit="contain"
-                  />
-                ) : null}
-                <ProjectLink title={project.frontmatter.title} stacks={project.frontmatter.stack} />
-              </Link>
-            )
-          })}
-        </div>
+        <ProjectContainer title="Main Project" projects={mainProjects} />
+        <ProjectContainer title="Minor Project" projects={minorProjects} />
+        <ProjectContainer title="Toy Project" projects={toyProjects} />
       </div>
     </Layout>
   )
@@ -91,9 +44,27 @@ export const query = graphql`
         }
       }
     }
-    etc: allMdx(
+    minor: allMdx(
       sort: { frontmatter: { end_date: DESC } }
-      filter: { internal: { contentFilePath: { glob: "**/src/projects/etc/*.mdx" } } }
+      filter: { internal: { contentFilePath: { glob: "**/src/projects/minor/*.mdx" } } }
+    ) {
+      nodes {
+        id
+        frontmatter {
+          slug
+          title
+          stack
+          image {
+            childImageSharp {
+              gatsbyImageData(placeholder: BLURRED, width: 500)
+            }
+          }
+        }
+      }
+    }
+    toy: allMdx(
+      sort: { frontmatter: { end_date: DESC } }
+      filter: { internal: { contentFilePath: { glob: "**/src/projects/toy/*.mdx" } } }
     ) {
       nodes {
         id
