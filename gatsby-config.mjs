@@ -16,6 +16,7 @@ const config = {
     'gatsby-plugin-postcss',
     'gatsby-plugin-image',
     'gatsby-plugin-sitemap',
+    'gatsby-remark-responsive-iframe',
     {
       resolve: "gatsby-plugin-breakpoints",
       options: {
