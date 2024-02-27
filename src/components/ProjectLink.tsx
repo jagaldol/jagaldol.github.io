@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
+import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 import Badge from '@/components/Badge'
 
 export default function ProjectLink({ title, stacks }: { title: string; stacks: string[] }) {
@@ -7,6 +8,8 @@ export default function ProjectLink({ title, stacks }: { title: string; stacks: 
 
   const elementRef = useRef<HTMLDivElement | null>(null) // 요소의 참조를 저장합니다.
   const timeoutRef = useRef<NodeJS.Timeout | null>(null) // 요소의 참조를 저장합니다.
+
+  const breakpoints = useBreakpoint()
 
   const checkVisibility = () => {
     if (elementRef.current) {
@@ -18,7 +21,7 @@ export default function ProjectLink({ title, stacks }: { title: string; stacks: 
   }
 
   useEffect(() => {
-    if (isVisible) {
+    if (isVisible && breakpoints.md) {
       if (!applyClass) {
         setApplyClass(true)
         if (timeoutRef.current) {
