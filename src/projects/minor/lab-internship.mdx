@@ -1,0 +1,92 @@
+---
+title:  공학연구실습
+subtitle: 공학연구실습I 대학원 연구실 인턴쉽
+slug: lab-internship
+stack: ["Pytorch", "Unity"]
+image: ../../images/projects/lab-internship/thumbnail.png
+banner: ../../images/projects/lab-internship/banner.png
+start_date: 2023-03-20 00:00:00 +0900
+end_date: 2023-06-28 00:00:00 +0900
+deploy_link: https://github.com/jagaldol/lab-internship
+---
+
+공학연구실습을 통해 총 **3개의 연구실에서 4주간격으로 실습을 수행**하였습니다. **1번째와 2번째는 AI 연구실**에서 인공지능 개발을 진행하였고, **3번째는 증강현실 연구실**에서 VR 콘텐츠 제작 실습을 진행하였습니다.
+
+이 과정들을 통해 인공지능의 구조와 신경망들(MLP, CNN, RNN), 생성모델 등을 직접 다뤄보고 익숙해질 수 있었습니다. 또한, Unity와 3D 엔진도 다뤄보는 등 새로운 경험을 할 수 있는 유익한 기회였습니다.
+
+
+> 2023년 부산대학교 정보컴퓨터공학부 연구실 인턴(공학연구실습I) 프로젝트입니다.
+
+## List
+1. [신약 후보 물질 발굴을 위한 인공지능 시스템 개발 실습(3.13. ~ 4.14.)](https://github.com/jagaldol/lab-internship/tree/main/Machine%20Learning%20and%20Bioinformatics%20Lab)
+2. [Deep Learning & Computer Vision 기초 이해 및 Google Colab 실습(4.17. ~ 5.19.)](https://github.com/jagaldol/lab-internship/tree/main/Visual%20Intelligence%20and%20Perception%20Lab)
+3. [Unity를 활용한 VR 콘텐츠 제작 실습 및 연구 주제 탐구(5.22. ~ 6.23.)](https://github.com/jagaldol/lab-internship/tree/main/eXtended%20Reality%20and%20HCI%20lab)
+
+## DeepBind를 사용한 신약 후보 물질 발굴(1그룹)
+
+> "Predicting the sequence specificities of DNA-and RNA-binding proteins by deep learning." Nature biotechnology(2015)
+
+<div align="center">
+  <div className="xl:w-[1000px]">
+    ![fig1](https://raw.githubusercontent.com/jagaldol/lab-internship/main/Machine%20Learning%20and%20Bioinformatics%20Lab/assets/deepbind_Fig1.webp)
+  </div>
+</div>
+
+
+1. High-throughput experiments(고효율 실험) - 데이터 수집 및 가공 단계
+기존 고전적인 방법(SELEX, RBPs 등)을 한 cycle만 수행하여 데이터 셋 확보
+2. Massively parallel deep learning - 딥러닝 학습 단계
+3. Community needs - 모델을 바탕으로 분석 수행 단계
+
+실험을 통해 얻은 신약후보물질(Aptamer) 데이터를 딥러닝하여 새로운 신약후보물질을 찾아낸다.
+
+### 모델 구조
+> 수식 표현: $f(s) = net_W(pool(rect_b(conv_M(s))))$
+
+<div align="center">
+  <div className="xl:w-[1000px]">
+    ![fig2](https://raw.githubusercontent.com/jagaldol/lab-internship/main/Machine%20Learning%20and%20Bioinformatics%20Lab/assets/deepbind_Fig2.webp)
+  </div>
+</div>
+
+## DeepLearning with Colab(2그룹)
+
+colab 노트북 환경에서의 딥러닝 신경망 기법 학습 및 실습
+
+- 딥러닝 기법 학습
+  1. Introduction to AI and Deep Learning and Perceptron
+  2. MNIST Classifier with Multi Layer Perceptron
+  3. MNIST Classifier with Convolutional Neural Network
+  4. Simple Chatbot with Recurrent Neural Network
+  5. Introduce of Generative Models
+
+## Unity를 활용한 VR 콘텐츠 제작 실습 및 연구 주제 탐구(3그룹)
+
+Unity3D를 사용하여 VR/AR 콘텐츠 제작
+
+
+1. [Introduction of VR/AR](https://github.com/jagaldol/lab-internship/blob/main/eXtended%20Reality%20and%20HCI%20lab/docs/README.md)
+
+2. [Jogging Simulation by Unity3D](https://github.com/jagaldol/lab-internship/tree/main/eXtended%20Reality%20and%20HCI%20lab/Jogging%20Simulator)
+
+<div align="center">
+  <div className="xl:w-[1000px]">
+    [![image 1](https://github.com/jagaldol/lab-internship/assets/84557643/4d87b9a9-dd07-4947-9d49-cdcd3cffcc05)](https://github.com/jagaldol/lab-internship/tree/main/eXtended%20Reality%20and%20HCI%20lab/Jogging%20Simulator)
+  </div>
+</div>
+
+3. [Interactive Virtual Human](https://github.com/jagaldol/Interactive-virtual-human)
+
+<div align="center">
+  <div className="xl:w-[1000px]">
+    [![image 2](https://github.com/jagaldol/lab-internship/assets/84557643/ab73acc9-ef19-4a0e-a019-2f1df31d0d21)](https://github.com/jagaldol/Interactive-virtual-human)
+  </div>
+</div>
+
+4. [Smartphone based AR with ARDK](https://github.com/jagaldol/AR-shooting-game)
+
+<div align="center">
+  <div className="xl:w-[1000px]">
+    [![image 3](https://github.com/jagaldol/lab-internship/assets/84557643/1837fe58-e8c7-43e4-a56f-da5d4a2bc016)](https://github.com/jagaldol/AR-shooting-game)
+  </div>
+</div>
