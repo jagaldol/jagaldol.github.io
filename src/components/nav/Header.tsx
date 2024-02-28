@@ -1,14 +1,11 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Link } from 'gatsby'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 import Navigator from '@/components/nav/Navigator'
-import NavToggleButton from '@/components/nav/NavToggleButton'
-import Navbar from '@/components/nav/Navbar'
+import MobileNavbar from '@/components/nav/MobileNavbar'
 
 export default function Header() {
   const breakpoints = useBreakpoint()
-
-  const [isNavOpen, setIsNavOpen] = useState(false)
 
   return (
     <>
@@ -23,12 +20,7 @@ export default function Header() {
           {breakpoints.md ? null : <Navigator />}
         </div>
       </header>
-      {breakpoints.md ? (
-        <>
-          <NavToggleButton isOpen={isNavOpen} toggle={() => setIsNavOpen(!isNavOpen)} />
-          <Navbar isNavOpen={isNavOpen} close={() => setIsNavOpen(false)} />
-        </>
-      ) : null}
+      {breakpoints.md ? <MobileNavbar /> : null}
     </>
   )
 }

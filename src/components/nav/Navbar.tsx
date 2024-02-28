@@ -2,12 +2,12 @@ import React, { useEffect, useRef } from 'react'
 import { Link } from 'gatsby'
 
 export default function Navbar({ isNavOpen, close }: { isNavOpen: boolean; close: () => void }) {
-  const navRef = useRef<HTMLDivElement>(null)
+  const navOutsideRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     // 외부 클릭을 처리하는 함수
     function handleClickOutside(event: any) {
-      if (navRef.current && !navRef.current.contains(event.target)) {
+      if (navOutsideRef.current && navOutsideRef.current.contains(event.target)) {
         close()
       }
     }
@@ -22,7 +22,7 @@ export default function Navbar({ isNavOpen, close }: { isNavOpen: boolean; close
     return () => {
       document.removeEventListener('mousedown', handleClickOutside)
     }
-  }, [navRef, isNavOpen])
+  }, [navOutsideRef, isNavOpen])
 
   useEffect(() => {
     const handleResize = () => {
@@ -37,12 +37,13 @@ export default function Navbar({ isNavOpen, close }: { isNavOpen: boolean; close
 
   return (
     <div className="overflow-x-hidden">
-      {isNavOpen ? <div className="fixed left-0 right-0 top-0 bottom-0 w-full h-screen z-40 bg-black/10" /> : null}
+      {isNavOpen ? (
+        <div className="fixed left-0 right-0 top-0 bottom-0 w-full h-screen z-40 bg-black/10" ref={navOutsideRef} />
+      ) : null}
       <nav
         className={`fixed right-0 top-0 bottom-0 z-50
         bg-bg w-72 h-screen px-5 py-32 flex flex-col items-center
         transition-all ${isNavOpen ? 'translate-x-0' : 'translate-x-[100%]'}`}
-        ref={navRef}
       >
         <div className="flex flex-col items-center gap-6">
           <Link
