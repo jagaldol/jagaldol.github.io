@@ -79,7 +79,7 @@ export default function Profile() {
         </div>
 
         <ProfileContent title="Education">
-          <Paragraph content="부산대학교 정보컴퓨터공학부" description="2018.03. ~ 2024.02.">
+          <Paragraph content="부산대학교 정보컴퓨터공학부" description="2018.03. ~ 2024.08.">
             <p className={paragraphDescriptionClassName}>학점: 4.00 / 4.5</p>
           </Paragraph>
 
