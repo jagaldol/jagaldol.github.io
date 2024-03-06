@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { graphql, HeadFC } from 'gatsby'
-import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import { GatsbyImage, getImage, withArtDirection } from 'gatsby-plugin-image'
 import Layout from '@/components/Layout'
 import SEO from '@/components/SEO'
 import Badge from '@/components/Badge'
@@ -78,7 +78,8 @@ export default function ProjectDetails({ data, children }: any) {
 
   const dateString = `${start.getFullYear()}.${start.getMonth() + 1}.${start.getDate()}. ~ ${end.getFullYear()}.${end.getMonth() + 1}.${end.getDate()}.`
 
-  const imageList = data.allFile.edges.map((edge: any) => getImage(edge.node))
+  const imageList400 = data.imagesHeight400.edges.map((edge: any) => getImage(edge.node))
+  const imageList200 = data.imagesHeight200.edges.map((edge: any) => getImage(edge.node))
 
   return (
     <Layout>
@@ -106,7 +107,7 @@ export default function ProjectDetails({ data, children }: any) {
             ))}
           </div>
 
-          <ImageListContainer imageList={imageList} />
+          <ImageListContainer imageList400={imageList400} imageList200={imageList200} />
 
           <div className="markdown-body">{children}</div>
         </div>
@@ -133,7 +134,7 @@ export const query = graphql`
         }
       }
     }
-    allFile(
+    imagesHeight400: allFile(
       filter: { sourceInstanceName: { eq: "images" }, relativePath: { glob: $imageListPath } }
       sort: { relativePath: ASC }
     ) {
@@ -141,6 +142,18 @@ export const query = graphql`
         node {
           childImageSharp {
             gatsbyImageData(placeholder: BLURRED, height: 400)
+          }
+        }
+      }
+    }
+    imagesHeight200: allFile(
+      filter: { sourceInstanceName: { eq: "images" }, relativePath: { glob: $imageListPath } }
+      sort: { relativePath: ASC }
+    ) {
+      edges {
+        node {
+          childImageSharp {
+            gatsbyImageData(placeholder: BLURRED, height: 200)
           }
         }
       }

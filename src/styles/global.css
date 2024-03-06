@@ -116,4 +116,10 @@
         @apply hover:cursor-pointer;
     }
 
+    .hide-scroll-bar{
+        -ms-overflow-style: none;
+    }
+    .hide-scroll-bar::-webkit-scrollbar{
+        display:none;
+    }
 }
