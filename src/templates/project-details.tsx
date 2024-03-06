@@ -2,8 +2,9 @@ import React, { useEffect, useRef, useState } from 'react'
 import { graphql, HeadFC } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import Layout from '@/components/Layout'
-import Badge from '@/components/Badge'
 import SEO from '@/components/SEO'
+import Badge from '@/components/Badge'
+import ImageListContainer from '@/containers/project/ImageListContainer'
 
 function BannerLink({ deploy_link }: { deploy_link: string }) {
   const [enableHover, setEnableHover] = useState(false)
@@ -77,6 +78,8 @@ export default function ProjectDetails({ data, children }: any) {
 
   const dateString = `${start.getFullYear()}.${start.getMonth() + 1}.${start.getDate()}. ~ ${end.getFullYear()}.${end.getMonth() + 1}.${end.getDate()}.`
 
+  const imageList = data.allFile.edges.map((edge: any) => getImage(edge.node))
+
   return (
     <Layout>
       <div className="mt-10 w-full flex justify-center">
@@ -103,6 +106,8 @@ export default function ProjectDetails({ data, children }: any) {
             ))}
           </div>
 
+          <ImageListContainer imageList={imageList} />
+
           <div className="markdown-body">{children}</div>
         </div>
       </div>
@@ -111,7 +116,7 @@ export default function ProjectDetails({ data, children }: any) {
 }
 
 export const query = graphql`
-  query ProjectsDetailPage($id: String!) {
+  query ProjectsDetailPage($id: String!, $imageListPath: String!) {
     mdx(id: { eq: $id }) {
       frontmatter {
         stack
@@ -124,6 +129,15 @@ export const query = graphql`
         banner {
           childImageSharp {
             gatsbyImageData(placeholder: BLURRED, width: 1500)
+          }
+        }
+      }
+    }
+    allFile(filter: { sourceInstanceName: { eq: "images" }, relativePath: { glob: $imageListPath } }) {
+      edges {
+        node {
+          childImageSharp {
+            gatsbyImageData(layout: CONSTRAINED, width: 200, height: 200)
           }
         }
       }

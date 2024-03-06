@@ -11,6 +11,7 @@ exports.createPages = async ({ graphql, actions, reporter }: any) => {
           id
           frontmatter {
             slug
+            image_list_path
           }
           internal {
             contentFilePath
@@ -37,7 +38,10 @@ exports.createPages = async ({ graphql, actions, reporter }: any) => {
       component: `${postTemplate}?__contentFilePath=${node.internal.contentFilePath}`,
       // You can use the values in this context in
       // our page layout component
-      context: { id: node.id },
+      context: {
+        id: node.id,
+        imageListPath: node.frontmatter.image_list_path || ' '
+      },
     })
   })
 }
