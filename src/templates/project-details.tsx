@@ -133,11 +133,14 @@ export const query = graphql`
         }
       }
     }
-    allFile(filter: { sourceInstanceName: { eq: "images" }, relativePath: { glob: $imageListPath } }) {
+    allFile(
+      filter: { sourceInstanceName: { eq: "images" }, relativePath: { glob: $imageListPath } }
+      sort: { relativePath: ASC }
+    ) {
       edges {
         node {
           childImageSharp {
-            gatsbyImageData(layout: CONSTRAINED, width: 200, height: 200)
+            gatsbyImageData(placeholder: BLURRED, height: 400)
           }
         }
       }
