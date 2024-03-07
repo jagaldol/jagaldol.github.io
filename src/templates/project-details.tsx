@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { graphql, HeadFC } from 'gatsby'
-import { GatsbyImage, getImage, withArtDirection } from 'gatsby-plugin-image'
+import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import Layout from '@/components/Layout'
 import SEO from '@/components/SEO'
 import Badge from '@/components/Badge'
@@ -81,6 +81,8 @@ export default function ProjectDetails({ data, children }: any) {
   const imageList400 = data.imagesHeight400.edges.map((edge: any) => getImage(edge.node))
   const imageList200 = data.imagesHeight200.edges.map((edge: any) => getImage(edge.node))
 
+  const srcList = data.imagesHeight400.edges.map((edge: any) => edge.node.childImageSharp.original.src)
+
   return (
     <Layout>
       <div className="mt-10 w-full flex justify-center">
@@ -107,7 +109,7 @@ export default function ProjectDetails({ data, children }: any) {
             ))}
           </div>
 
-          <ImageListContainer imageList400={imageList400} imageList200={imageList200} />
+          <ImageListContainer imageList400={imageList400} imageList200={imageList200} srcList={srcList} />
 
           <div className="markdown-body">{children}</div>
         </div>
@@ -142,6 +144,9 @@ export const query = graphql`
         node {
           childImageSharp {
             gatsbyImageData(placeholder: BLURRED, height: 400)
+            original {
+              src
+            }
           }
         }
       }
