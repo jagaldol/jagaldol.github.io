@@ -1,5 +1,19 @@
 import React, { useEffect, useRef } from 'react'
 import { Link } from 'gatsby'
+import useBodyScrollLock from '@/hooks/useBodyScrollLock'
+
+function BackgroundNavbar({ navOutsideRef }: { navOutsideRef: React.Ref<HTMLDivElement> }) {
+  const { lockScroll, openScroll } = useBodyScrollLock()
+
+  useEffect(() => {
+    lockScroll()
+    return () => {
+      openScroll()
+    }
+  }, [])
+
+  return <div className="fixed left-0 right-0 top-0 bottom-0 w-full h-screen z-40 bg-black/10" ref={navOutsideRef} />
+}
 
 export default function Navbar({ isNavOpen, close }: { isNavOpen: boolean; close: () => void }) {
   const navOutsideRef = useRef<HTMLDivElement>(null)
@@ -37,9 +51,7 @@ export default function Navbar({ isNavOpen, close }: { isNavOpen: boolean; close
 
   return (
     <div className="overflow-x-hidden">
-      {isNavOpen ? (
-        <div className="fixed left-0 right-0 top-0 bottom-0 w-full h-screen z-40 bg-black/10" ref={navOutsideRef} />
-      ) : null}
+      {isNavOpen ? <BackgroundNavbar navOutsideRef={navOutsideRef} /> : null}
       <nav
         className={`fixed right-0 top-0 bottom-0 z-50
         bg-bg w-72 h-screen px-5 py-32 flex flex-col items-center

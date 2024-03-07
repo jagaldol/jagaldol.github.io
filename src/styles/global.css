@@ -18,7 +18,24 @@
 
 @layer base {
     body {
-        @apply bg-bg font-SUITRegular max-md:text-sm overflow-x-hidden;
+        @apply bg-bg font-SUITRegular max-md:text-sm overflow-y-scroll;
+    }
+
+    /* Webkit (Chrome, Safari 등) 브라우저에서 스크롤바 스타일링 */
+    body::-webkit-scrollbar {
+        width: 12px; /* 스크롤바의 너비 설정 */
+    }
+
+    body::-webkit-scrollbar-track {
+        background: transparent; /* 스크롤바 트랙의 배경 색상을 투명하게 설정 */
+    }
+
+    body::-webkit-scrollbar-thumb {
+        background-color: theme('colors.main-theme'); /* 스크롤바 썸의 색상 설정 */
+    }
+
+    body::-webkit-scrollbar-thumb:hover {
+        background-color: theme('colors.main-theme-70'); /* 호버 시 썸의 색상 변경 */
     }
 
     h1, h2, h3, h4, h5, h6, header, nav {

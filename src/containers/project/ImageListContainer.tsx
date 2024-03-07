@@ -86,13 +86,13 @@ export default function ImageListContainer({
                     setIsOpen(true)
                   }}
                   aria-label={`${index} 번째 이미지`}
+                  key={image.images.fallback?.src || `image-${index}`}
                 >
                   <GatsbyImage
                     alt={`${index} 번째 이미지`}
                     image={image}
                     className="rounded h-full min-w-max hover:cursor-pointer"
                     objectFit="contain"
-                    key={image.images.fallback?.src || `image-${index}`}
                     onClick={() => {
                       setNumber(index)
                       setIsOpen(true)
@@ -108,6 +108,7 @@ export default function ImageListContainer({
                     setIsOpen(true)
                   }}
                   aria-label={`${index} 번째 이미지`}
+                  key={image.images.fallback?.src || `image-${index}`}
                 >
                   <GatsbyImage
                     alt=""
@@ -116,7 +117,6 @@ export default function ImageListContainer({
                     objectFit="contain"
                     key={image.images.fallback?.src || `image-${index}`}
                     onClick={() => {
-                      console.log('why')
                       setNumber(index)
                       setIsOpen(true)
                     }}
@@ -129,7 +129,7 @@ export default function ImageListContainer({
           <div className="absolute z-10 -right-7 max-lg:-right-4 top-0 bottom-0 flex items-center">
             <button
               type="button"
-              aria-label="왼쪽 더보기"
+              aria-label="오른쪽 더보기"
               className="bg-white rounded-full shadow-[0_1px_2px_0_rgba(0,0,0,0.3)] h-14 w-14 max-lg:h-10 max-lg:w-10"
               onClick={scrollToRight}
             >
@@ -138,7 +138,15 @@ export default function ImageListContainer({
           </div>
         )}
       </div>
-      {isOpen ? <ImageDetail srcList={srcList} number={number} /> : null}
+      {isOpen ? (
+        <ImageDetail
+          srcList={srcList}
+          number={number}
+          close={() => setIsOpen(false)}
+          toLeft={() => setNumber(number - 1 < 0 ? 0 : number - 1)}
+          toRight={() => setNumber(number + 1 > srcList.length - 1 ? srcList.length - 1 : number + 1)}
+        />
+      ) : null}
     </>
   ) : null
 }
