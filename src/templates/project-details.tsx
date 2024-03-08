@@ -109,7 +109,9 @@ export default function ProjectDetails({ data, children }: any) {
             ))}
           </div>
 
-          <ImageListContainer imageList400={imageList400} imageList200={imageList200} srcList={srcList} />
+          {imageList400.length > 0 && (
+            <ImageListContainer imageList400={imageList400} imageList200={imageList200} srcList={srcList} />
+          )}
 
           <div className="markdown-body">{children}</div>
         </div>

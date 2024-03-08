@@ -5,23 +5,19 @@ import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import ImageDetail from '@/containers/project/ImageDetail'
 
-export default function ImageListContainer({
-  imageList400,
-  imageList200,
-  srcList,
+function ImageList({
+  imageList,
+  onClickImage,
 }: {
-  imageList400: IGatsbyImageData[]
-  imageList200: IGatsbyImageData[]
-  srcList: string[]
+  imageList: IGatsbyImageData[]
+  onClickImage: (num: number) => void
 }) {
   const breakpoints = useBreakpoint()
+  const scrollRef = useRef<HTMLDivElement>(null) // 스크롤 가능한 div에 대한 참조를 생성합니다.
 
   const [isScrolledToLeft, setIsScrolledToLeft] = useState(true)
   const [isScrolledToRight, setIsScrolledToRight] = useState(false)
-  const [isOpen, setIsOpen] = useState(false)
-  const [number, setNumber] = useState(0)
 
-  const scrollRef = useRef<HTMLDivElement>(null) // 스크롤 가능한 div에 대한 참조를 생성합니다.
   // 왼쪽으로 스크롤하는 함수
   const scrollToLeft = () => {
     if (scrollRef.current) {
@@ -35,7 +31,6 @@ export default function ImageListContainer({
       scrollRef.current.scrollBy({ left: breakpoints.lg ? 350 : 800, behavior: 'smooth' }) // 여기서 300은 스크롤할 양입니다. 필요에 따라 조절하세요.
     }
   }
-
   const checkScroll = () => {
     if (scrollRef.current) {
       const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current
@@ -60,84 +55,80 @@ export default function ImageListContainer({
     }
   }, [])
 
-  return imageList400.length > 0 ? (
+  return (
     <>
-      <div className="flex justify-center my-10 bg-neutral-200 relative">
-        {!isScrolledToLeft && (
-          <div className="absolute z-10 -left-7 max-lg:-left-4 top-0 bottom-0 flex items-center">
-            <button
-              type="button"
-              aria-label="왼쪽 더보기"
-              className="bg-white rounded-full shadow-[0_1px_2px_0_rgba(0,0,0,0.3)] h-14 w-14 max-lg:h-10 max-lg:w-10"
-              onClick={scrollToLeft}
-            >
-              <FontAwesomeIcon size="lg" icon={faAngleLeft} />
-            </button>
-          </div>
-        )}
-
-        <div className="flex gap-5 overflow-x-scroll hide-scroll-bar" ref={scrollRef}>
-          {breakpoints.lg
-            ? imageList200.map((image: IGatsbyImageData, index) => (
-                <button
-                  type="button"
-                  onClick={() => {
-                    setNumber(index)
-                    setIsOpen(true)
-                  }}
-                  aria-label={`${index} 번째 이미지`}
-                  key={image.images.fallback?.src || `image-${index}`}
-                >
-                  <GatsbyImage
-                    alt={`${index} 번째 이미지`}
-                    image={image}
-                    className="rounded-xl h-full min-w-max hover:cursor-pointer"
-                    objectFit="contain"
-                    onClick={() => {
-                      setNumber(index)
-                      setIsOpen(true)
-                    }}
-                  />
-                </button>
-              ))
-            : imageList400.map((image: IGatsbyImageData, index) => (
-                <button
-                  type="button"
-                  onClick={() => {
-                    setNumber(index)
-                    setIsOpen(true)
-                  }}
-                  aria-label={`${index} 번째 이미지`}
-                  key={image.images.fallback?.src || `image-${index}`}
-                >
-                  <GatsbyImage
-                    alt=""
-                    image={image}
-                    className="rounded-2xl h-full min-w-max hover:cursor-pointer"
-                    objectFit="contain"
-                    key={image.images.fallback?.src || `image-${index}`}
-                    onClick={() => {
-                      setNumber(index)
-                      setIsOpen(true)
-                    }}
-                  />
-                </button>
-              ))}
+      {!isScrolledToLeft && (
+        <div className="absolute z-10 -left-7 max-lg:-left-4 top-0 bottom-0 flex items-center">
+          <button
+            type="button"
+            aria-label="왼쪽 더보기"
+            className="bg-white rounded-full shadow-[0_1px_2px_0_rgba(0,0,0,0.3)] h-14 w-14 max-lg:h-10 max-lg:w-10"
+            onClick={scrollToLeft}
+          >
+            <FontAwesomeIcon size="lg" icon={faAngleLeft} />
+          </button>
         </div>
-
-        {!isScrolledToRight && (
-          <div className="absolute z-10 -right-7 max-lg:-right-4 top-0 bottom-0 flex items-center">
-            <button
-              type="button"
-              aria-label="오른쪽 더보기"
-              className="bg-white rounded-full shadow-[0_1px_2px_0_rgba(0,0,0,0.3)] h-14 w-14 max-lg:h-10 max-lg:w-10"
-              onClick={scrollToRight}
-            >
-              <FontAwesomeIcon size="lg" icon={faAngleRight} />
-            </button>
-          </div>
-        )}
+      )}
+      <div className="flex gap-5 overflow-x-scroll hide-scroll-bar" ref={scrollRef}>
+        {imageList.map((image: IGatsbyImageData, index) => (
+          <button
+            type="button"
+            onClick={() => onClickImage(index)}
+            aria-label={`${index} 번째 이미지`}
+            key={image.images.fallback?.src || `image-${index}`}
+          >
+            <GatsbyImage
+              alt={`${index} 번째 이미지`}
+              image={image}
+              className="rounded-xl h-full min-w-max hover:cursor-pointer"
+              objectFit="contain"
+            />
+          </button>
+        ))}
       </div>
+      {!isScrolledToRight && (
+        <div className="absolute z-10 -right-7 max-lg:-right-4 top-0 bottom-0 flex items-center">
+          <button
+            type="button"
+            aria-label="오른쪽 더보기"
+            className="bg-white rounded-full shadow-[0_1px_2px_0_rgba(0,0,0,0.3)] h-14 w-14 max-lg:h-10 max-lg:w-10"
+            onClick={scrollToRight}
+          >
+            <FontAwesomeIcon size="lg" icon={faAngleRight} />
+          </button>
+        </div>
+      )}
+    </>
+  )
+}
+
+export default function ImageListContainer({
+  imageList400,
+  imageList200,
+  srcList,
+}: {
+  imageList400: IGatsbyImageData[]
+  imageList200: IGatsbyImageData[]
+  srcList: string[]
+}) {
+  const breakpoints = useBreakpoint()
+
+  const [isOpen, setIsOpen] = useState(false)
+  const [number, setNumber] = useState(0)
+
+  const onClickImage = (num: number) => {
+    setNumber(num)
+    setIsOpen(true)
+  }
+
+  return (
+    <div className="flex justify-center my-10 bg-neutral-200 relative">
+      {breakpoints.lg ? (
+        <ImageList onClickImage={onClickImage} imageList={imageList200} />
+      ) : (
+        <ImageList onClickImage={onClickImage} imageList={imageList400} />
+      )}
+
       {isOpen ? (
         <ImageDetail
           srcList={srcList}
@@ -147,6 +138,6 @@ export default function ImageListContainer({
           toRight={() => setNumber(number + 1 > srcList.length - 1 ? srcList.length - 1 : number + 1)}
         />
       ) : null}
-    </>
-  ) : null
+    </div>
+  )
 }
