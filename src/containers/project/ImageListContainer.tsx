@@ -62,7 +62,7 @@ export default function ImageListContainer({
 
   return imageList400.length > 0 ? (
     <>
-      <div className="flex justify-center my-10 bg-neutral-100 relative">
+      <div className="flex justify-center my-10 bg-neutral-200 relative">
         {!isScrolledToLeft && (
           <div className="absolute z-10 -left-7 max-lg:-left-4 top-0 bottom-0 flex items-center">
             <button
@@ -91,7 +91,7 @@ export default function ImageListContainer({
                   <GatsbyImage
                     alt={`${index} 번째 이미지`}
                     image={image}
-                    className="rounded h-full min-w-max hover:cursor-pointer"
+                    className="rounded-xl h-full min-w-max hover:cursor-pointer"
                     objectFit="contain"
                     onClick={() => {
                       setNumber(index)
@@ -113,7 +113,7 @@ export default function ImageListContainer({
                   <GatsbyImage
                     alt=""
                     image={image}
-                    className="rounded h-full min-w-max hover:cursor-pointer"
+                    className="rounded-2xl h-full min-w-max hover:cursor-pointer"
                     objectFit="contain"
                     key={image.images.fallback?.src || `image-${index}`}
                     onClick={() => {
