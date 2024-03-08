@@ -59,7 +59,7 @@ export default function ImageDetail({
           </button>
         </div>
 
-        <div className="px-5 h-[80%] flex items-center" onClick={handleClick}>
+        <div className="px-5 h-[80%] flex items-center" role="presentation" onClick={handleClick}>
           <img src={srcList[number]} alt={srcList[number]} className="max-w-full max-h-full flex-1 object-contain" />
         </div>
 
