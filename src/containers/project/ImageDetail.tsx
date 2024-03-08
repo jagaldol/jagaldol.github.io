@@ -18,6 +18,31 @@ export default function ImageDetail({
 }) {
   const { lockScroll, openScroll } = useBodyScrollLock()
 
+  const handleLeftClick = () => {
+    toLeft()
+  }
+
+  // 오른쪽 클릭 처리 함수
+  const handleRightClick = () => {
+    toRight()
+  }
+
+  // Div 클릭 이벤트 핸들러
+  const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    // Div의 전체 너비와 클릭 위치를 가져옵니다.
+    const target = event.target as HTMLDivElement
+    const { width } = target.getBoundingClientRect()
+    const { clientX } = event
+    const clickX = clientX - target.offsetLeft // Div 내에서의 클릭 위치
+
+    // 클릭 위치가 Div의 중간보다 왼쪽이면 왼쪽 클릭, 오른쪽이면 오른쪽 클릭으로 처리합니다.
+    if (clickX < width / 2) {
+      handleLeftClick()
+    } else {
+      handleRightClick()
+    }
+  }
+
   useEffect(() => {
     lockScroll()
     return () => {
@@ -34,7 +59,7 @@ export default function ImageDetail({
           </button>
         </div>
 
-        <div className="px-5 h-[80%] flex items-center">
+        <div className="px-5 h-[80%] flex items-center" onClick={handleClick}>
           <img src={srcList[number]} alt={srcList[number]} className="max-w-full max-h-full flex-1 object-contain" />
         </div>
 
