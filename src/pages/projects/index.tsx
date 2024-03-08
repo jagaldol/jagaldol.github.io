@@ -39,6 +39,9 @@ export const query = graphql`
           image {
             childImageSharp {
               gatsbyImageData(placeholder: BLURRED, width: 500)
+              original {
+                src
+              }
             }
           }
         }
@@ -88,6 +91,6 @@ export const Head: HeadFC = ({ data }: any) => (
     title="Project"
     description="지금까지 수행해온 프로젝트 모음입니다."
     pathname="/projects/"
-    image={`/og-image/${data.main.nodes[0].frontmatter.slug}/thumbnail.png`}
+    image={data.main.nodes[0].frontmatter.image.childImageSharp.original.src}
   />
 )

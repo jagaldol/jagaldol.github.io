@@ -134,6 +134,13 @@ export const query = graphql`
             gatsbyImageData(placeholder: BLURRED, width: 1500)
           }
         }
+        image {
+          childImageSharp {
+            original {
+              src
+            }
+          }
+        }
       }
     }
     imagesHeight400: allFile(
@@ -171,6 +178,6 @@ export const Head: HeadFC = ({ data }: any) => (
     title={data.mdx.frontmatter.title}
     description={data.mdx.frontmatter.subtitle}
     pathname={`/projects/${data.mdx.frontmatter.slug}/`}
-    image={`/og-image/${data.mdx.frontmatter.slug}/thumbnail.png`}
+    image={data.mdx.frontmatter.image.childImageSharp.original.src}
   />
 )

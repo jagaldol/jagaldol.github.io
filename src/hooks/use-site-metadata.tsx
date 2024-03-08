@@ -8,7 +8,6 @@ export default function useSiteMetadata() {
           title
           name
           description
-          image
           siteUrl
         }
       }

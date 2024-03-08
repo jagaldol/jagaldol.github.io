@@ -1,4 +1,5 @@
 import React from 'react'
+import { graphql, useStaticQuery } from 'gatsby'
 import useSiteMetadata from '@/hooks/use-site-metadata'
 
 export default function SEO({
@@ -14,12 +15,24 @@ export default function SEO({
   pathname?: string
   children?: string
 }) {
-  const { title: defaultTitle, name, description: defaultDescription, image: defaultImage, siteUrl } = useSiteMetadata()
+  const { title: defaultTitle, name, description: defaultDescription, siteUrl } = useSiteMetadata()
+
+  const data = useStaticQuery(graphql`
+    query DefaultImageForSEO {
+      file(relativePath: { eq: "profile.png" }, sourceInstanceName: { eq: "images" }) {
+        childImageSharp {
+          original {
+            src
+          }
+        }
+      }
+    }
+  `)
 
   const seo = {
     title: `${title || defaultTitle} | ${name}`,
     description: description || defaultDescription,
-    image: `${siteUrl}${image || defaultImage}`,
+    image: `${siteUrl}${image || data.file.childImageSharp.original.src}`,
     url: `${siteUrl}${pathname || `/`}`,
   }
 
