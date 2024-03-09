@@ -78,10 +78,9 @@ export default function ProjectDetails({ data, children }: any) {
 
   const dateString = `${start.getFullYear()}.${start.getMonth() + 1}.${start.getDate()}. ~ ${end.getFullYear()}.${end.getMonth() + 1}.${end.getDate()}.`
 
-  const imageList400 = data.imagesHeight400.edges.map((edge: any) => getImage(edge.node))
-  const imageList200 = data.imagesHeight200.edges.map((edge: any) => getImage(edge.node))
+  const imageList = data.imageList.edges.map((edge: any) => getImage(edge.node))
 
-  const srcList = data.imagesHeight400.edges.map((edge: any) => edge.node.childImageSharp.original.src)
+  const srcList = data.imageList.edges.map((edge: any) => edge.node.childImageSharp.original.src)
 
   return (
     <Layout>
@@ -109,9 +108,7 @@ export default function ProjectDetails({ data, children }: any) {
             ))}
           </div>
 
-          {imageList400.length > 0 && (
-            <ImageListContainer imageList400={imageList400} imageList200={imageList200} srcList={srcList} />
-          )}
+          {imageList.length > 0 && <ImageListContainer imageList={imageList} srcList={srcList} />}
 
           <div className="markdown-body">{children}</div>
         </div>
@@ -145,7 +142,7 @@ export const query = graphql`
         }
       }
     }
-    imagesHeight400: allFile(
+    imageList: allFile(
       filter: { sourceInstanceName: { eq: "images" }, relativePath: { glob: $imageListPath } }
       sort: { relativePath: ASC }
     ) {
@@ -156,18 +153,6 @@ export const query = graphql`
             original {
               src
             }
-          }
-        }
-      }
-    }
-    imagesHeight200: allFile(
-      filter: { sourceInstanceName: { eq: "images" }, relativePath: { glob: $imageListPath } }
-      sort: { relativePath: ASC }
-    ) {
-      edges {
-        node {
-          childImageSharp {
-            gatsbyImageData(placeholder: BLURRED, height: 200)
           }
         }
       }

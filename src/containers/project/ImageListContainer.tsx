@@ -3,6 +3,7 @@ import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import styled from 'styled-components'
 import ImageDetail from '@/containers/project/ImageDetail'
 
 function ImageList({
@@ -70,21 +71,33 @@ function ImageList({
         </div>
       )}
       <div className="flex gap-5 overflow-x-scroll hide-scroll-bar" ref={scrollRef}>
-        {imageList.map((image: IGatsbyImageData, index) => (
-          <button
-            type="button"
-            onClick={() => onClickImage(index)}
-            aria-label={`${index} 번째 이미지`}
-            key={image.images.fallback?.src || `image-${index}`}
-          >
-            <GatsbyImage
-              alt={`${index} 번째 이미지`}
-              image={image}
-              className="rounded-xl h-full min-w-max hover:cursor-pointer"
-              objectFit="contain"
-            />
-          </button>
-        ))}
+        {imageList.map((image: IGatsbyImageData, index) => {
+          const { width } = image
+          const halfWidth = Math.floor(image.width / 2)
+
+          const ImageComponent = styled.div`
+            display: flex;
+            align-items: center;
+            min-width: ${width < 1000 ? width : 1000}px;
+            @media (max-width: 1024px) {
+              min-width: ${halfWidth < 348 ? halfWidth : 348}px;
+            }
+          `
+          return (
+            <ImageComponent
+              onClick={() => onClickImage(index)}
+              aria-label={`${index} 번째 이미지`}
+              key={image.images.fallback?.src || `image-${index}`}
+            >
+              <GatsbyImage
+                alt={`${index} 번째 이미지`}
+                image={image}
+                className="rounded-xl hover:cursor-pointer"
+                objectFit="contain"
+              />
+            </ImageComponent>
+          )
+        })}
       </div>
       {!isScrolledToRight && (
         <div className="absolute z-10 -right-7 max-lg:-right-4 top-0 bottom-0 flex items-center">
@@ -103,16 +116,12 @@ function ImageList({
 }
 
 export default function ImageListContainer({
-  imageList400,
-  imageList200,
+  imageList,
   srcList,
 }: {
-  imageList400: IGatsbyImageData[]
-  imageList200: IGatsbyImageData[]
+  imageList: IGatsbyImageData[]
   srcList: string[]
 }) {
-  const breakpoints = useBreakpoint()
-
   const [isOpen, setIsOpen] = useState(false)
   const [number, setNumber] = useState(0)
 
@@ -122,12 +131,8 @@ export default function ImageListContainer({
   }
 
   return (
-    <div className="flex justify-center my-10 bg-neutral-200 relative">
-      {breakpoints.lg ? (
-        <ImageList onClickImage={onClickImage} imageList={imageList200} />
-      ) : (
-        <ImageList onClickImage={onClickImage} imageList={imageList400} />
-      )}
+    <div className="flex justify-center my-10 bg-neutral-200 relative h-[400px] max-lg:max-h-[200px] max-lg:h-[200px]">
+      <ImageList imageList={imageList} onClickImage={onClickImage} />
 
       {isOpen ? (
         <ImageDetail
