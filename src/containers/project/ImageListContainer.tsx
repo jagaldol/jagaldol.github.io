@@ -6,6 +6,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import styled from 'styled-components'
 import ImageDetail from '@/containers/project/ImageDetail'
 
+const ImageComponent = styled.div<{ width: number }>`
+  display: flex;
+  align-items: center;
+  min-width: ${({ width }) => (width < 1000 ? width : 1000)}px;
+  @media (max-width: 1024px) {
+    min-width: ${({ width }) => {
+      const halfWidth = Math.floor(width / 2)
+      return halfWidth < 348 ? halfWidth : 348
+    }}px;
+  }
+`
+
 function ImageList({
   imageList,
   onClickImage,
@@ -72,19 +84,9 @@ function ImageList({
       )}
       <div className="flex gap-5 overflow-x-scroll hide-scroll-bar" ref={scrollRef}>
         {imageList.map((image: IGatsbyImageData, index) => {
-          const { width } = image
-          const halfWidth = Math.floor(image.width / 2)
-
-          const ImageComponent = styled.div`
-            display: flex;
-            align-items: center;
-            min-width: ${width < 1000 ? width : 1000}px;
-            @media (max-width: 1024px) {
-              min-width: ${halfWidth < 348 ? halfWidth : 348}px;
-            }
-          `
           return (
             <ImageComponent
+              width={image.width}
               onClick={() => onClickImage(index)}
               aria-label={`${index} 번째 이미지`}
               key={image.images.fallback?.src || `image-${index}`}
