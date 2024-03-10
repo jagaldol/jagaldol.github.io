@@ -21,9 +21,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   }
 
   const checkScroll = () => {
+    console.log(document.documentElement.clientHeight)
+    console.log(document.documentElement.scrollHeight - document.documentElement.scrollTop)
+
     if (
       document.documentElement.clientHeight >=
-      document.documentElement.scrollHeight - document.documentElement.scrollTop
+      document.documentElement.scrollHeight - document.documentElement.scrollTop - 10
     ) {
       setAtBottom(true)
     } else {
