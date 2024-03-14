@@ -6,23 +6,29 @@ export default function Navigator() {
     <nav className="h-full flex items-end max-md:hidden">
       <Link
         to="/"
-        className="mx-3 text-xl transition-all hover:text-main-theme hover:-translate-y-[2px] duration-1000"
+        className="mx-3 text-lg transition-all hover:text-main-theme hover:-translate-y-[2px] duration-1000"
         activeClassName="text-main-theme -translate-y-[2px]"
       >
-        Home
+        HOME
       </Link>
       <Link
         to="/projects"
-        className="mx-3 text-xl transition-all hover:text-main-theme hover:-translate-y-[2px] duration-1000"
+        className="mx-3 text-lg transition-all hover:text-main-theme hover:-translate-y-[2px] duration-1000"
         activeClassName="text-main-theme -translate-y-[2px]"
       >
-        Project
+        PROJECT
       </Link>
       <a
-        href="https://blog.jagaldol.com/"
-        className="mx-3 text-xl word-highlight transition-all hover:text-main-theme hover:-translate-y-[2px] duration-1000"
+        href="/files/resume.pdf"
+        className="mx-3 text-lg transition-all hover:text-main-theme hover:-translate-y-[2px] duration-1000"
       >
-        Blog
+        RESUME
+      </a>
+      <a
+        href="https://blog.jagaldol.com/"
+        className="mx-3 text-lg transition-all hover:text-main-theme hover:-translate-y-[2px] duration-1000"
+      >
+        BLOG
       </a>
     </nav>
   )

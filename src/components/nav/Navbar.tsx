@@ -57,26 +57,26 @@ export default function Navbar({ isNavOpen, close }: { isNavOpen: boolean; close
         bg-bg w-72 h-screen px-5 py-32 flex flex-col items-center
         transition-all ${isNavOpen ? 'translate-x-0' : 'translate-x-[100%]'}`}
       >
-        <div className="flex flex-col items-center gap-6">
+        <div className="flex flex-col items-center gap-10">
           <Link
             to="/"
-            className="text-lg pb-1 transition-all hover:text-main-theme duration-1000"
+            className="text-lg transition-all hover:text-main-theme duration-1000"
             activeClassName="text-main-theme"
           >
-            Home
+            HOME
           </Link>
           <Link
             to="/projects"
-            className="text-lg pb-1 transition-all hover:text-main-theme duration-1000"
+            className="text-lg transition-all hover:text-main-theme duration-1000"
             activeClassName="text-main-theme"
           >
-            Project
+            PROJECT
           </Link>
-          <a
-            href="https://blog.jagaldol.com/"
-            className="text-lg pb-1 transition-all hover:text-main-theme duration-1000"
-          >
-            Blog
+          <a href="/files/resume.pdf" className="text-lg transition-all hover:text-main-theme duration-1000">
+            RESUME
+          </a>
+          <a href="https://blog.jagaldol.com/" className="text-lg transition-all hover:text-main-theme duration-1000">
+            BLOG
           </a>
         </div>
       </nav>
