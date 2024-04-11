@@ -93,9 +93,9 @@ export default function Profile() {
         </ProfileContent>
 
         <ProfileContent title="Certificate">
-          <Paragraph content="TOPCIT - 수준 3(608점)" description="Test Of Practical Competency in IT" />
-          <Paragraph content="PCCP - Python level 3(700점)" description="Programmers Certified Coding Professional" />
-          <Paragraph content="TOEIC - 830점" description="Test Of English for International Communication" />
+          <Paragraph content="TOPCIT - 수준 3(608점)" description="2023.05.20." />
+          <Paragraph content="PCCP - Python level 3(700점)" description="2023.12.03." />
+          <Paragraph content="TOEIC - 830점" description="2023.12.10." />
         </ProfileContent>
       </div>
     </Block>
