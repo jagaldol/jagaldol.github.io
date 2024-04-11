@@ -7,7 +7,7 @@ import ProjectContainer from '@/containers/project/ProjectConatiner'
 
 const IndexPage: React.FC<PageProps> = ({ data }: { data: any }) => {
   const mainProjects = data.main.nodes
-  const minorProjects = data.minor.nodes
+  const subProjects = data.sub.nodes
   const toyProjects = data.toy.nodes
 
   return (
@@ -15,7 +15,7 @@ const IndexPage: React.FC<PageProps> = ({ data }: { data: any }) => {
       <div className="mt-5 flex flex-col text-center">
         <h1 className="text-3xl my-8">Project List</h1>
         <ProjectContainer title="Main Project" projects={mainProjects} />
-        <ProjectContainer title="Minor Project" projects={minorProjects} />
+        <ProjectContainer title="Sub Project" projects={subProjects} />
         <ProjectContainer title="Toy Project" projects={toyProjects} />
       </div>
     </Layout>
@@ -47,9 +47,9 @@ export const query = graphql`
         }
       }
     }
-    minor: allMdx(
+    sub: allMdx(
       sort: { frontmatter: { end_date: DESC } }
-      filter: { internal: { contentFilePath: { glob: "**/src/projects/minor/*.mdx" } } }
+      filter: { internal: { contentFilePath: { glob: "**/src/projects/sub/*.mdx" } } }
     ) {
       nodes {
         id
