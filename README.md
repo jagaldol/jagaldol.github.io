@@ -1,6 +1,6 @@
 # jagaldol.github.io
 
-![Banner](src\images\projects\web-portfolio\banner.png)
+![Banner](https://github.com/jagaldol/jagaldol.github.io/assets/84557643/964f63b1-9aa9-4fd6-ade7-956bdcf7aae1)
 
 my personal portfolio page build with `Gatsby`.
 
@@ -8,17 +8,17 @@ my personal portfolio page build with `Gatsby`.
 
 ### [Home Page](<(https://jagaldol.com)>)
 
-![Home](src\images\projects\web-portfolio\images\01.png)
+![Home](https://github.com/jagaldol/jagaldol.github.io/assets/84557643/a7c3c737-33fe-49a2-8ae4-ef57190ddb72)
 
-![Profile](src\images\projects\web-portfolio\images\02.png)
+![Profile](https://github.com/jagaldol/jagaldol.github.io/assets/84557643/e2a332b4-14a8-4ca1-8174-5f78b55eaf20)
 
-![Main Projects](src\images\projects\web-portfolio\images\03.png)
+![Main Projects](https://github.com/jagaldol/jagaldol.github.io/assets/84557643/df00e40d-73af-4785-94e1-8d2d54ba4539)
 
 You can view my Introduction, Profile, and Main Projects.
 
 ### [Project List Page](https://jagaldol.com/projects/)
 
-![Projects](src\images\projects\web-portfolio\images\04.png)
+![Projects](https://github.com/jagaldol/jagaldol.github.io/assets/84557643/6342dcb9-d633-4f08-a0f5-6b3e7d727f68)
 
 You can view my develop projects.
 
@@ -28,9 +28,9 @@ You can view my develop projects.
 
 ### [Project Overview Page](https://jagaldol.com/projects/chat-foodie/)
 
-![Chat foodie Title](src\images\projects\web-portfolio\images\06.png)
+![Chat foodie Title](https://github.com/jagaldol/jagaldol.github.io/assets/84557643/80de2b0f-57ab-407a-9e57-61e10274364c)
 
-![Chat foodie Content](src\images\projects\web-portfolio\images\07.png)
+![Chat foodie Content](https://github.com/jagaldol/jagaldol.github.io/assets/84557643/dd2ecd82-62a6-4b08-a02f-dc55ff26a889)
 
 Each page offers a **detailed look at the project, including my contributions, the skills applied, and the development journey**. It also details the project's duration, the technologies used, and the design elements.
 
