@@ -1,0 +1,3688 @@
+{
+  "openapi" : "3.0.1",
+  "info" : {
+    "title" : "번개볼링 API Documents",
+    "description" : "⚠️(주의)현재 서버가 구동되지 않고 있어 API 실행이 불가능합니다.⚠️",
+    "version" : "0.0.1"
+  },
+  "servers" : [ {
+    "url" : "http://localhost:8080"
+  }, {
+    "url" : "http://localhost:8080"
+  } ],
+  "tags" : [ ],
+  "paths" : {
+    "/api/authentication" : {
+      "post" : {
+        "tags" : [ "회원가입, 로그인, 인증" ],
+        "summary" : "토큰 재발급",
+        "description" : "http-only cookie의 refresh 토큰을 사용하여 access token과 refresh 토큰을 재발급합니다.\n\nRequest COOKIE: refreshToken={jwt_refresh_token}",
+        "operationId" : "[user] reIssueTokens",
+        "responses" : {
+          "200" : {
+            "description" : "200",
+            "headers" : {
+              "Set-Cookie" : {
+                "description" : "refresh token(http-only cookie)\n\n(e.g.)refreshToken={jwt_refresh_token}",
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Authorization" : {
+                "description" : "access token\n\n(e.g.)Bearer {jwt_access_token}",
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json;charset=UTF-8" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/성공 응답 DTO"
+                },
+                "examples" : {
+                  "[user] reIssueTokens" : {
+                    "value" : "{\r\n  \"status\" : 200,\r\n  \"response\" : null,\r\n  \"errorMessage\" : null\r\n}"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/cities" : {
+      "get" : {
+        "tags" : [ "행정 구역" ],
+        "summary" : "시/도 조회",
+        "description" : "시/도 정보를 조회합니다.",
+        "operationId" : "[city] getCities",
+        "responses" : {
+          "200" : {
+            "description" : "200",
+            "content" : {
+              "application/json;charset=UTF-8" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/시-도 조회 응답 DTO"
+                },
+                "examples" : {
+                  "[city] getCities" : {
+                    "value" : "{\r\n  \"status\" : 200,\r\n  \"response\" : {\r\n    \"cities\" : [ {\r\n      \"id\" : 2,\r\n      \"name\" : \"부산광역시\"\r\n    }, {\r\n      \"id\" : 1,\r\n      \"name\" : \"서울특별시\"\r\n    } ]\r\n  },\r\n  \"errorMessage\" : null\r\n}"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/email-confirm" : {
+      "post" : {
+        "tags" : [ "회원가입, 로그인, 인증" ],
+        "summary" : "메일 인증",
+        "description" : "이메일로 받은 토큰을 사용하여 메일 인증을 수행합니다. 유저의 권한이 상승됩니다.\n",
+        "operationId" : "[user] confirmEmail",
+        "requestBody" : {
+          "content" : {
+            "application/json;charset=UTF-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/메일 인증 요청 DTO"
+              },
+              "examples" : {
+                "[user] confirmEmail" : {
+                  "value" : "{\r\n  \"token\" : \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwidHlwZSI6ImVtYWlsLXZlcmlmaWNhdGlvbiIsImV4cCI6MTcxMjEyMTE5Mn0.OZSOFpfV2HyuPs-B-bbW2a6bqIcLcWZzpyRUgazMFt-kTqaxy0Soqhd38how9d7tyNrjouQr2cAQSzwRNfwkpw\"\r\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "200",
+            "content" : {
+              "application/json;charset=UTF-8" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/성공 응답 DTO"
+                },
+                "examples" : {
+                  "[user] confirmEmail" : {
+                    "value" : "{\r\n  \"status\" : 200,\r\n  \"response\" : null,\r\n  \"errorMessage\" : null\r\n}"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/email-verification" : {
+      "post" : {
+        "tags" : [ "회원가입, 로그인, 인증" ],
+        "summary" : "인증 메일 발송",
+        "description" : "계정 정보의 email로 인증 메일을 보냅니다. email에는 url이 삽입되어 보내집니다.\n\n(e.g.) https://bungaebowling.com/email-verification?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwicm9sZSI6IlJPTEVfVVNFUiIsInR5cGUiOiJlbWFpbC12ZXJpZmljYXRpb24iLCJleHAiOjE2OTU2MzU5MDh9.3AWusXvtgBiQN0GoegjKJw-fnaYSGVO1Ue0sSrtuWCVOQwzfIwh6KELN2NHOOXIO6MK-D11PndbtwcHetibZVQ\n\n인증을 위해서 이 토큰 값을 그대로 /api/email-confirm의 데이터로 요청 보내주시길 바랍니다.\n",
+        "operationId" : "[user] sendVerification",
+        "parameters" : [ {
+          "name" : "Authorization",
+          "in" : "header",
+          "description" : "access token",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwicm9sZSI6IlJPTEVfVVNFUiIsInR5cGUiOiJhY2Nlc3MiLCJleHAiOjE3MTIyMDc1OTF9.5sLYIequ-1KOX5S_OV-981hHWAa2W2OPD-i4Hs-qYP6SeJj1K0jDUIRIF1R6pWWO4IjtP6kVWYZyYs33FoIzFg"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200",
+            "content" : {
+              "application/json;charset=UTF-8" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/성공 응답 DTO"
+                },
+                "examples" : {
+                  "[user] sendVerification" : {
+                    "value" : "{\r\n  \"status\" : 200,\r\n  \"response\" : null,\r\n  \"errorMessage\" : null\r\n}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "bearerAuthJWT" : [ ]
+        } ]
+      }
+    },
+    "/api/join" : {
+      "post" : {
+        "tags" : [ "회원가입, 로그인, 인증" ],
+        "summary" : "회원가입",
+        "description" : "유저로 회원가입합니다.\n\n회원가입 성공 시, 로그인과 똑같이 액세스 토큰과 리프레시 토큰을 전달합니다.\n\n- 가입 후 메일 인증 필요",
+        "operationId" : "[user] join",
+        "requestBody" : {
+          "content" : {
+            "application/json;charset=UTF-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/회원가입 요청 DTO"
+              },
+              "examples" : {
+                "[user] join" : {
+                  "value" : "{\r\n  \"name\" : \"testCode회원\",\r\n  \"email\" : \"testCode@test.com\",\r\n  \"password\" : \"testCode12!@\",\r\n  \"districtId\" : \"1\"\r\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "200",
+            "headers" : {
+              "Set-Cookie" : {
+                "description" : "refresh token(http-only cookie)\n\n(e.g.)refreshToken={jwt_refresh_token}",
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Authorization" : {
+                "description" : "access token\n\n(e.g.)Bearer {jwt_access_token}",
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json;charset=UTF-8" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/생성 응답 DTO"
+                },
+                "examples" : {
+                  "[user] join" : {
+                    "value" : "{\r\n  \"status\" : 200,\r\n  \"response\" : {\r\n    \"id\" : 6\r\n  },\r\n  \"errorMessage\" : null\r\n}"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/login" : {
+      "post" : {
+        "tags" : [ "회원가입, 로그인, 인증" ],
+        "summary" : "로그인",
+        "description" : " 로그인 진행 시 액세스 토큰과 리프레시 토큰을 전달합니다.\n\n 액세스 토큰의 구조는 아래와 같습니다.\n\n ```json\n{\n  \"sub\": \"2\",\n  \"role\": \"ROLE_USER\",\n \"type\": \"access\",\n  \"exp\": 1695633312\n}\n ```\n\n | 항목 | description                                               |\n |------|-----------------------------------------------------------|\n | sub  | 유저의 ID(PK)                                             |\n | role | 권한(이메일 인증 시 ROLE_USER / 인증 안한 경우 ROLE_PENDING) |\n | exp  | 유효기간                                                  |\n | type | 토큰의 종류(access, refresh, email-verfication 등이 존재)   |\n\n",
+        "operationId" : "[user] login",
+        "requestBody" : {
+          "content" : {
+            "application/json;charset=UTF-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/로그인 요청 DTO"
+              },
+              "examples" : {
+                "[user] login" : {
+                  "value" : "{\r\n  \"email\" : \"test@test.com\",\r\n  \"password\" : \"test12!@\"\r\n}"
+                },
+                "[user] login - fail" : {
+                  "value" : "{\r\n  \"email\" : \"test@test.com\",\r\n  \"password\" : \"test12\"\r\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "200",
+            "headers" : {
+              "Set-Cookie" : {
+                "description" : "refresh token(http-only cookie)\n\n(e.g.)refreshToken={jwt_refresh_token}",
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Authorization" : {
+                "description" : "access token\n\n(e.g.)Bearer {jwt_access_token}",
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json;charset=UTF-8" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/성공 응답 DTO"
+                },
+                "examples" : {
+                  "[user] login" : {
+                    "value" : "{\r\n  \"status\" : 200,\r\n  \"response\" : null,\r\n  \"errorMessage\" : null\r\n}"
+                  }
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "400",
+            "content" : {
+              "application/json;charset=UTF-8" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/실패 응답 DTO"
+                },
+                "examples" : {
+                  "[user] login - fail" : {
+                    "value" : "{\r\n  \"status\" : 400,\r\n  \"response\" : \"LOGIN_FAILED\",\r\n  \"errorMessage\" : \"이메일 혹은 비밀번호가 일치하지 않습니다.\"\r\n}"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/logout" : {
+      "post" : {
+        "tags" : [ "회원가입, 로그인, 인증" ],
+        "summary" : "로그아웃",
+        "description" : "서버에 저장된 리프레시 토큰의 정보를 만료시킵니다.",
+        "operationId" : "[user] logout",
+        "parameters" : [ {
+          "name" : "Authorization",
+          "in" : "header",
+          "description" : "access token",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlJPTEVfVVNFUiIsInR5cGUiOiJhY2Nlc3MiLCJleHAiOjE3MTIyMDc1OTF9.gi0oj49bzqnbrmUtrLs08uBpo3tqerDQ4p5ND6NBSuUhVzejjTSUChJ6nuzWkupqfiUYjrblaNQecgM4NHTFxg"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200",
+            "content" : {
+              "application/json;charset=UTF-8" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/성공 응답 DTO"
+                },
+                "examples" : {
+                  "[user] logout" : {
+                    "value" : "{\r\n  \"status\" : 200,\r\n  \"response\" : null,\r\n  \"errorMessage\" : null\r\n}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "bearerAuthJWT" : [ ]
+        } ]
+      }
+    },
+    "/api/posts" : {
+      "get" : {
+        "tags" : [ "모집글" ],
+        "summary" : "모집글 목록 조회",
+        "description" : "모집글 목록를 조회합니다.\n",
+        "operationId" : "[post] getPosts",
+        "parameters" : [ {
+          "name" : "key",
+          "in" : "query",
+          "description" : "검색 기준 id\n\n처음 요청 시 key 없이 요청 | 2번째 요청부터는 response.nextCursorRequest.key 값으로 요청\n\n더이상 가져올 값이 없을 시 nextCursorRequest.key로 -1 응답\n",
+          "required" : false,
+          "schema" : {
+            "type" : "number"
+          }
+        }, {
+          "name" : "size",
+          "in" : "query",
+          "description" : "한번에 가져올 크기",
+          "required" : false,
+          "schema" : {
+            "type" : "number",
+            "default" : 20
+          }
+        }, {
+          "name" : "cityId",
+          "in" : "query",
+          "description" : "시/도 ID (넘겨주지 않을 시 설정 시/도 설정 안 한 것)",
+          "required" : false,
+          "schema" : {
+            "type" : "number"
+          }
+        }, {
+          "name" : "countryId",
+          "in" : "query",
+          "description" : "시/군/구 ID (넘겨주지 않을 시 설정 시/군/구 설정 안 한 것)",
+          "required" : false,
+          "schema" : {
+            "type" : "number"
+          }
+        }, {
+          "name" : "districtId",
+          "in" : "query",
+          "description" : "읍/면/동 ID (넘겨주지 않을 시 설정 읍/면/동 설정 안 한 것)",
+          "required" : false,
+          "schema" : {
+            "type" : "number"
+          }
+        }, {
+          "name" : "all",
+          "in" : "query",
+          "description" : "전체 보기/모집 중 선택",
+          "required" : false,
+          "schema" : {
+            "type" : "boolean",
+            "default" : true
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200",
+            "content" : {
+              "application/json;charset=UTF-8" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/모집글 목록 조회 응답 DTO"
+                },
+                "examples" : {
+                  "[post] getPosts" : {
+                    "value" : "{\r\n  \"status\" : 200,\r\n  \"response\" : {\r\n    \"nextCursorRequest\" : {\r\n      \"key\" : 1,\r\n      \"size\" : 20\r\n    },\r\n    \"posts\" : [ {\r\n      \"id\" : 10,\r\n      \"title\" : \"불금 볼링 점수 내기 하실 분~\",\r\n      \"dueTime\" : \"2024-05-02T00:00:00\",\r\n      \"districtName\" : \"서울특별시 종로구 청운동\",\r\n      \"startTime\" : \"2024-02-02T00:00:00\",\r\n      \"userName\" : \"이볼링\",\r\n      \"profileImage\" : null,\r\n      \"currentNumber\" : 1,\r\n      \"isClose\" : false\r\n    }, {\r\n      \"id\" : 9,\r\n      \"title\" : \"불금 볼링 점수 내기 하실 분~\",\r\n      \"dueTime\" : \"2024-05-02T00:00:00\",\r\n      \"districtName\" : \"서울특별시 종로구 청운동\",\r\n      \"startTime\" : \"2024-02-02T00:00:00\",\r\n      \"userName\" : \"이볼링\",\r\n      \"profileImage\" : null,\r\n      \"currentNumber\" : 1,\r\n      \"isClose\" : true\r\n    }, {\r\n      \"id\" : 8,\r\n      \"title\" : \"불금 볼링 점수 내기 하실 분~\",\r\n      \"dueTime\" : \"2024-05-02T00:00:00\",\r\n      \"districtName\" : \"서울특별시 종로구 청운동\",\r\n      \"startTime\" : \"2024-02-02T00:00:00\",\r\n      \"userName\" : \"이볼링\",\r\n      \"profileImage\" : null,\r\n      \"currentNumber\" : 1,\r\n      \"isClose\" : false\r\n    }, {\r\n      \"id\" : 7,\r\n      \"title\" : \"불금 볼링 점수 내기 하실 분~\",\r\n      \"dueTime\" : \"2024-05-02T00:00:00\",\r\n      \"districtName\" : \"서울특별시 종로구 청운동\",\r\n      \"startTime\" : \"2024-02-02T00:00:00\",\r\n      \"userName\" : \"이볼링\",\r\n      \"profileImage\" : null,\r\n      \"currentNumber\" : 2,\r\n      \"isClose\" : true\r\n    }, {\r\n      \"id\" : 6,\r\n      \"title\" : \"불금 볼링 점수 내기 하실 분~\",\r\n      \"dueTime\" : \"2024-05-02T00:00:00\",\r\n      \"districtName\" : \"서울특별시 종로구 청운동\",\r\n      \"startTime\" : \"2024-03-13T00:00:00\",\r\n      \"userName\" : \"이볼링\",\r\n      \"profileImage\" : null,\r\n      \"currentNumber\" : 2,\r\n      \"isClose\" : false\r\n    }, {\r\n      \"id\" : 4,\r\n      \"title\" : \"불금 볼링 점수 내기 하실 분~\",\r\n      \"dueTime\" : \"2024-05-02T00:00:00\",\r\n      \"districtName\" : \"서울특별시 종로구 청운동\",\r\n      \"startTime\" : \"2024-03-28T00:00:00\",\r\n      \"userName\" : \"김볼링\",\r\n      \"profileImage\" : null,\r\n      \"currentNumber\" : 1,\r\n      \"isClose\" : false\r\n    }, {\r\n      \"id\" : 1,\r\n      \"title\" : \"불금 볼링 점수 내기 하실 분~\",\r\n      \"dueTime\" : \"2024-04-22T00:00:00\",\r\n      \"districtName\" : \"서울특별시 종로구 청운동\",\r\n      \"startTime\" : \"2024-04-12T00:00:00\",\r\n      \"userName\" : \"김볼링\",\r\n      \"profileImage\" : null,\r\n      \"currentNumber\" : 2,\r\n      \"isClose\" : true\r\n    } ]\r\n  },\r\n  \"errorMessage\" : null\r\n}"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "모집글" ],
+        "summary" : "모집글 등록",
+        "description" : "모집글을 등록합니다.\n",
+        "operationId" : "[post] createPost",
+        "parameters" : [ {
+          "name" : "Authorization",
+          "in" : "header",
+          "description" : "access token",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlJPTEVfVVNFUiIsInR5cGUiOiJhY2Nlc3MiLCJleHAiOjE3MTIyMDc1ODZ9.4rGX4glRltGNL3z8veXQ9AZnkBV2MOZ5u9M6m0ZDYHJjn988xxKHi-6x-VN7wWVHe8WiUxzWylNWfulw4rxmTQ"
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json;charset=UTF-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/모집글 등록 요청 DTO"
+              },
+              "examples" : {
+                "[post] createPost" : {
+                  "value" : "{\r\n  \"title\" : \"테스트\",\r\n  \"startTime\" : \"2024-04-04T14:13:06.2077681\",\r\n  \"dueTime\" : \"2024-04-03T14:13:06.2077681\",\r\n  \"content\" : \"테스트\",\r\n  \"districtId\" : 1\r\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "200",
+            "content" : {
+              "application/json;charset=UTF-8" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/생성 응답 DTO"
+                },
+                "examples" : {
+                  "[post] createPost" : {
+                    "value" : "{\r\n  \"status\" : 200,\r\n  \"response\" : {\r\n    \"id\" : 16\r\n  },\r\n  \"errorMessage\" : null\r\n}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "bearerAuthJWT" : [ ]
+        } ]
+      }
+    },
+    "/api/users" : {
+      "get" : {
+        "tags" : [ "개인 프로필, 정보" ],
+        "summary" : "사용자 목록 조회",
+        "description" : "검색어를 포함하는 사용자를 모두 조회합니다.\n",
+        "operationId" : "[user] getUsers",
+        "parameters" : [ {
+          "name" : "key",
+          "in" : "query",
+          "description" : "검색 기준 id\n\n처음 요청 시 key 없이 요청 | 2번째 요청부터는 response.nextCursorRequest.key 값으로 요청\n\n더이상 가져올 값이 없을 시 nextCursorRequest.key로 -1 응답\n",
+          "required" : false,
+          "schema" : {
+            "type" : "number"
+          }
+        }, {
+          "name" : "size",
+          "in" : "query",
+          "description" : "한번에 가져올 크기",
+          "required" : false,
+          "schema" : {
+            "type" : "number",
+            "default" : 20
+          }
+        }, {
+          "name" : "name",
+          "in" : "query",
+          "description" : "검색할 유저의 이름(닉네임)",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200",
+            "content" : {
+              "application/json;charset=UTF-8" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/사용자 목록 조회 응답 DTO"
+                },
+                "examples" : {
+                  "[user] getUsers" : {
+                    "value" : "{\r\n  \"status\" : 200,\r\n  \"response\" : {\r\n    \"nextCursorRequest\" : {\r\n      \"key\" : 1,\r\n      \"size\" : 20\r\n    },\r\n    \"users\" : [ {\r\n      \"id\" : 5,\r\n      \"name\" : \"신볼링\",\r\n      \"rating\" : 0.0,\r\n      \"profileImage\" : null\r\n    }, {\r\n      \"id\" : 4,\r\n      \"name\" : \"박볼링\",\r\n      \"rating\" : 5.0,\r\n      \"profileImage\" : null\r\n    }, {\r\n      \"id\" : 3,\r\n      \"name\" : \"이볼링\",\r\n      \"rating\" : 1.0,\r\n      \"profileImage\" : null\r\n    }, {\r\n      \"id\" : 2,\r\n      \"name\" : \"최볼링\",\r\n      \"rating\" : 0.0,\r\n      \"profileImage\" : null\r\n    }, {\r\n      \"id\" : 1,\r\n      \"name\" : \"김볼링\",\r\n      \"rating\" : 0.0,\r\n      \"profileImage\" : null\r\n    } ]\r\n  },\r\n  \"errorMessage\" : null\r\n}"
+                  },
+                  "[user] getUsersNextPage" : {
+                    "value" : "{\r\n  \"status\" : 200,\r\n  \"response\" : {\r\n    \"nextCursorRequest\" : {\r\n      \"key\" : 1,\r\n      \"size\" : 20\r\n    },\r\n    \"users\" : [ {\r\n      \"id\" : 5,\r\n      \"name\" : \"신볼링\",\r\n      \"rating\" : 0.0,\r\n      \"profileImage\" : null\r\n    }, {\r\n      \"id\" : 4,\r\n      \"name\" : \"박볼링\",\r\n      \"rating\" : 5.0,\r\n      \"profileImage\" : null\r\n    }, {\r\n      \"id\" : 3,\r\n      \"name\" : \"이볼링\",\r\n      \"rating\" : 1.0,\r\n      \"profileImage\" : null\r\n    }, {\r\n      \"id\" : 2,\r\n      \"name\" : \"최볼링\",\r\n      \"rating\" : 0.0,\r\n      \"profileImage\" : null\r\n    }, {\r\n      \"id\" : 1,\r\n      \"name\" : \"김볼링\",\r\n      \"rating\" : 0.0,\r\n      \"profileImage\" : null\r\n    } ]\r\n  },\r\n  \"errorMessage\" : null\r\n}"
+                  },
+                  "[user] getUsersWithName" : {
+                    "value" : "{\r\n  \"status\" : 200,\r\n  \"response\" : {\r\n    \"nextCursorRequest\" : {\r\n      \"key\" : 3,\r\n      \"size\" : 20\r\n    },\r\n    \"users\" : [ {\r\n      \"id\" : 3,\r\n      \"name\" : \"이볼링\",\r\n      \"rating\" : 1.0,\r\n      \"profileImage\" : null\r\n    } ]\r\n  },\r\n  \"errorMessage\" : null\r\n}"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/messages/opponents" : {
+      "get" : {
+        "tags" : [ "쪽지" ],
+        "summary" : "대화방(쪽지) 목록 조회",
+        "description" : "대화 목록를 조회합니다.\n",
+        "operationId" : "[message] getOpponents",
+        "parameters" : [ {
+          "name" : "key",
+          "in" : "query",
+          "description" : "검색 기준 id\n\n처음 요청 시 key 없이 요청 | 2번째 요청부터는 response.nextCursorRequest.key 값으로 요청\n\n더이상 가져올 값이 없을 시 nextCursorRequest.key로 -1 응답\n",
+          "required" : false,
+          "schema" : {
+            "type" : "number"
+          }
+        }, {
+          "name" : "size",
+          "in" : "query",
+          "description" : "한번에 가져올 크기",
+          "required" : false,
+          "schema" : {
+            "type" : "number",
+            "default" : 20
+          }
+        }, {
+          "name" : "Authorization",
+          "in" : "header",
+          "description" : "access token",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlJPTEVfVVNFUiIsInR5cGUiOiJhY2Nlc3MiLCJleHAiOjE3MTIyMDc1ODR9.yr3vho5BHSuSnFR3EaeepVjtJkOFPFwjXxZ0BeTC9wktpAqM3H98oVlJOaOP5Dr3SfHvMKzrEzS6_5k2_p16dg"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200",
+            "content" : {
+              "application/json;charset=UTF-8" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/대화방 목록 조회 응답 DTO"
+                },
+                "examples" : {
+                  "[message] getOpponents" : {
+                    "value" : "{\r\n  \"status\" : 200,\r\n  \"response\" : {\r\n    \"nextCursorRequest\" : {\r\n      \"key\" : 20,\r\n      \"size\" : 20\r\n    },\r\n    \"messages\" : [ {\r\n      \"opponentUserId\" : 3,\r\n      \"opponentUserName\" : \"이볼링\",\r\n      \"opponentUserProfileImage\" : null,\r\n      \"recentMessage\" : \"3번이 1번에게 보낸 쪽지5\",\r\n      \"recentTime\" : \"2024-04-02T14:13:04.843584\",\r\n      \"countNew\" : 5\r\n    } ]\r\n  },\r\n  \"errorMessage\" : null\r\n}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "bearerAuthJWT" : [ ]
+        } ]
+      }
+    },
+    "/api/messages/{messageId}" : {
+      "delete" : {
+        "tags" : [ "쪽지" ],
+        "summary" : "쪽지 개별 삭제",
+        "description" : "쪽지를 삭제합니다.\n",
+        "operationId" : "[message] deleteMessageById",
+        "parameters" : [ {
+          "name" : "messageId",
+          "in" : "path",
+          "description" : "삭제할 쪽지 id",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "Authorization",
+          "in" : "header",
+          "description" : "access token",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlJPTEVfVVNFUiIsInR5cGUiOiJhY2Nlc3MiLCJleHAiOjE3MTIyMDc1ODR9.yr3vho5BHSuSnFR3EaeepVjtJkOFPFwjXxZ0BeTC9wktpAqM3H98oVlJOaOP5Dr3SfHvMKzrEzS6_5k2_p16dg"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200",
+            "content" : {
+              "application/json;charset=UTF-8" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/성공 응답 DTO"
+                },
+                "examples" : {
+                  "[message] deleteMessageById" : {
+                    "value" : "{\r\n  \"status\" : 200,\r\n  \"response\" : null,\r\n  \"errorMessage\" : null\r\n}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "bearerAuthJWT" : [ ]
+        } ]
+      }
+    },
+    "/api/password/email-confirm" : {
+      "post" : {
+        "tags" : [ "회원가입, 로그인, 인증" ],
+        "summary" : "비밀번호 찾기 - 본인 인증 메일 확인 및 임시 비밀번호 메일 발송",
+        "description" : "본인 인증 확인 후 기존 비밀번호를 삭제하고 임시 비밀번호를 생성합니다.\n\n임시 비밀번호를 메일로 발송합니다.\n",
+        "operationId" : "[user] confirmEmailAndSendTempPassword",
+        "requestBody" : {
+          "content" : {
+            "application/json;charset=UTF-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/비밀번호 찾기 - 본인 인증 메일 발송 요청 DTO"
+              },
+              "examples" : {
+                "[user] confirmEmailAndSendTempPassword" : {
+                  "value" : "{\r\n  \"token\" : \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwidHlwZSI6ImVtYWlsLXZlcmlmaWNhdGlvbi1wYXNzd29yZCIsImV4cCI6MTcxMjEyMTE5MH0.oLJJxokmEGSSxoRPz3TQCNsxBQv-dyhi1uqGl1KgPt-8X7VMu89jJ3CFsIE6UVxD2SYjnDdoTVBx4DzA6_EETA\"\r\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "200",
+            "content" : {
+              "application/json;charset=UTF-8" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/성공 응답 DTO"
+                },
+                "examples" : {
+                  "[user] confirmEmailAndSendTempPassword" : {
+                    "value" : "{\r\n  \"status\" : 200,\r\n  \"response\" : null,\r\n  \"errorMessage\" : null\r\n}"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/password/email-verification" : {
+      "post" : {
+        "tags" : [ "회원가입, 로그인, 인증" ],
+        "summary" : "비밀번호 찾기 - 본인 인증 메일 발송",
+        "description" : "계정 정보의 email로 인증 메일을 보냅니다. email에는 url이 삽입되어 보내집니다.\n\n(e.g.) https://bungaebowling.com/password/email-verification?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwicm9sZSI6IlJPTEVfVVNFUiIsInR5cGUiOiJlbWFpbC12ZXJpZmljYXRpb24iLCJleHAiOjE2OTU2MzU5MDh9.3AWusXvtgBiQN0GoegjKJw-fnaYSGVO1Ue0sSrtuWCVOQwzfIwh6KELN2NHOOXIO6MK-D11PndbtwcHetibZVQ\n\n인증을 위해서 이 토큰 값을 그대로 /api/password/email-confirm의 데이터로 요청 보내주시길 바랍니다.\n",
+        "operationId" : "[user] sendVerificationMailForPasswordReset",
+        "requestBody" : {
+          "content" : {
+            "application/json;charset=UTF-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/비밀번호 찾기 - 본인 인증 메일 발송 요청 DTO"
+              },
+              "examples" : {
+                "[user] sendVerificationMailForPasswordReset" : {
+                  "value" : "{\r\n  \"email\" : \"test@test.com\"\r\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "200",
+            "content" : {
+              "application/json;charset=UTF-8" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/성공 응답 DTO"
+                },
+                "examples" : {
+                  "[user] sendVerificationMailForPasswordReset" : {
+                    "value" : "{\r\n  \"status\" : 200,\r\n  \"response\" : null,\r\n  \"errorMessage\" : null\r\n}"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/posts/{postId}" : {
+      "get" : {
+        "tags" : [ "모집글" ],
+        "summary" : "모집글 상세 조회",
+        "description" : "모집글의 상세 정보를 조회합니다.\n",
+        "operationId" : "[post] getPost",
+        "parameters" : [ {
+          "name" : "postId",
+          "in" : "path",
+          "description" : "조회할 모집글 ID",
+          "required" : true,
+          "schema" : {
+            "type" : "number"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200",
+            "content" : {
+              "application/json;charset=UTF-8" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/모집글 상세 조회 응답 DTO"
+                },
+                "examples" : {
+                  "[post] getPost" : {
+                    "value" : "{\r\n  \"status\" : 200,\r\n  \"response\" : {\r\n    \"post\" : {\r\n      \"id\" : 1,\r\n      \"title\" : \"불금 볼링 점수 내기 하실 분~\",\r\n      \"userId\" : 1,\r\n      \"userName\" : \"김볼링\",\r\n      \"profileImage\" : null,\r\n      \"districtName\" : \"서울특별시 종로구 청운동\",\r\n      \"currentNumber\" : 2,\r\n      \"content\" : \"볼링 점수 내기합시다.\",\r\n      \"startTime\" : \"2024-04-12T00:00:00\",\r\n      \"dueTime\" : \"2024-04-22T00:00:00\",\r\n      \"viewCount\" : 1,\r\n      \"createdAt\" : \"2024-04-02T14:13:05.994226\",\r\n      \"editedAt\" : \"2024-04-02T14:13:05.994226\",\r\n      \"isClose\" : true\r\n    }\r\n  },\r\n  \"errorMessage\" : null\r\n}"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "모집글" ],
+        "summary" : "모집글 수정",
+        "description" : "모집글을 수정합니다.\n\n모집마감된 모집글은 수정이 불가능합니다.\n",
+        "operationId" : "[post] updatePost",
+        "parameters" : [ {
+          "name" : "postId",
+          "in" : "path",
+          "description" : "수정할 모집글의 ID",
+          "required" : true,
+          "schema" : {
+            "type" : "number"
+          }
+        }, {
+          "name" : "Authorization",
+          "in" : "header",
+          "description" : "access token",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlJPTEVfVVNFUiIsInR5cGUiOiJhY2Nlc3MiLCJleHAiOjE3MTIyMDc1ODV9.KTl2v4SieeIQdGnjWhrIixK1gAGOtlq3kQGMibOlLHzBQlewnFTxhpUB72aDJM0rFMEjpNArPJrFWdL-bSn2WA"
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json;charset=UTF-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/모집글 수정 요청 DTO"
+              },
+              "examples" : {
+                "[post] updatePost" : {
+                  "value" : "{\r\n  \"title\" : \"테스트\",\r\n  \"startTime\" : \"2024-04-04T14:13:05.9479148\",\r\n  \"dueTime\" : \"2024-04-03T14:13:05.9479148\",\r\n  \"content\" : \"테스트\"\r\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "200",
+            "content" : {
+              "application/json;charset=UTF-8" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/성공 응답 DTO"
+                },
+                "examples" : {
+                  "[post] updatePost" : {
+                    "value" : "{\r\n  \"status\" : 200,\r\n  \"response\" : null,\r\n  \"errorMessage\" : null\r\n}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "bearerAuthJWT" : [ ]
+        } ]
+      },
+      "delete" : {
+        "tags" : [ "모집글" ],
+        "summary" : "모집글 삭제",
+        "description" : "모집글을 삭제합니다.\n\n모집마감된 모집글은 삭제가 불가능합니다.\n",
+        "operationId" : "[post] deletePost",
+        "parameters" : [ {
+          "name" : "postId",
+          "in" : "path",
+          "description" : "삭제할 모집글의 ID",
+          "required" : true,
+          "schema" : {
+            "type" : "number"
+          }
+        }, {
+          "name" : "Authorization",
+          "in" : "header",
+          "description" : "access token",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlJPTEVfVVNFUiIsInR5cGUiOiJhY2Nlc3MiLCJleHAiOjE3MTIyMDc1ODZ9.4rGX4glRltGNL3z8veXQ9AZnkBV2MOZ5u9M6m0ZDYHJjn988xxKHi-6x-VN7wWVHe8WiUxzWylNWfulw4rxmTQ"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200",
+            "content" : {
+              "application/json;charset=UTF-8" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/성공 응답 DTO"
+                },
+                "examples" : {
+                  "[post] deletePost" : {
+                    "value" : "{\r\n  \"status\" : 200,\r\n  \"response\" : null,\r\n  \"errorMessage\" : null\r\n}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "bearerAuthJWT" : [ ]
+        } ]
+      },
+      "patch" : {
+        "tags" : [ "모집글" ],
+        "summary" : "모집글 마감",
+        "description" : "모집글을 마감합니다.\n",
+        "operationId" : "[post] patchPost",
+        "parameters" : [ {
+          "name" : "postId",
+          "in" : "path",
+          "description" : "마감할 모집글의 ID",
+          "required" : true,
+          "schema" : {
+            "type" : "number"
+          }
+        }, {
+          "name" : "Authorization",
+          "in" : "header",
+          "description" : "access token",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlJPTEVfVVNFUiIsInR5cGUiOiJhY2Nlc3MiLCJleHAiOjE3MTIyMDc1ODV9.KTl2v4SieeIQdGnjWhrIixK1gAGOtlq3kQGMibOlLHzBQlewnFTxhpUB72aDJM0rFMEjpNArPJrFWdL-bSn2WA"
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json;charset=UTF-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/모집글 마감 요청 DTO"
+              },
+              "examples" : {
+                "[post] patchPost" : {
+                  "value" : "{\r\n  \"isClose\" : true\r\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "200",
+            "content" : {
+              "application/json;charset=UTF-8" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/성공 응답 DTO"
+                },
+                "examples" : {
+                  "[post] patchPost" : {
+                    "value" : "{\r\n  \"status\" : 200,\r\n  \"response\" : null,\r\n  \"errorMessage\" : null\r\n}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "bearerAuthJWT" : [ ]
+        } ]
+      }
+    },
+    "/api/users/mine" : {
+      "get" : {
+        "tags" : [ "개인 프로필, 정보" ],
+        "summary" : "자신의 프로필 조회",
+        "description" : "자신의 프로필 정보를 조회합니다.\n",
+        "operationId" : "[user] getMyProfile",
+        "parameters" : [ {
+          "name" : "Authorization",
+          "in" : "header",
+          "description" : "access token",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlJPTEVfVVNFUiIsInR5cGUiOiJhY2Nlc3MiLCJleHAiOjE3MTIyMDc1OTB9.iSTYvo4ar7cgndvxmoG-5d91Xtb6M53-EXa34wUvpijEoE7LqKzLXHgWCv7jnu4_iURYanUPp1M2MZOI7gvELw"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200",
+            "content" : {
+              "application/json;charset=UTF-8" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/사용자 상세 조회 응답 DTO"
+                },
+                "examples" : {
+                  "[user] getMyProfile" : {
+                    "value" : "{\r\n  \"status\" : 200,\r\n  \"response\" : {\r\n    \"id\" : 1,\r\n    \"name\" : \"김볼링\",\r\n    \"email\" : \"test@test.com\",\r\n    \"verification\" : true,\r\n    \"averageScore\" : 125,\r\n    \"rating\" : 0.0,\r\n    \"districtId\" : 1,\r\n    \"address\" : \"서울특별시 종로구 청운동\",\r\n    \"profileImage\" : null\r\n  },\r\n  \"errorMessage\" : null\r\n}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "bearerAuthJWT" : [ ]
+        } ]
+      },
+      "put" : {
+        "tags" : [ "개인 프로필, 정보" ],
+        "summary" : "자신의 프로필 수정",
+        "description" : "자신의 프로필 정보를 수정합니다.\n\n현재 사용 플러그인이 multipart/form-data의 파라미터에 대한 문서화가 지원되지 않습니다. (try it out 불가능)\n\n아래 파라미터 중 변경 할 요소만 포함하여 보내면 됩니다.\n\n| Part         | Type   | Description            |\n|--------------|--------|------------------------|\n| name         | String | 변경할 이름(닉네임)      |\n| districtId   | String | 변경할 기본 설정 지역 id |\n| profileImage | Binary | 변경할 프로필 이미지 파일 |\n\n",
+        "operationId" : "[user] updateMyProfile",
+        "parameters" : [ {
+          "name" : "Authorization",
+          "in" : "header",
+          "description" : "access token",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlJPTEVfVVNFUiIsInR5cGUiOiJhY2Nlc3MiLCJleHAiOjE3MTIyMDc1OTF9.gi0oj49bzqnbrmUtrLs08uBpo3tqerDQ4p5ND6NBSuUhVzejjTSUChJ6nuzWkupqfiUYjrblaNQecgM4NHTFxg"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200",
+            "content" : {
+              "application/json;charset=UTF-8" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/성공 응답 DTO"
+                },
+                "examples" : {
+                  "[user] updateMyProfile" : {
+                    "value" : "{\r\n  \"status\" : 200,\r\n  \"response\" : null,\r\n  \"errorMessage\" : null\r\n}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "bearerAuthJWT" : [ ]
+        } ]
+      }
+    },
+    "/api/users/password" : {
+      "patch" : {
+        "tags" : [ "개인 프로필, 정보" ],
+        "summary" : "비밀번호 변경",
+        "description" : "비밀번호를 변경합니다.\n",
+        "operationId" : "[user] updatePassword",
+        "parameters" : [ {
+          "name" : "Authorization",
+          "in" : "header",
+          "description" : "access token",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlJPTEVfVVNFUiIsInR5cGUiOiJhY2Nlc3MiLCJleHAiOjE3MTIyMDc1OTJ9.RpmXUgQ5VpZ-svD9DtZwXtOiA7Urze_6egFxrI4qM01p-WZg4m4Y6EDrJAkGf7cqg0G1WzgF_Ag0DXyVBLhu8g"
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json;charset=UTF-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/비밀번호 변경 요청 DTO"
+              },
+              "examples" : {
+                "[user] updatePassword" : {
+                  "value" : "{\r\n  \"password\" : \"test12!@\",\r\n  \"newPassword\" : \"qwer1234!\"\r\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "200",
+            "content" : {
+              "application/json;charset=UTF-8" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/성공 응답 DTO"
+                },
+                "examples" : {
+                  "[user] updatePassword" : {
+                    "value" : "{\r\n  \"status\" : 200,\r\n  \"response\" : null,\r\n  \"errorMessage\" : null\r\n}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "bearerAuthJWT" : [ ]
+        } ]
+      }
+    },
+    "/api/users/{userId}" : {
+      "get" : {
+        "tags" : [ "개인 프로필, 정보" ],
+        "summary" : "사용자 상세 조회",
+        "description" : "특정 사용자의 상세 정보를 확인합니다.\n",
+        "operationId" : "[user] getUser",
+        "parameters" : [ {
+          "name" : "userId",
+          "in" : "path",
+          "description" : "사용자 id",
+          "required" : true,
+          "schema" : {
+            "type" : "number"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200",
+            "content" : {
+              "application/json;charset=UTF-8" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/사용자 상세 조회 응답 DTO"
+                },
+                "examples" : {
+                  "[user] getUser" : {
+                    "value" : "{\r\n  \"status\" : 200,\r\n  \"response\" : {\r\n    \"name\" : \"김볼링\",\r\n    \"averageScore\" : 125,\r\n    \"rating\" : 0.0,\r\n    \"address\" : \"서울특별시 종로구 청운동\",\r\n    \"profileImage\" : null\r\n  },\r\n  \"errorMessage\" : null\r\n}"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/cities/districts/{districtId}" : {
+      "get" : {
+        "tags" : [ "행정 구역" ],
+        "summary" : "행정 구역 정보 조회",
+        "description" : "행정 구역의 정보를 조회합니다.",
+        "operationId" : "[city] getDistrictInfo",
+        "parameters" : [ {
+          "name" : "districtId",
+          "in" : "path",
+          "description" : "읍/면/동 id",
+          "required" : true,
+          "schema" : {
+            "type" : "number"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200",
+            "content" : {
+              "application/json;charset=UTF-8" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/행정 구역 정보 조회 응답 DTO"
+                },
+                "examples" : {
+                  "[city] getDistrictInfo" : {
+                    "value" : "{\r\n  \"status\" : 200,\r\n  \"response\" : {\r\n    \"cityId\" : 1,\r\n    \"cityName\" : \"서울특별시\",\r\n    \"countryId\" : 1,\r\n    \"countryName\" : \"종로구\",\r\n    \"name\" : \"청운동\"\r\n  },\r\n  \"errorMessage\" : null\r\n}"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/cities/{cityId}/countries" : {
+      "get" : {
+        "tags" : [ "행정 구역" ],
+        "summary" : "시/군/구 조회",
+        "description" : "시/군/구 정보를 조회합니다.",
+        "operationId" : "[city] getCountries",
+        "parameters" : [ {
+          "name" : "cityId",
+          "in" : "path",
+          "description" : "시/도 id",
+          "required" : true,
+          "schema" : {
+            "type" : "number"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200",
+            "content" : {
+              "application/json;charset=UTF-8" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/시-군-구 조회 응답 DTO"
+                },
+                "examples" : {
+                  "[city] getCountries" : {
+                    "value" : "{\r\n  \"status\" : 200,\r\n  \"response\" : {\r\n    \"countries\" : [ {\r\n      \"id\" : 23,\r\n      \"name\" : \"강남구\"\r\n    }, {\r\n      \"id\" : 25,\r\n      \"name\" : \"강동구\"\r\n    }, {\r\n      \"id\" : 9,\r\n      \"name\" : \"강북구\"\r\n    }, {\r\n      \"id\" : 16,\r\n      \"name\" : \"강서구\"\r\n    }, {\r\n      \"id\" : 21,\r\n      \"name\" : \"관악구\"\r\n    }, {\r\n      \"id\" : 5,\r\n      \"name\" : \"광진구\"\r\n    }, {\r\n      \"id\" : 17,\r\n      \"name\" : \"구로구\"\r\n    }, {\r\n      \"id\" : 18,\r\n      \"name\" : \"금천구\"\r\n    }, {\r\n      \"id\" : 11,\r\n      \"name\" : \"노원구\"\r\n    }, {\r\n      \"id\" : 10,\r\n      \"name\" : \"도봉구\"\r\n    }, {\r\n      \"id\" : 6,\r\n      \"name\" : \"동대문구\"\r\n    }, {\r\n      \"id\" : 20,\r\n      \"name\" : \"동작구\"\r\n    }, {\r\n      \"id\" : 14,\r\n      \"name\" : \"마포구\"\r\n    }, {\r\n      \"id\" : 13,\r\n      \"name\" : \"서대문구\"\r\n    }, {\r\n      \"id\" : 22,\r\n      \"name\" : \"서초구\"\r\n    }, {\r\n      \"id\" : 4,\r\n      \"name\" : \"성동구\"\r\n    }, {\r\n      \"id\" : 8,\r\n      \"name\" : \"성북구\"\r\n    }, {\r\n      \"id\" : 24,\r\n      \"name\" : \"송파구\"\r\n    }, {\r\n      \"id\" : 15,\r\n      \"name\" : \"양천구\"\r\n    }, {\r\n      \"id\" : 19,\r\n      \"name\" : \"영등포구\"\r\n    }, {\r\n      \"id\" : 3,\r\n      \"name\" : \"용산구\"\r\n    }, {\r\n      \"id\" : 12,\r\n      \"name\" : \"은평구\"\r\n    }, {\r\n      \"id\" : 1,\r\n      \"name\" : \"종로구\"\r\n    }, {\r\n      \"id\" : 2,\r\n      \"name\" : \"중구\"\r\n    }, {\r\n      \"id\" : 7,\r\n      \"name\" : \"중랑구\"\r\n    } ]\r\n  },\r\n  \"errorMessage\" : null\r\n}"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/messages/opponents/{opponentId}" : {
+      "get" : {
+        "tags" : [ "쪽지" ],
+        "summary" : "일대일 대화방 쪽지 조회",
+        "description" : "상대 유저와의 쪽지 목록을 조회합니다.\n",
+        "operationId" : "[message] getMessagesAndUpdateToRead",
+        "parameters" : [ {
+          "name" : "opponentId",
+          "in" : "path",
+          "description" : "쪽지를 조회할 상대 유저의 Id",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "key",
+          "in" : "query",
+          "description" : "검색 기준 id\n\n처음 요청 시 key 없이 요청 | 2번째 요청부터는 response.nextCursorRequest.key 값으로 요청\n\n더이상 가져올 값이 없을 시 nextCursorRequest.key로 -1 응답\n",
+          "required" : false,
+          "schema" : {
+            "type" : "number"
+          }
+        }, {
+          "name" : "size",
+          "in" : "query",
+          "description" : "한번에 가져올 크기",
+          "required" : false,
+          "schema" : {
+            "type" : "number",
+            "default" : 20
+          }
+        }, {
+          "name" : "Authorization",
+          "in" : "header",
+          "description" : "access token",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlJPTEVfVVNFUiIsInR5cGUiOiJhY2Nlc3MiLCJleHAiOjE3MTIyMDc1ODV9.KTl2v4SieeIQdGnjWhrIixK1gAGOtlq3kQGMibOlLHzBQlewnFTxhpUB72aDJM0rFMEjpNArPJrFWdL-bSn2WA"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200",
+            "content" : {
+              "application/json;charset=UTF-8" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/일대일 대화방 쪽지 조회 응답 DTO"
+                },
+                "examples" : {
+                  "[message] getMessagesAndUpdateToRead" : {
+                    "value" : "{\r\n  \"status\" : 200,\r\n  \"response\" : {\r\n    \"nextCursorRequest\" : {\r\n      \"key\" : 1,\r\n      \"size\" : 20\r\n    },\r\n    \"opponentUserName\" : \"이볼링\",\r\n    \"opponentUserProfileImage\" : null,\r\n    \"messages\" : [ {\r\n      \"id\" : 20,\r\n      \"content\" : \"3번이 1번에게 보낸 쪽지5\",\r\n      \"time\" : \"2024-04-02T14:13:05.004177\",\r\n      \"isRead\" : true,\r\n      \"isReceive\" : true\r\n    }, {\r\n      \"id\" : 18,\r\n      \"content\" : \"3번이 1번에게 보낸 쪽지4\",\r\n      \"time\" : \"2024-04-02T14:13:05.004177\",\r\n      \"isRead\" : true,\r\n      \"isReceive\" : true\r\n    }, {\r\n      \"id\" : 16,\r\n      \"content\" : \"3번이 1번에게 보낸 쪽지3\",\r\n      \"time\" : \"2024-04-02T14:13:05.004177\",\r\n      \"isRead\" : true,\r\n      \"isReceive\" : true\r\n    }, {\r\n      \"id\" : 14,\r\n      \"content\" : \"3번이 1번에게 보낸 쪽지2\",\r\n      \"time\" : \"2024-04-02T14:13:05.004177\",\r\n      \"isRead\" : true,\r\n      \"isReceive\" : true\r\n    }, {\r\n      \"id\" : 12,\r\n      \"content\" : \"3번이 1번에게 보낸 쪽지1\",\r\n      \"time\" : \"2024-04-02T14:13:05.004177\",\r\n      \"isRead\" : true,\r\n      \"isReceive\" : true\r\n    }, {\r\n      \"id\" : 9,\r\n      \"content\" : \"1번이 3번에게 보낸 쪽지5\",\r\n      \"time\" : \"2024-04-02T14:13:05.004177\",\r\n      \"isRead\" : true,\r\n      \"isReceive\" : false\r\n    }, {\r\n      \"id\" : 7,\r\n      \"content\" : \"1번이 3번에게 보낸 쪽지4\",\r\n      \"time\" : \"2024-04-02T14:13:05.004177\",\r\n      \"isRead\" : true,\r\n      \"isReceive\" : false\r\n    }, {\r\n      \"id\" : 5,\r\n      \"content\" : \"1번이 3번에게 보낸 쪽지3\",\r\n      \"time\" : \"2024-04-02T14:13:05.004177\",\r\n      \"isRead\" : true,\r\n      \"isReceive\" : false\r\n    }, {\r\n      \"id\" : 3,\r\n      \"content\" : \"1번이 3번에게 보낸 쪽지2\",\r\n      \"time\" : \"2024-04-02T14:13:05.004177\",\r\n      \"isRead\" : true,\r\n      \"isReceive\" : false\r\n    }, {\r\n      \"id\" : 1,\r\n      \"content\" : \"1번이 3번에게 보낸 쪽지1\",\r\n      \"time\" : \"2024-04-02T14:13:05.004177\",\r\n      \"isRead\" : true,\r\n      \"isReceive\" : false\r\n    } ]\r\n  },\r\n  \"errorMessage\" : null\r\n}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "bearerAuthJWT" : [ ]
+        } ]
+      },
+      "post" : {
+        "tags" : [ "쪽지" ],
+        "summary" : "쪽지 보내기",
+        "description" : "쪽지를 보냅니다.\n",
+        "operationId" : "[message] sendMessage",
+        "parameters" : [ {
+          "name" : "opponentId",
+          "in" : "path",
+          "description" : "쪽지를 수신할 유저의 Id",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "Authorization",
+          "in" : "header",
+          "description" : "access token",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlJPTEVfVVNFUiIsInR5cGUiOiJhY2Nlc3MiLCJleHAiOjE3MTIyMDc1ODR9.yr3vho5BHSuSnFR3EaeepVjtJkOFPFwjXxZ0BeTC9wktpAqM3H98oVlJOaOP5Dr3SfHvMKzrEzS6_5k2_p16dg"
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json;charset=UTF-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/쪽지 보내기 요청 DTO"
+              },
+              "examples" : {
+                "[message] sendMessage" : {
+                  "value" : "{\r\n  \"content\" : \"쪽지보내기 테스트\"\r\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "200",
+            "content" : {
+              "application/json;charset=UTF-8" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/성공 응답 DTO"
+                },
+                "examples" : {
+                  "[message] sendMessage" : {
+                    "value" : "{\r\n  \"status\" : 200,\r\n  \"response\" : null,\r\n  \"errorMessage\" : null\r\n}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "bearerAuthJWT" : [ ]
+        } ]
+      },
+      "delete" : {
+        "tags" : [ "쪽지" ],
+        "summary" : "쪽지함 삭제",
+        "description" : "해당유저와의 모든 쪽지를 삭제합니다.(쪽지함을 삭제합니다.)\n",
+        "operationId" : "[message] deleteMessagesByOpponentId",
+        "parameters" : [ {
+          "name" : "opponentId",
+          "in" : "path",
+          "description" : "쪽지를 삭제할 대화 상대의 Id",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "Authorization",
+          "in" : "header",
+          "description" : "access token",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlJPTEVfVVNFUiIsInR5cGUiOiJhY2Nlc3MiLCJleHAiOjE3MTIyMDc1ODV9.KTl2v4SieeIQdGnjWhrIixK1gAGOtlq3kQGMibOlLHzBQlewnFTxhpUB72aDJM0rFMEjpNArPJrFWdL-bSn2WA"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200",
+            "content" : {
+              "application/json;charset=UTF-8" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/성공 응답 DTO"
+                },
+                "examples" : {
+                  "[message] deleteMessagesByOpponentId" : {
+                    "value" : "{\r\n  \"status\" : 200,\r\n  \"response\" : null,\r\n  \"errorMessage\" : null\r\n}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "bearerAuthJWT" : [ ]
+        } ]
+      }
+    },
+    "/api/posts/{postId}/applicants" : {
+      "get" : {
+        "tags" : [ "신청, 별점" ],
+        "summary" : "신청자 목록 조회",
+        "description" : "모집글의 신청자 목록을 조회합니다.\n",
+        "operationId" : "[applicant] getApplicants",
+        "parameters" : [ {
+          "name" : "postId",
+          "in" : "path",
+          "description" : "조회할 모집글 id",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "key",
+          "in" : "query",
+          "description" : "검색 기준 id\n\n처음 요청 시 key 없이 요청 | 2번째 요청부터는 response.nextCursorRequest.key 값으로 요청\n\n더이상 가져올 값이 없을 시 nextCursorRequest.key로 -1 응답\n",
+          "required" : false,
+          "schema" : {
+            "type" : "number"
+          }
+        }, {
+          "name" : "size",
+          "in" : "query",
+          "description" : "한번에 가져올 크기",
+          "required" : false,
+          "schema" : {
+            "type" : "number",
+            "default" : 20
+          }
+        }, {
+          "name" : "Authorization",
+          "in" : "header",
+          "description" : "access token",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlJPTEVfVVNFUiIsInR5cGUiOiJhY2Nlc3MiLCJleHAiOjE3MTIyMDc1ODN9.Z_MzrQ7Yeun5Ewy1bYkTZOHIxkMHWwFJQECe-7rQnvDkNDvXAjiM7whAIF8xNsguGqdG62Q45xixCtSnzRUtVw"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200",
+            "content" : {
+              "application/json;charset=UTF-8" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/신청자 목록 조회 응답 DTO"
+                },
+                "examples" : {
+                  "[applicant] getApplicants" : {
+                    "value" : "{\r\n  \"status\" : 200,\r\n  \"response\" : {\r\n    \"nextCursorRequest\" : {\r\n      \"key\" : 27,\r\n      \"size\" : 2\r\n    },\r\n    \"applicantNumber\" : 1,\r\n    \"applicants\" : [ {\r\n      \"id\" : 27,\r\n      \"user\" : {\r\n        \"id\" : 4,\r\n        \"name\" : \"박볼링\",\r\n        \"profileImage\" : null,\r\n        \"rating\" : 5.0\r\n      },\r\n      \"status\" : true\r\n    } ]\r\n  },\r\n  \"errorMessage\" : null\r\n}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "bearerAuthJWT" : [ ]
+        } ]
+      },
+      "post" : {
+        "tags" : [ "신청, 별점" ],
+        "summary" : "모집글에 대한 신청",
+        "description" : "마감되지 않은 모집글에 신청을 합니다.\n",
+        "operationId" : "[applicant] create",
+        "parameters" : [ {
+          "name" : "postId",
+          "in" : "path",
+          "description" : "신청할 모집글 id",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "Authorization",
+          "in" : "header",
+          "description" : "access token",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0Iiwicm9sZSI6IlJPTEVfVVNFUiIsInR5cGUiOiJhY2Nlc3MiLCJleHAiOjE3MTIyMDc1ODN9.oBkh0QdjkroS4oyiQiGgXyaEb_qB2rUrhqzfnou28A2eFmOygHEwHl-rRHIChrhRwikqAaf1g0MVWAefw4jcLg"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200",
+            "content" : {
+              "application/json;charset=UTF-8" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/성공 응답 DTO"
+                },
+                "examples" : {
+                  "[applicant] create" : {
+                    "value" : "{\r\n  \"status\" : 200,\r\n  \"response\" : null,\r\n  \"errorMessage\" : null\r\n}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "bearerAuthJWT" : [ ]
+        } ]
+      }
+    },
+    "/api/posts/{postId}/comments" : {
+      "get" : {
+        "tags" : [ "댓글" ],
+        "summary" : "댓글 조회",
+        "description" : "모집글의 댓글들을 조회합니다.\n\n기본적으로 **삭제된 댓글은 보이지 않**습니다.\n\n삭제된 댓글이 대댓글을 가지고 있는 경우만 출력이 되며 이때 댓글은 아래와 같이 응답되게 됩니다.\n- userId, userName -> null\n- content -> \"삭제된 댓글입니다.\"\n\nsize에는 삭제된 댓글의 수가 함께 집계되기 때문에 응답에는 없지만 개수로 포함될 수 있습니다. 따라서 **설정한 size 수(default 20)보다 적은 수의 댓글이 응답될 수** 있습니다.\n",
+        "operationId" : "[comment] getComments",
+        "parameters" : [ {
+          "name" : "postId",
+          "in" : "path",
+          "description" : "조회할 댓글들의 모집글 id",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "key",
+          "in" : "query",
+          "description" : "검색 기준 id\n\n처음 요청 시 key 없이 요청 | 2번째 요청부터는 response.nextCursorRequest.key 값으로 요청\n\n더이상 가져올 값이 없을 시 nextCursorRequest.key로 -1 응답\n",
+          "required" : false,
+          "schema" : {
+            "type" : "number"
+          }
+        }, {
+          "name" : "size",
+          "in" : "query",
+          "description" : "한번에 가져올 크기",
+          "required" : false,
+          "schema" : {
+            "type" : "number",
+            "default" : 20
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200",
+            "content" : {
+              "application/json;charset=UTF-8" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/댓글 조회 응답 DTO"
+                },
+                "examples" : {
+                  "[comment] getComments" : {
+                    "value" : "{\r\n  \"status\" : 200,\r\n  \"response\" : {\r\n    \"nextCursorRequest\" : {\r\n      \"key\" : 7,\r\n      \"size\" : 20\r\n    },\r\n    \"comments\" : [ {\r\n      \"id\" : 1,\r\n      \"userId\" : null,\r\n      \"userName\" : null,\r\n      \"profileImage\" : null,\r\n      \"content\" : \"삭제된 댓글입니다.\",\r\n      \"createdAt\" : \"2024-04-02T14:13:04.729118\",\r\n      \"editedAt\" : \"2024-04-02T14:13:04.729118\",\r\n      \"childComments\" : [ {\r\n        \"id\" : 2,\r\n        \"userId\" : 1,\r\n        \"userName\" : \"김볼링\",\r\n        \"profileImage\" : null,\r\n        \"content\" : \"신청해주세요~\",\r\n        \"createdAt\" : \"2024-04-02T14:13:04.729118\",\r\n        \"editedAt\" : \"2024-04-02T14:13:04.729118\"\r\n      } ]\r\n    }, {\r\n      \"id\" : 3,\r\n      \"userId\" : 3,\r\n      \"userName\" : \"이볼링\",\r\n      \"profileImage\" : null,\r\n      \"content\" : \"저 신청했어요!\",\r\n      \"createdAt\" : \"2024-04-02T14:13:04.729118\",\r\n      \"editedAt\" : \"2024-04-02T14:13:04.729118\",\r\n      \"childComments\" : [ ]\r\n    }, {\r\n      \"id\" : 4,\r\n      \"userId\" : 3,\r\n      \"userName\" : \"이볼링\",\r\n      \"profileImage\" : null,\r\n      \"content\" : \"확인부탁드립니다!\",\r\n      \"createdAt\" : \"2024-04-02T14:13:04.729118\",\r\n      \"editedAt\" : \"2024-04-02T14:13:04.729118\",\r\n      \"childComments\" : [ {\r\n        \"id\" : 5,\r\n        \"userId\" : 4,\r\n        \"userName\" : \"박볼링\",\r\n        \"profileImage\" : null,\r\n        \"content\" : \"이사람 조심하세요 ㄷㄷㄷ\",\r\n        \"createdAt\" : \"2024-04-02T14:13:04.729118\",\r\n        \"editedAt\" : \"2024-04-02T14:13:04.729118\"\r\n      }, {\r\n        \"id\" : 6,\r\n        \"userId\" : 4,\r\n        \"userName\" : \"박볼링\",\r\n        \"profileImage\" : null,\r\n        \"content\" : \"저번에 신청하고 날랐습니다\",\r\n        \"createdAt\" : \"2024-04-02T14:13:04.729118\",\r\n        \"editedAt\" : \"2024-04-02T14:13:04.729118\"\r\n      } ]\r\n    }, {\r\n      \"id\" : 7,\r\n      \"userId\" : 5,\r\n      \"userName\" : \"신볼링\",\r\n      \"profileImage\" : null,\r\n      \"content\" : \"아직 자리 있나요?\",\r\n      \"createdAt\" : \"2024-04-02T14:13:04.729118\",\r\n      \"editedAt\" : \"2024-04-02T14:13:04.729118\",\r\n      \"childComments\" : [ {\r\n        \"id\" : 8,\r\n        \"userId\" : 1,\r\n        \"userName\" : \"김볼링\",\r\n        \"profileImage\" : null,\r\n        \"content\" : \"네 있습니다\",\r\n        \"createdAt\" : \"2024-04-02T14:13:04.729118\",\r\n        \"editedAt\" : \"2024-04-02T14:13:04.729118\"\r\n      } ]\r\n    } ]\r\n  },\r\n  \"errorMessage\" : null\r\n}"
+                  },
+                  "[comment] getCommentsWithPage" : {
+                    "value" : "{\r\n  \"status\" : 200,\r\n  \"response\" : {\r\n    \"nextCursorRequest\" : {\r\n      \"key\" : 4,\r\n      \"size\" : 2\r\n    },\r\n    \"comments\" : [ {\r\n      \"id\" : 3,\r\n      \"userId\" : 3,\r\n      \"userName\" : \"이볼링\",\r\n      \"profileImage\" : null,\r\n      \"content\" : \"저 신청했어요!\",\r\n      \"createdAt\" : \"2024-04-02T14:13:04.392678\",\r\n      \"editedAt\" : \"2024-04-02T14:13:04.392678\",\r\n      \"childComments\" : [ ]\r\n    }, {\r\n      \"id\" : 4,\r\n      \"userId\" : 3,\r\n      \"userName\" : \"이볼링\",\r\n      \"profileImage\" : null,\r\n      \"content\" : \"확인부탁드립니다!\",\r\n      \"createdAt\" : \"2024-04-02T14:13:04.392678\",\r\n      \"editedAt\" : \"2024-04-02T14:13:04.392678\",\r\n      \"childComments\" : [ {\r\n        \"id\" : 5,\r\n        \"userId\" : 4,\r\n        \"userName\" : \"박볼링\",\r\n        \"profileImage\" : null,\r\n        \"content\" : \"이사람 조심하세요 ㄷㄷㄷ\",\r\n        \"createdAt\" : \"2024-04-02T14:13:04.392678\",\r\n        \"editedAt\" : \"2024-04-02T14:13:04.392678\"\r\n      }, {\r\n        \"id\" : 6,\r\n        \"userId\" : 4,\r\n        \"userName\" : \"박볼링\",\r\n        \"profileImage\" : null,\r\n        \"content\" : \"저번에 신청하고 날랐습니다\",\r\n        \"createdAt\" : \"2024-04-02T14:13:04.392678\",\r\n        \"editedAt\" : \"2024-04-02T14:13:04.392678\"\r\n      } ]\r\n    } ]\r\n  },\r\n  \"errorMessage\" : null\r\n}"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "댓글" ],
+        "summary" : "댓글 등록",
+        "description" : "모집글에 새로운 댓글을 등록합니다.\n\n대댓글 등록은 별개의 api를 사용해주세요.\n",
+        "operationId" : "[comment] create",
+        "parameters" : [ {
+          "name" : "postId",
+          "in" : "path",
+          "description" : "댓글을 등록할 모집글 id",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "Authorization",
+          "in" : "header",
+          "description" : "access token",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlJPTEVfVVNFUiIsInR5cGUiOiJhY2Nlc3MiLCJleHAiOjE3MTIyMDc1ODR9.yr3vho5BHSuSnFR3EaeepVjtJkOFPFwjXxZ0BeTC9wktpAqM3H98oVlJOaOP5Dr3SfHvMKzrEzS6_5k2_p16dg"
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json;charset=UTF-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/댓글 등록 요청 DTO"
+              },
+              "examples" : {
+                "[comment] create" : {
+                  "value" : "{\r\n  \"content\" : \"안녕하세요\"\r\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "200",
+            "content" : {
+              "application/json;charset=UTF-8" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/생성 응답 DTO"
+                },
+                "examples" : {
+                  "[comment] create" : {
+                    "value" : "{\r\n  \"status\" : 200,\r\n  \"response\" : {\r\n    \"id\" : 9\r\n  },\r\n  \"errorMessage\" : null\r\n}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "bearerAuthJWT" : [ ]
+        } ]
+      }
+    },
+    "/api/posts/{postId}/scores" : {
+      "get" : {
+        "tags" : [ "볼링 점수(스코어)" ],
+        "summary" : "점수 조회",
+        "description" : "모집글의 점수들을 조회합니다.\n",
+        "operationId" : "[score] getScores",
+        "parameters" : [ {
+          "name" : "postId",
+          "in" : "path",
+          "description" : "모집글 id",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "userId",
+          "in" : "query",
+          "description" : "점수를 확인할 사용자 id",
+          "required" : false,
+          "schema" : {
+            "type" : "number"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200",
+            "content" : {
+              "application/json;charset=UTF-8" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/점수 조회 응답 DTO"
+                },
+                "examples" : {
+                  "[score] getScores" : {
+                    "value" : "{\r\n  \"status\" : 200,\r\n  \"response\" : {\r\n    \"scores\" : [ {\r\n      \"id\" : 2,\r\n      \"scoreNum\" : 150,\r\n      \"scoreImage\" : null\r\n    } ]\r\n  },\r\n  \"errorMessage\" : null\r\n}"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "볼링 점수(스코어)" ],
+        "summary" : "점수 등록",
+        "description" : "모집 완료되어 게임 플레이 한 이후(start_time 이후) 자신이 참여한 모집글에 점수 등록이 가능합니다.\n\n- 파일은 png, jpg, gif, jpeg만 업로드 가능합니다.\n- 파일은 10MB의 크기 제한이 존재합니다.\n\n현재 사용 플러그인이 multipart/form-data의 파라미터에 대한 문서화가 지원되지 않습니다. (try it out 불가능)\n\n| Part  | Type   | Description                  |\n|-------|--------|------------------------------|\n| score | number | 볼링 점수 (1~300)             |\n| image | Binary | 점수판 사진 등 첨부 이미지 파일 |\n\n",
+        "operationId" : "[score] createScore",
+        "parameters" : [ {
+          "name" : "postId",
+          "in" : "path",
+          "description" : "모집글 id",
+          "required" : true,
+          "schema" : {
+            "type" : "number"
+          }
+        }, {
+          "name" : "Authorization",
+          "in" : "header",
+          "description" : "access token",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlJPTEVfVVNFUiIsInR5cGUiOiJhY2Nlc3MiLCJleHAiOjE3MTIyMDc1ODh9.q_YrMpnJLGyaHAm8FzMPeGU6dBHmQambxfwHsqj7cdrbNzr7WFUF2cqJ5PVPwsiRXArvkEVn7s6XAfvv89RqsQ"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200",
+            "content" : {
+              "application/json;charset=UTF-8" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/성공 응답 DTO"
+                },
+                "examples" : {
+                  "[score] createScore" : {
+                    "value" : "{\r\n  \"status\" : 200,\r\n  \"response\" : null,\r\n  \"errorMessage\" : null\r\n}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "bearerAuthJWT" : [ ]
+        } ]
+      }
+    },
+    "/api/users/{userId}/records" : {
+      "get" : {
+        "tags" : [ "개인 프로필, 정보" ],
+        "summary" : "사용자 기록(경기수, 평균점수) 조회",
+        "description" : "사용자의 경기 기록을 조회합니다.\n",
+        "operationId" : "[user] getUserRecords",
+        "parameters" : [ {
+          "name" : "userId",
+          "in" : "path",
+          "description" : "사용자 id",
+          "required" : true,
+          "schema" : {
+            "type" : "number"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200",
+            "content" : {
+              "application/json;charset=UTF-8" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/사용자 기록(경기수, 평균점수) 조회 응답 DTO"
+                },
+                "examples" : {
+                  "[user] getUserRecords" : {
+                    "value" : "{\r\n  \"status\" : 200,\r\n  \"response\" : {\r\n    \"name\" : \"김볼링\",\r\n    \"game\" : 4,\r\n    \"average\" : 125,\r\n    \"maximum\" : 150,\r\n    \"minimum\" : 100\r\n  },\r\n  \"errorMessage\" : null\r\n}"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/cities/countries/{countryId}/districts" : {
+      "get" : {
+        "tags" : [ "행정 구역" ],
+        "summary" : "읍/면/동 조회",
+        "description" : "읍/면/동 정보를 조회합니다.",
+        "operationId" : "[city] getDistricts",
+        "parameters" : [ {
+          "name" : "countryId",
+          "in" : "path",
+          "description" : "시/군/구 id",
+          "required" : true,
+          "schema" : {
+            "type" : "number"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200",
+            "content" : {
+              "application/json;charset=UTF-8" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/읍-면-동 조회 응답 DTO"
+                },
+                "examples" : {
+                  "[city] getDistricts" : {
+                    "value" : "{\r\n  \"status\" : 200,\r\n  \"response\" : {\r\n    \"districts\" : [ {\r\n      \"id\" : 1,\r\n      \"name\" : \"청운동\"\r\n    }, {\r\n      \"id\" : 2,\r\n      \"name\" : \"신교동\"\r\n    }, {\r\n      \"id\" : 3,\r\n      \"name\" : \"궁정동\"\r\n    }, {\r\n      \"id\" : 4,\r\n      \"name\" : \"효자동\"\r\n    }, {\r\n      \"id\" : 5,\r\n      \"name\" : \"창성동\"\r\n    }, {\r\n      \"id\" : 6,\r\n      \"name\" : \"통의동\"\r\n    }, {\r\n      \"id\" : 7,\r\n      \"name\" : \"적선동\"\r\n    }, {\r\n      \"id\" : 8,\r\n      \"name\" : \"통인동\"\r\n    }, {\r\n      \"id\" : 9,\r\n      \"name\" : \"누상동\"\r\n    }, {\r\n      \"id\" : 10,\r\n      \"name\" : \"누하동\"\r\n    }, {\r\n      \"id\" : 11,\r\n      \"name\" : \"옥인동\"\r\n    }, {\r\n      \"id\" : 12,\r\n      \"name\" : \"체부동\"\r\n    }, {\r\n      \"id\" : 13,\r\n      \"name\" : \"필운동\"\r\n    }, {\r\n      \"id\" : 14,\r\n      \"name\" : \"내자동\"\r\n    }, {\r\n      \"id\" : 15,\r\n      \"name\" : \"사직동\"\r\n    }, {\r\n      \"id\" : 16,\r\n      \"name\" : \"도렴동\"\r\n    }, {\r\n      \"id\" : 17,\r\n      \"name\" : \"당주동\"\r\n    }, {\r\n      \"id\" : 18,\r\n      \"name\" : \"내수동\"\r\n    }, {\r\n      \"id\" : 19,\r\n      \"name\" : \"세종로\"\r\n    }, {\r\n      \"id\" : 20,\r\n      \"name\" : \"신문로1가\"\r\n    }, {\r\n      \"id\" : 21,\r\n      \"name\" : \"신문로2가\"\r\n    }, {\r\n      \"id\" : 22,\r\n      \"name\" : \"청진동\"\r\n    }, {\r\n      \"id\" : 23,\r\n      \"name\" : \"서린동\"\r\n    }, {\r\n      \"id\" : 24,\r\n      \"name\" : \"수송동\"\r\n    }, {\r\n      \"id\" : 25,\r\n      \"name\" : \"중학동\"\r\n    }, {\r\n      \"id\" : 26,\r\n      \"name\" : \"종로1가\"\r\n    }, {\r\n      \"id\" : 27,\r\n      \"name\" : \"공평동\"\r\n    }, {\r\n      \"id\" : 28,\r\n      \"name\" : \"관훈동\"\r\n    }, {\r\n      \"id\" : 29,\r\n      \"name\" : \"견지동\"\r\n    }, {\r\n      \"id\" : 30,\r\n      \"name\" : \"와룡동\"\r\n    }, {\r\n      \"id\" : 31,\r\n      \"name\" : \"권농동\"\r\n    }, {\r\n      \"id\" : 32,\r\n      \"name\" : \"운니동\"\r\n    }, {\r\n      \"id\" : 33,\r\n      \"name\" : \"익선동\"\r\n    }, {\r\n      \"id\" : 34,\r\n      \"name\" : \"경운동\"\r\n    }, {\r\n      \"id\" : 35,\r\n      \"name\" : \"관철동\"\r\n    }, {\r\n      \"id\" : 36,\r\n      \"name\" : \"인사동\"\r\n    }, {\r\n      \"id\" : 37,\r\n      \"name\" : \"낙원동\"\r\n    }, {\r\n      \"id\" : 38,\r\n      \"name\" : \"종로2가\"\r\n    }, {\r\n      \"id\" : 39,\r\n      \"name\" : \"팔판동\"\r\n    }, {\r\n      \"id\" : 40,\r\n      \"name\" : \"삼청동\"\r\n    }, {\r\n      \"id\" : 41,\r\n      \"name\" : \"안국동\"\r\n    }, {\r\n      \"id\" : 42,\r\n      \"name\" : \"소격동\"\r\n    }, {\r\n      \"id\" : 43,\r\n      \"name\" : \"화동\"\r\n    }, {\r\n      \"id\" : 44,\r\n      \"name\" : \"사간동\"\r\n    }, {\r\n      \"id\" : 45,\r\n      \"name\" : \"송현동\"\r\n    }, {\r\n      \"id\" : 46,\r\n      \"name\" : \"가회동\"\r\n    }, {\r\n      \"id\" : 47,\r\n      \"name\" : \"재동\"\r\n    }, {\r\n      \"id\" : 48,\r\n      \"name\" : \"계동\"\r\n    }, {\r\n      \"id\" : 49,\r\n      \"name\" : \"원서동\"\r\n    }, {\r\n      \"id\" : 50,\r\n      \"name\" : \"훈정동\"\r\n    }, {\r\n      \"id\" : 51,\r\n      \"name\" : \"묘동\"\r\n    }, {\r\n      \"id\" : 52,\r\n      \"name\" : \"봉익동\"\r\n    }, {\r\n      \"id\" : 53,\r\n      \"name\" : \"돈의동\"\r\n    }, {\r\n      \"id\" : 54,\r\n      \"name\" : \"장사동\"\r\n    }, {\r\n      \"id\" : 55,\r\n      \"name\" : \"관수동\"\r\n    }, {\r\n      \"id\" : 56,\r\n      \"name\" : \"종로3가\"\r\n    }, {\r\n      \"id\" : 57,\r\n      \"name\" : \"인의동\"\r\n    }, {\r\n      \"id\" : 58,\r\n      \"name\" : \"예지동\"\r\n    }, {\r\n      \"id\" : 59,\r\n      \"name\" : \"원남동\"\r\n    }, {\r\n      \"id\" : 60,\r\n      \"name\" : \"연지동\"\r\n    }, {\r\n      \"id\" : 61,\r\n      \"name\" : \"종로4가\"\r\n    }, {\r\n      \"id\" : 62,\r\n      \"name\" : \"효제동\"\r\n    }, {\r\n      \"id\" : 63,\r\n      \"name\" : \"종로5가\"\r\n    }, {\r\n      \"id\" : 64,\r\n      \"name\" : \"종로6가\"\r\n    }, {\r\n      \"id\" : 65,\r\n      \"name\" : \"이화동\"\r\n    }, {\r\n      \"id\" : 66,\r\n      \"name\" : \"연건동\"\r\n    }, {\r\n      \"id\" : 67,\r\n      \"name\" : \"충신동\"\r\n    }, {\r\n      \"id\" : 68,\r\n      \"name\" : \"동숭동\"\r\n    }, {\r\n      \"id\" : 69,\r\n      \"name\" : \"혜화동\"\r\n    }, {\r\n      \"id\" : 70,\r\n      \"name\" : \"명륜1가\"\r\n    }, {\r\n      \"id\" : 71,\r\n      \"name\" : \"명륜2가\"\r\n    }, {\r\n      \"id\" : 72,\r\n      \"name\" : \"명륜4가\"\r\n    }, {\r\n      \"id\" : 73,\r\n      \"name\" : \"명륜3가\"\r\n    }, {\r\n      \"id\" : 74,\r\n      \"name\" : \"창신동\"\r\n    }, {\r\n      \"id\" : 75,\r\n      \"name\" : \"숭인동\"\r\n    }, {\r\n      \"id\" : 76,\r\n      \"name\" : \"교남동\"\r\n    }, {\r\n      \"id\" : 77,\r\n      \"name\" : \"평동\"\r\n    }, {\r\n      \"id\" : 78,\r\n      \"name\" : \"송월동\"\r\n    }, {\r\n      \"id\" : 79,\r\n      \"name\" : \"홍파동\"\r\n    }, {\r\n      \"id\" : 80,\r\n      \"name\" : \"교북동\"\r\n    }, {\r\n      \"id\" : 81,\r\n      \"name\" : \"행촌동\"\r\n    }, {\r\n      \"id\" : 82,\r\n      \"name\" : \"구기동\"\r\n    }, {\r\n      \"id\" : 83,\r\n      \"name\" : \"평창동\"\r\n    }, {\r\n      \"id\" : 84,\r\n      \"name\" : \"부암동\"\r\n    }, {\r\n      \"id\" : 85,\r\n      \"name\" : \"홍지동\"\r\n    }, {\r\n      \"id\" : 86,\r\n      \"name\" : \"신영동\"\r\n    }, {\r\n      \"id\" : 87,\r\n      \"name\" : \"무악동\"\r\n    } ]\r\n  },\r\n  \"errorMessage\" : null\r\n}"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/posts/users/{userId}/participation-records" : {
+      "get" : {
+        "tags" : [ "모집글" ],
+        "summary" : "참여 기록 조회",
+        "description" : "참여 기록을 조회합니다.\n",
+        "operationId" : "[post] getUserParticipationRecords",
+        "parameters" : [ {
+          "name" : "userId",
+          "in" : "path",
+          "description" : "조회할 유저의 ID",
+          "required" : true,
+          "schema" : {
+            "type" : "number"
+          }
+        }, {
+          "name" : "key",
+          "in" : "query",
+          "description" : "검색 기준 id\n\n처음 요청 시 key 없이 요청 | 2번째 요청부터는 response.nextCursorRequest.key 값으로 요청\n\n더이상 가져올 값이 없을 시 nextCursorRequest.key로 -1 응답\n",
+          "required" : false,
+          "schema" : {
+            "type" : "number"
+          }
+        }, {
+          "name" : "size",
+          "in" : "query",
+          "description" : "한번에 가져올 크기",
+          "required" : false,
+          "schema" : {
+            "type" : "number",
+            "default" : 20
+          }
+        }, {
+          "name" : "condition",
+          "in" : "query",
+          "description" : "모집글 유형 (종류 : 전체 보기 - all, 작성한 글 - created, 참여한 글 - participated)",
+          "required" : false,
+          "schema" : {
+            "type" : "string",
+            "default" : "all"
+          }
+        }, {
+          "name" : "status",
+          "in" : "query",
+          "description" : "모집글 상태 (종류 : 전체 보기 - all, 모집중 - open, 모집 완료 - closed)",
+          "required" : false,
+          "schema" : {
+            "type" : "string",
+            "default" : "all"
+          }
+        }, {
+          "name" : "cityId",
+          "in" : "query",
+          "description" : "모집 장소 (시/군/구)",
+          "required" : false,
+          "schema" : {
+            "type" : "number"
+          }
+        }, {
+          "name" : "start",
+          "in" : "query",
+          "description" : "조회 시작일자, 기본 값: 3개월 전",
+          "required" : false,
+          "schema" : {
+            "type" : "string",
+            "default" : "2024-01-02"
+          }
+        }, {
+          "name" : "end",
+          "in" : "query",
+          "description" : "조회 종료일자, 기본 값: 현재 날짜",
+          "required" : false,
+          "schema" : {
+            "type" : "string",
+            "default" : "2024-04-02"
+          }
+        }, {
+          "name" : "Authorization",
+          "in" : "header",
+          "description" : "access token",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlJPTEVfVVNFUiIsInR5cGUiOiJhY2Nlc3MiLCJleHAiOjE3MTIyMDc1ODZ9.4rGX4glRltGNL3z8veXQ9AZnkBV2MOZ5u9M6m0ZDYHJjn988xxKHi-6x-VN7wWVHe8WiUxzWylNWfulw4rxmTQ"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200",
+            "content" : {
+              "application/json;charset=UTF-8" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/참여 기록 조회 응답 DTO"
+                },
+                "examples" : {
+                  "[post] getUserParticipationRecords" : {
+                    "value" : "{\r\n  \"status\" : 200,\r\n  \"response\" : {\r\n    \"nextCursorRequest\" : {\r\n      \"key\" : 3,\r\n      \"size\" : 20\r\n    },\r\n    \"posts\" : [ {\r\n      \"id\" : 7,\r\n      \"applicantId\" : 17,\r\n      \"title\" : \"불금 볼링 점수 내기 하실 분~\",\r\n      \"dueTime\" : \"2024-05-02T00:00:00\",\r\n      \"districtName\" : \"서울특별시 종로구 청운동\",\r\n      \"startTime\" : \"2024-02-02T00:00:00\",\r\n      \"currentNumber\" : 2,\r\n      \"isClose\" : true,\r\n      \"scores\" : [ {\r\n        \"id\" : 1,\r\n        \"score\" : 100,\r\n        \"scoreImage\" : null\r\n      } ],\r\n      \"members\" : [ {\r\n        \"id\" : 3,\r\n        \"name\" : \"이볼링\",\r\n        \"profileImage\" : null,\r\n        \"isRated\" : true\r\n      }, {\r\n        \"id\" : 1,\r\n        \"name\" : \"김볼링\",\r\n        \"profileImage\" : null,\r\n        \"isRated\" : false\r\n      } ]\r\n    }, {\r\n      \"id\" : 6,\r\n      \"applicantId\" : 16,\r\n      \"title\" : \"불금 볼링 점수 내기 하실 분~\",\r\n      \"dueTime\" : \"2024-05-02T00:00:00\",\r\n      \"districtName\" : \"서울특별시 종로구 청운동\",\r\n      \"startTime\" : \"2024-03-13T00:00:00\",\r\n      \"currentNumber\" : 2,\r\n      \"isClose\" : false,\r\n      \"scores\" : [ ],\r\n      \"members\" : [ {\r\n        \"id\" : 3,\r\n        \"name\" : \"이볼링\",\r\n        \"profileImage\" : null,\r\n        \"isRated\" : false\r\n      }, {\r\n        \"id\" : 1,\r\n        \"name\" : \"김볼링\",\r\n        \"profileImage\" : null,\r\n        \"isRated\" : false\r\n      } ]\r\n    }, {\r\n      \"id\" : 5,\r\n      \"applicantId\" : 5,\r\n      \"title\" : \"불금 볼링 점수 내기 하실 분~\",\r\n      \"dueTime\" : \"2024-05-02T00:00:00\",\r\n      \"districtName\" : \"서울특별시 종로구 신교동\",\r\n      \"startTime\" : \"2024-03-23T00:00:00\",\r\n      \"currentNumber\" : 1,\r\n      \"isClose\" : true,\r\n      \"scores\" : [ ],\r\n      \"members\" : [ {\r\n        \"id\" : 1,\r\n        \"name\" : \"김볼링\",\r\n        \"profileImage\" : null,\r\n        \"isRated\" : false\r\n      } ]\r\n    }, {\r\n      \"id\" : 4,\r\n      \"applicantId\" : 4,\r\n      \"title\" : \"불금 볼링 점수 내기 하실 분~\",\r\n      \"dueTime\" : \"2024-05-02T00:00:00\",\r\n      \"districtName\" : \"서울특별시 종로구 청운동\",\r\n      \"startTime\" : \"2024-03-28T00:00:00\",\r\n      \"currentNumber\" : 1,\r\n      \"isClose\" : false,\r\n      \"scores\" : [ ],\r\n      \"members\" : [ {\r\n        \"id\" : 1,\r\n        \"name\" : \"김볼링\",\r\n        \"profileImage\" : null,\r\n        \"isRated\" : false\r\n      } ]\r\n    }, {\r\n      \"id\" : 3,\r\n      \"applicantId\" : 3,\r\n      \"title\" : \"불금 볼링 점수 내기 하실 분~\",\r\n      \"dueTime\" : \"2024-05-02T00:00:00\",\r\n      \"districtName\" : \"서울특별시 종로구 신교동\",\r\n      \"startTime\" : \"2024-03-28T00:00:00\",\r\n      \"currentNumber\" : 2,\r\n      \"isClose\" : true,\r\n      \"scores\" : [ ],\r\n      \"members\" : [ {\r\n        \"id\" : 4,\r\n        \"name\" : \"박볼링\",\r\n        \"profileImage\" : null,\r\n        \"isRated\" : false\r\n      }, {\r\n        \"id\" : 1,\r\n        \"name\" : \"김볼링\",\r\n        \"profileImage\" : null,\r\n        \"isRated\" : false\r\n      } ]\r\n    } ]\r\n  },\r\n  \"errorMessage\" : null\r\n}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "bearerAuthJWT" : [ ]
+        } ]
+      }
+    },
+    "/api/posts/{postId}/applicants/check-status" : {
+      "get" : {
+        "tags" : [ "신청, 별점" ],
+        "summary" : "자신의 신청 상태 조회",
+        "description" : "해당 모집글에 대한 자신의 신청 상태를 확인 합니다.\n",
+        "operationId" : "[applicant] checkStatus",
+        "parameters" : [ {
+          "name" : "postId",
+          "in" : "path",
+          "description" : "조회할 모집글 id",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "Authorization",
+          "in" : "header",
+          "description" : "access token",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0Iiwicm9sZSI6IlJPTEVfVVNFUiIsInR5cGUiOiJhY2Nlc3MiLCJleHAiOjE3MTIyMDc1ODN9.oBkh0QdjkroS4oyiQiGgXyaEb_qB2rUrhqzfnou28A2eFmOygHEwHl-rRHIChrhRwikqAaf1g0MVWAefw4jcLg"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200",
+            "content" : {
+              "application/json;charset=UTF-8" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/자신의 신청 상태 응답 DTO"
+                },
+                "examples" : {
+                  "[applicant] checkStatus" : {
+                    "value" : "{\r\n  \"status\" : 200,\r\n  \"response\" : {\r\n    \"applicantId\" : 27,\r\n    \"isApplied\" : true,\r\n    \"isAccepted\" : true\r\n  },\r\n  \"errorMessage\" : null\r\n}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "bearerAuthJWT" : [ ]
+        } ]
+      }
+    },
+    "/api/posts/{postId}/applicants/{applicantId}" : {
+      "put" : {
+        "tags" : [ "신청, 별점" ],
+        "summary" : "모집자의 신청 수락",
+        "description" : "모집자가 신청을 승낙 할 수 있습니다.\n\nstatus를 수정 가능합니다. true: 승낙 / false: 승낙 대기\n\n거절은 DELETE 요청으로 신청을 완전히 삭제 해주시길 바랍니다.\n",
+        "operationId" : "[applicant] accept",
+        "parameters" : [ {
+          "name" : "postId",
+          "in" : "path",
+          "description" : "모집글 id",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "applicantId",
+          "in" : "path",
+          "description" : "수락할 신청의 Id",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "Authorization",
+          "in" : "header",
+          "description" : "access token",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzIiwicm9sZSI6IlJPTEVfVVNFUiIsInR5cGUiOiJhY2Nlc3MiLCJleHAiOjE3MTIyMDc1ODJ9.dSZHpQKg-tqP28LoAOKMZlrGO7PNi715niH63ODLnpIhOlK7Vqd8B8kTrYxmKIPKnGxY3kGdtuB9oc3YIfQd2w"
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json;charset=UTF-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/모집자의 신청 수락 요청 DTO"
+              },
+              "examples" : {
+                "[applicant] accept" : {
+                  "value" : "{\r\n  \"status\" : true\r\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "200",
+            "content" : {
+              "application/json;charset=UTF-8" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/성공 응답 DTO"
+                },
+                "examples" : {
+                  "[applicant] accept" : {
+                    "value" : "{\r\n  \"status\" : 200,\r\n  \"response\" : null,\r\n  \"errorMessage\" : null\r\n}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "bearerAuthJWT" : [ ]
+        } ]
+      },
+      "delete" : {
+        "tags" : [ "신청, 별점" ],
+        "summary" : "모집자의 신청 거절",
+        "description" : "모집자가 신청을 거절 합니다.\n",
+        "operationId" : "[applicant] reject",
+        "parameters" : [ {
+          "name" : "postId",
+          "in" : "path",
+          "description" : "모집글 id",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "applicantId",
+          "in" : "path",
+          "description" : "거절할 신청의 Id",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "Authorization",
+          "in" : "header",
+          "description" : "access token",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzIiwicm9sZSI6IlJPTEVfVVNFUiIsInR5cGUiOiJhY2Nlc3MiLCJleHAiOjE3MTIyMDc1ODN9.StmrIOz3SwPyQXtIjRUjRWBS7ofrj3JK3_zjyiForgXSoKPJ89h2zzLwNFQ2jkHoyNbhzFaDGZgDKVW3Xl-6jQ"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200",
+            "content" : {
+              "application/json;charset=UTF-8" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/성공 응답 DTO"
+                },
+                "examples" : {
+                  "[applicant] reject" : {
+                    "value" : "{\r\n  \"status\" : 200,\r\n  \"response\" : null,\r\n  \"errorMessage\" : null\r\n}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "bearerAuthJWT" : [ ]
+        } ]
+      }
+    },
+    "/api/posts/{postId}/comments/{commentId}" : {
+      "put" : {
+        "tags" : [ "댓글" ],
+        "summary" : "댓글 수정",
+        "description" : "댓글을 수정합니다.(대댓글의 경우도 commentId를 사용하여 해당 api를 사용합니다.)\n",
+        "operationId" : "[comment] edit",
+        "parameters" : [ {
+          "name" : "postId",
+          "in" : "path",
+          "description" : "댓글을 수정할 모집글 id",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "commentId",
+          "in" : "path",
+          "description" : "수정할 댓글 id",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "Authorization",
+          "in" : "header",
+          "description" : "access token",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzIiwicm9sZSI6IlJPTEVfVVNFUiIsInR5cGUiOiJhY2Nlc3MiLCJleHAiOjE3MTIyMDc1ODR9.wLW_ZmZV2_6zh4aRUOvbJNxtG98eY35Mrkd7rdCPiVYrcQ_B2KbZ16i0SVoq2whFiRJPZ7PNA3es2Zz14YMwig"
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json;charset=UTF-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/댓글 수정 요청 DTO"
+              },
+              "examples" : {
+                "[comment] edit" : {
+                  "value" : "{\r\n  \"content\" : \"아 그냥 취소할게요\"\r\n}"
+                },
+                "[comment] editNotMyComment" : {
+                  "value" : "{\r\n  \"content\" : \"아 그냥 취소할게요\"\r\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "200",
+            "content" : {
+              "application/json;charset=UTF-8" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/성공 응답 DTO"
+                },
+                "examples" : {
+                  "[comment] edit" : {
+                    "value" : "{\r\n  \"status\" : 200,\r\n  \"response\" : null,\r\n  \"errorMessage\" : null\r\n}"
+                  }
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "403",
+            "content" : {
+              "application/json;charset=UTF-8" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/실패 응답 DTO"
+                },
+                "examples" : {
+                  "[comment] editNotMyComment" : {
+                    "value" : "{\r\n  \"status\" : 403,\r\n  \"response\" : \"COMMENT_UPDATE_PERMISSION_DENIED\",\r\n  \"errorMessage\" : \"본인의 댓글만 수정 가능합니다.\"\r\n}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "bearerAuthJWT" : [ ]
+        } ]
+      },
+      "delete" : {
+        "tags" : [ "댓글" ],
+        "summary" : "댓글 삭제",
+        "description" : "댓글을 삭제합니다.(대댓글의 경우도 commentId를 사용하여 해당 api를 사용합니다.)\n\n삭제된 댓글이 대댓글을 가지고 있던 경우, 댓글 조회 api 호출 시 내용과 작성자가 지워진 채로 조회가 됩니다.\n- userId, userName -> null\n- content -> \"%s\"\n",
+        "operationId" : "[comment] delete",
+        "parameters" : [ {
+          "name" : "postId",
+          "in" : "path",
+          "description" : "댓글을 삭제할 모집글 id",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "commentId",
+          "in" : "path",
+          "description" : "삭제할 댓글 id",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "Authorization",
+          "in" : "header",
+          "description" : "access token",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlJPTEVfVVNFUiIsInR5cGUiOiJhY2Nlc3MiLCJleHAiOjE3MTIyMDc1ODR9.yr3vho5BHSuSnFR3EaeepVjtJkOFPFwjXxZ0BeTC9wktpAqM3H98oVlJOaOP5Dr3SfHvMKzrEzS6_5k2_p16dg"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200",
+            "content" : {
+              "application/json;charset=UTF-8" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/성공 응답 DTO"
+                },
+                "examples" : {
+                  "[comment] delete" : {
+                    "value" : "{\r\n  \"status\" : 200,\r\n  \"response\" : null,\r\n  \"errorMessage\" : null\r\n}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "bearerAuthJWT" : [ ]
+        } ]
+      }
+    },
+    "/api/posts/{postId}/scores/{scoreId}" : {
+      "put" : {
+        "tags" : [ "볼링 점수(스코어)" ],
+        "summary" : "점수 수정",
+        "description" : "자신의 점수에 대한 정보를 수정 가능합니다.\n\n요청에 포함된 image나 score에 대하여 기존 정보를 수정합니다.\n\n- 파일은 png, jpg, gif, jpeg만 업로드 가능합니다.\n- 파일은 10MB의 크기 제한이 존재합니다.\n\n현재 사용 플러그인이 multipart/form-data의 파라미터에 대한 문서화가 지원되지 않습니다. (try it out 불가능)\n\n아래 파라미터 중 변경 할 요소만 포함하여 보내면 됩니다.\n\n| Part  | Type   | Description                  |\n|-------|--------|------------------------------|\n| score | number | 볼링 점수 (1~300)             |\n| image | Binary | 점수판 사진 등 첨부 이미지 파일 |\n\n",
+        "operationId" : "[score] updateScore",
+        "parameters" : [ {
+          "name" : "postId",
+          "in" : "path",
+          "description" : "모집글 id",
+          "required" : true,
+          "schema" : {
+            "type" : "number"
+          }
+        }, {
+          "name" : "scoreId",
+          "in" : "path",
+          "description" : "점수 id",
+          "required" : true,
+          "schema" : {
+            "type" : "number"
+          }
+        }, {
+          "name" : "Authorization",
+          "in" : "header",
+          "description" : "access token",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlJPTEVfVVNFUiIsInR5cGUiOiJhY2Nlc3MiLCJleHAiOjE3MTIyMDc1ODh9.q_YrMpnJLGyaHAm8FzMPeGU6dBHmQambxfwHsqj7cdrbNzr7WFUF2cqJ5PVPwsiRXArvkEVn7s6XAfvv89RqsQ"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200",
+            "content" : {
+              "application/json;charset=UTF-8" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/성공 응답 DTO"
+                },
+                "examples" : {
+                  "[score] updateScore" : {
+                    "value" : "{\r\n  \"status\" : 200,\r\n  \"response\" : null,\r\n  \"errorMessage\" : null\r\n}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "bearerAuthJWT" : [ ]
+        } ]
+      },
+      "delete" : {
+        "tags" : [ "볼링 점수(스코어)" ],
+        "summary" : "점수 삭제",
+        "description" : "점수 행을 완전히 삭제합니다.\n",
+        "operationId" : "[score] deleteScore",
+        "parameters" : [ {
+          "name" : "postId",
+          "in" : "path",
+          "description" : "모집글 id",
+          "required" : true,
+          "schema" : {
+            "type" : "number"
+          }
+        }, {
+          "name" : "scoreId",
+          "in" : "path",
+          "description" : "점수 id",
+          "required" : true,
+          "schema" : {
+            "type" : "number"
+          }
+        }, {
+          "name" : "Authorization",
+          "in" : "header",
+          "description" : "access token",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlJPTEVfVVNFUiIsInR5cGUiOiJhY2Nlc3MiLCJleHAiOjE3MTIyMDc1ODh9.q_YrMpnJLGyaHAm8FzMPeGU6dBHmQambxfwHsqj7cdrbNzr7WFUF2cqJ5PVPwsiRXArvkEVn7s6XAfvv89RqsQ"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200",
+            "content" : {
+              "application/json;charset=UTF-8" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/성공 응답 DTO"
+                },
+                "examples" : {
+                  "[score] deleteScore" : {
+                    "value" : "{\r\n  \"status\" : 200,\r\n  \"response\" : null,\r\n  \"errorMessage\" : null\r\n}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "bearerAuthJWT" : [ ]
+        } ]
+      }
+    },
+    "/api/posts/{postId}/applicants/{applicantId}/rating" : {
+      "post" : {
+        "tags" : [ "신청, 별점" ],
+        "summary" : "참여자에게 별점 등록",
+        "description" : "같은 모집글에 참여한 사람들에게 별점을 등록할 수 있습니다.\n\n별점은 모집완료(모집글의 is_close가 true) 후 게임 시작 시간(start_time)이 지나야 등록 가능합니다.\n",
+        "operationId" : "[applicant] rateUser",
+        "parameters" : [ {
+          "name" : "postId",
+          "in" : "path",
+          "description" : "모집글 id",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "applicantId",
+          "in" : "path",
+          "description" : "자신의 신청 id",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "Authorization",
+          "in" : "header",
+          "description" : "access token",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0Iiwicm9sZSI6IlJPTEVfVVNFUiIsInR5cGUiOiJhY2Nlc3MiLCJleHAiOjE3MTIyMDc1ODN9.oBkh0QdjkroS4oyiQiGgXyaEb_qB2rUrhqzfnou28A2eFmOygHEwHl-rRHIChrhRwikqAaf1g0MVWAefw4jcLg"
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json;charset=UTF-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/참여자에게 별점 등록 요청 DTO"
+              },
+              "examples" : {
+                "[applicant] rateUser" : {
+                  "value" : "{\r\n  \"targetId\" : 1,\r\n  \"rating\" : 4\r\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "200",
+            "content" : {
+              "application/json;charset=UTF-8" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/성공 응답 DTO"
+                },
+                "examples" : {
+                  "[applicant] rateUser" : {
+                    "value" : "{\r\n  \"status\" : 200,\r\n  \"response\" : null,\r\n  \"errorMessage\" : null\r\n}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "bearerAuthJWT" : [ ]
+        } ]
+      }
+    },
+    "/api/posts/{postId}/comments/{commentId}/reply" : {
+      "post" : {
+        "tags" : [ "댓글" ],
+        "summary" : "대댓글 등록",
+        "description" : "댓글에 대댓글을 등록합니다.\n",
+        "operationId" : "[comment] createReply",
+        "parameters" : [ {
+          "name" : "postId",
+          "in" : "path",
+          "description" : "대댓글을 등록할 모집글 id",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "commentId",
+          "in" : "path",
+          "description" : "대댓글을 등록할 댓글 id",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "Authorization",
+          "in" : "header",
+          "description" : "access token",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlJPTEVfVVNFUiIsInR5cGUiOiJhY2Nlc3MiLCJleHAiOjE3MTIyMDc1ODR9.yr3vho5BHSuSnFR3EaeepVjtJkOFPFwjXxZ0BeTC9wktpAqM3H98oVlJOaOP5Dr3SfHvMKzrEzS6_5k2_p16dg"
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json;charset=UTF-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/댓글 등록 요청 DTO"
+              },
+              "examples" : {
+                "[comment] createReply" : {
+                  "value" : "{\r\n  \"content\" : \"확인 해볼게요!\"\r\n}"
+                },
+                "[comment] createReplyAtDeleted" : {
+                  "value" : "{\r\n  \"content\" : \"확인 해볼게요!\"\r\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "200",
+            "content" : {
+              "application/json;charset=UTF-8" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/생성 응답 DTO"
+                },
+                "examples" : {
+                  "[comment] createReply" : {
+                    "value" : "{\r\n  \"status\" : 200,\r\n  \"response\" : {\r\n    \"id\" : 9\r\n  },\r\n  \"errorMessage\" : null\r\n}"
+                  }
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "404",
+            "content" : {
+              "application/json;charset=UTF-8" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/실패 응답 DTO"
+                },
+                "examples" : {
+                  "[comment] createReplyAtDeleted" : {
+                    "value" : "{\r\n  \"status\" : 404,\r\n  \"response\" : \"COMMENT_NOT_FOUND\",\r\n  \"errorMessage\" : \"존재하지 않는 댓글입니다.\"\r\n}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "bearerAuthJWT" : [ ]
+        } ]
+      }
+    },
+    "/api/posts/{postId}/scores/{scoreId}/image" : {
+      "delete" : {
+        "tags" : [ "볼링 점수(스코어)" ],
+        "summary" : "점수 이미지 삭제",
+        "description" : "점수는 유지한 채 이미지만 삭제합니다.\n",
+        "operationId" : "[score] deleteScoreImage",
+        "parameters" : [ {
+          "name" : "postId",
+          "in" : "path",
+          "description" : "모집글 id",
+          "required" : true,
+          "schema" : {
+            "type" : "number"
+          }
+        }, {
+          "name" : "scoreId",
+          "in" : "path",
+          "description" : "점수 id",
+          "required" : true,
+          "schema" : {
+            "type" : "number"
+          }
+        }, {
+          "name" : "Authorization",
+          "in" : "header",
+          "description" : "access token",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlJPTEVfVVNFUiIsInR5cGUiOiJhY2Nlc3MiLCJleHAiOjE3MTIyMDc1ODh9.q_YrMpnJLGyaHAm8FzMPeGU6dBHmQambxfwHsqj7cdrbNzr7WFUF2cqJ5PVPwsiRXArvkEVn7s6XAfvv89RqsQ"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200",
+            "content" : {
+              "application/json;charset=UTF-8" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/성공 응답 DTO"
+                },
+                "examples" : {
+                  "[score] deleteScoreImage" : {
+                    "value" : "{\r\n  \"status\" : 200,\r\n  \"response\" : null,\r\n  \"errorMessage\" : null\r\n}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "bearerAuthJWT" : [ ]
+        } ]
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "일대일 대화방 쪽지 조회 응답 DTO" : {
+        "title" : "일대일 대화방 쪽지 조회 응답 DTO",
+        "required" : [ "status" ],
+        "type" : "object",
+        "properties" : {
+          "response" : {
+            "required" : [ "nextCursorRequest", "opponentUserName", "opponentUserProfileImage" ],
+            "type" : "object",
+            "properties" : {
+              "opponentUserName" : {
+                "type" : "string",
+                "description" : "쪽지 상대 유저 이름"
+              },
+              "messages" : {
+                "type" : "array",
+                "items" : {
+                  "required" : [ "content", "id", "isRead", "isReceive", "time" ],
+                  "type" : "object",
+                  "properties" : {
+                    "isRead" : {
+                      "type" : "boolean",
+                      "description" : "쪽지대상이  읽었는지"
+                    },
+                    "isReceive" : {
+                      "type" : "boolean",
+                      "description" : "내가 받은 쪽지인지"
+                    },
+                    "time" : {
+                      "type" : "string",
+                      "description" : "쪽지 송신시간"
+                    },
+                    "id" : {
+                      "type" : "number",
+                      "description" : "쪽지 ID"
+                    },
+                    "content" : {
+                      "type" : "string",
+                      "description" : "쪽지 내용"
+                    }
+                  }
+                }
+              },
+              "nextCursorRequest" : {
+                "required" : [ "key", "size" ],
+                "type" : "object",
+                "properties" : {
+                  "size" : {
+                    "type" : "number",
+                    "description" : "다음 요청 cursor의 size"
+                  },
+                  "key" : {
+                    "type" : "number",
+                    "description" : "다음 요청 cursor의 key"
+                  }
+                },
+                "description" : "다음 요청 cursor 정보(받은 값 그대로 다음 요청에 사용할 것)"
+              }
+            },
+            "description" : "응답 body"
+          },
+          "errorMessage" : {
+            "type" : "string",
+            "description" : "에러 메시지",
+            "nullable" : true
+          },
+          "status" : {
+            "type" : "number",
+            "description" : "응답 상태 정보"
+          }
+        }
+      },
+      "댓글 수정 요청 DTO" : {
+        "title" : "댓글 수정 요청 DTO",
+        "required" : [ "content" ],
+        "type" : "object",
+        "properties" : {
+          "content" : {
+            "type" : "string",
+            "description" : "수정할 댓글 내용"
+          }
+        }
+      },
+      "모집글 상세 조회 응답 DTO" : {
+        "title" : "모집글 상세 조회 응답 DTO",
+        "required" : [ "status" ],
+        "type" : "object",
+        "properties" : {
+          "response" : {
+            "type" : "object",
+            "properties" : {
+              "post" : {
+                "required" : [ "content", "createdAt", "currentNumber", "districtName", "dueTime", "editedAt", "id", "isClose", "startTime", "title", "userId", "userName", "viewCount" ],
+                "type" : "object",
+                "properties" : {
+                  "isClose" : {
+                    "type" : "boolean",
+                    "description" : "모집글 마감 여부"
+                  },
+                  "districtName" : {
+                    "type" : "string",
+                    "description" : "모집글 행정 구역"
+                  },
+                  "profileImage" : {
+                    "type" : "number",
+                    "description" : "조회된 모집글 작성자 프로필 사진 경로 | 사진이 없을 경우 null",
+                    "nullable" : true
+                  },
+                  "dueTime" : {
+                    "type" : "string",
+                    "description" : "모집 마감기한"
+                  },
+                  "userName" : {
+                    "type" : "string",
+                    "description" : "모집글 작성자 이름"
+                  },
+                  "title" : {
+                    "type" : "string",
+                    "description" : "모집글 제목"
+                  },
+                  "userId" : {
+                    "type" : "number",
+                    "description" : "모집글 작성자 ID"
+                  },
+                  "content" : {
+                    "type" : "string",
+                    "description" : "모집글 내용"
+                  },
+                  "createdAt" : {
+                    "type" : "string",
+                    "description" : "모집글 생성 시간"
+                  },
+                  "editedAt" : {
+                    "type" : "string",
+                    "description" : "모집글 수정 시간 "
+                  },
+                  "startTime" : {
+                    "type" : "string",
+                    "description" : "게임 예정 일시"
+                  },
+                  "viewCount" : {
+                    "type" : "number",
+                    "description" : "조회 수"
+                  },
+                  "currentNumber" : {
+                    "type" : "number",
+                    "description" : "현재 모집 확정 인원 수"
+                  },
+                  "id" : {
+                    "type" : "number",
+                    "description" : "모집글 ID"
+                  }
+                }
+              }
+            },
+            "description" : "응답 body"
+          },
+          "errorMessage" : {
+            "type" : "string",
+            "description" : "에러 메시지",
+            "nullable" : true
+          },
+          "status" : {
+            "type" : "number",
+            "description" : "응답 상태 정보"
+          }
+        }
+      },
+      "생성 응답 DTO" : {
+        "title" : "생성 응답 DTO",
+        "required" : [ "status" ],
+        "type" : "object",
+        "properties" : {
+          "response" : {
+            "required" : [ "id" ],
+            "type" : "object",
+            "properties" : {
+              "id" : {
+                "type" : "number",
+                "description" : "생성된 데이터의 id"
+              }
+            },
+            "description" : "응답 body"
+          },
+          "errorMessage" : {
+            "type" : "string",
+            "description" : "에러 메시지",
+            "nullable" : true
+          },
+          "status" : {
+            "type" : "number",
+            "description" : "응답 상태 정보"
+          }
+        }
+      },
+      "실패 응답 DTO" : {
+        "title" : "실패 응답 DTO",
+        "required" : [ "errorMessage", "response", "status" ],
+        "type" : "object",
+        "properties" : {
+          "response" : {
+            "type" : "string",
+            "description" : "에러 코드"
+          },
+          "errorMessage" : {
+            "type" : "string",
+            "description" : "에러 메시지"
+          },
+          "status" : {
+            "type" : "number",
+            "description" : "응답 상태 정보"
+          }
+        }
+      },
+      "사용자 목록 조회 응답 DTO" : {
+        "title" : "사용자 목록 조회 응답 DTO",
+        "required" : [ "status" ],
+        "type" : "object",
+        "properties" : {
+          "response" : {
+            "required" : [ "nextCursorRequest" ],
+            "type" : "object",
+            "properties" : {
+              "nextCursorRequest" : {
+                "required" : [ "key", "size" ],
+                "type" : "object",
+                "properties" : {
+                  "size" : {
+                    "type" : "number",
+                    "description" : "다음 요청 cursor의 size"
+                  },
+                  "key" : {
+                    "type" : "number",
+                    "description" : "다음 요청 cursor의 key"
+                  }
+                },
+                "description" : "다음 요청 cursor 정보(받은 값 그대로 다음 요청에 사용할 것)"
+              },
+              "users" : {
+                "type" : "array",
+                "items" : {
+                  "required" : [ "id", "name", "rating" ],
+                  "type" : "object",
+                  "properties" : {
+                    "rating" : {
+                      "type" : "number",
+                      "description" : "사용자의 별점"
+                    },
+                    "name" : {
+                      "type" : "string",
+                      "description" : "이름(닉네임)"
+                    },
+                    "profileImage" : {
+                      "type" : "string",
+                      "description" : "사용자의 프로필 이미지 링크 | 이미지 설정 안한 경우 null",
+                      "nullable" : true
+                    },
+                    "id" : {
+                      "type" : "number",
+                      "description" : "사용자의 ID(PK)"
+                    }
+                  }
+                }
+              }
+            },
+            "description" : "응답 body"
+          },
+          "errorMessage" : {
+            "type" : "string",
+            "description" : "에러 메시지",
+            "nullable" : true
+          },
+          "status" : {
+            "type" : "number",
+            "description" : "응답 상태 정보"
+          }
+        }
+      },
+      "행정 구역 정보 조회 응답 DTO" : {
+        "title" : "행정 구역 정보 조회 응답 DTO",
+        "required" : [ "status" ],
+        "type" : "object",
+        "properties" : {
+          "response" : {
+            "required" : [ "cityId", "cityName", "countryId", "countryName", "name" ],
+            "type" : "object",
+            "properties" : {
+              "cityName" : {
+                "type" : "string",
+                "description" : "시/도(city)의 이름"
+              },
+              "name" : {
+                "type" : "string",
+                "description" : "읍/면/동(district)의 이름"
+              },
+              "countryName" : {
+                "type" : "string",
+                "description" : "시/군/구(country)의 이름"
+              },
+              "cityId" : {
+                "type" : "number",
+                "description" : "시/도(city)의 ID"
+              },
+              "countryId" : {
+                "type" : "number",
+                "description" : "시/군/구(country)의 ID"
+              }
+            },
+            "description" : "응답 body"
+          },
+          "errorMessage" : {
+            "type" : "string",
+            "description" : "에러 메시지",
+            "nullable" : true
+          },
+          "status" : {
+            "type" : "number",
+            "description" : "응답 상태 정보"
+          }
+        }
+      },
+      "비밀번호 찾기 - 본인 인증 메일 발송 요청 DTO" : {
+        "title" : "비밀번호 찾기 - 본인 인증 메일 발송 요청 DTO",
+        "required" : [ "token" ],
+        "type" : "object",
+        "properties" : {
+          "token" : {
+            "type" : "string",
+            "description" : "메일로 발송된 링크에 첨부된 토큰"
+          }
+        }
+      },
+      "모집글 마감 요청 DTO" : {
+        "title" : "모집글 마감 요청 DTO",
+        "required" : [ "isClose" ],
+        "type" : "object",
+        "properties" : {
+          "isClose" : {
+            "type" : "boolean",
+            "description" : "마감 여부"
+          }
+        }
+      },
+      "성공 응답 DTO" : {
+        "title" : "성공 응답 DTO",
+        "required" : [ "status" ],
+        "type" : "object",
+        "properties" : {
+          "response" : {
+            "type" : "string",
+            "description" : "응답 body",
+            "nullable" : true
+          },
+          "errorMessage" : {
+            "type" : "string",
+            "description" : "에러 메시지",
+            "nullable" : true
+          },
+          "status" : {
+            "type" : "number",
+            "description" : "응답 상태 정보"
+          }
+        }
+      },
+      "메일 인증 요청 DTO" : {
+        "title" : "메일 인증 요청 DTO",
+        "required" : [ "token" ],
+        "type" : "object",
+        "properties" : {
+          "token" : {
+            "type" : "string",
+            "description" : "이메일로 제공 받은 인증 토큰"
+          }
+        }
+      },
+      "자신의 신청 상태 응답 DTO" : {
+        "title" : "자신의 신청 상태 응답 DTO",
+        "required" : [ "status" ],
+        "type" : "object",
+        "properties" : {
+          "response" : {
+            "required" : [ "isAccepted", "isApplied" ],
+            "type" : "object",
+            "properties" : {
+              "isAccepted" : {
+                "type" : "boolean",
+                "description" : "승낙 상태(true: 승낙됨 / false: 승낙되지 않음"
+              },
+              "isApplied" : {
+                "type" : "boolean",
+                "description" : "신청 상태(true: 신청됨 / false: 신청되지 않음"
+              },
+              "applicantId" : {
+                "type" : "number",
+                "description" : "신청의 ID(PK)",
+                "nullable" : true
+              }
+            },
+            "description" : "응답 body"
+          },
+          "errorMessage" : {
+            "type" : "string",
+            "description" : "에러 메시지",
+            "nullable" : true
+          },
+          "status" : {
+            "type" : "number",
+            "description" : "응답 상태 정보"
+          }
+        }
+      },
+      "로그인 요청 DTO" : {
+        "title" : "로그인 요청 DTO",
+        "required" : [ "email", "password" ],
+        "type" : "object",
+        "properties" : {
+          "password" : {
+            "type" : "string",
+            "description" : "로그인 비밀번호"
+          },
+          "email" : {
+            "type" : "string",
+            "description" : "로그인 이메일"
+          }
+        }
+      },
+      "점수 조회 응답 DTO" : {
+        "title" : "점수 조회 응답 DTO",
+        "required" : [ "status" ],
+        "type" : "object",
+        "properties" : {
+          "response" : {
+            "required" : [ "scores" ],
+            "type" : "object",
+            "properties" : {
+              "scores" : {
+                "type" : "array",
+                "description" : "점수 목록",
+                "items" : {
+                  "required" : [ "id", "scoreNum" ],
+                  "type" : "object",
+                  "properties" : {
+                    "scoreImage" : {
+                      "type" : "string",
+                      "description" : "점수 첨부 이미지 경로",
+                      "nullable" : true
+                    },
+                    "scoreNum" : {
+                      "type" : "number",
+                      "description" : "볼링 점수"
+                    },
+                    "id" : {
+                      "type" : "number",
+                      "description" : "점수의 ID(PK)"
+                    }
+                  }
+                }
+              }
+            },
+            "description" : "응답 body"
+          },
+          "errorMessage" : {
+            "type" : "string",
+            "description" : "에러 메시지",
+            "nullable" : true
+          },
+          "status" : {
+            "type" : "number",
+            "description" : "응답 상태 정보"
+          }
+        }
+      },
+      "비밀번호 변경 요청 DTO" : {
+        "title" : "비밀번호 변경 요청 DTO",
+        "required" : [ "newPassword", "password" ],
+        "type" : "object",
+        "properties" : {
+          "password" : {
+            "type" : "string",
+            "description" : "기존 비밀번호"
+          },
+          "newPassword" : {
+            "type" : "string",
+            "description" : "새로운 비밀번호"
+          }
+        }
+      },
+      "신청자 목록 조회 응답 DTO" : {
+        "title" : "신청자 목록 조회 응답 DTO",
+        "required" : [ "status" ],
+        "type" : "object",
+        "properties" : {
+          "response" : {
+            "required" : [ "applicantNumber", "nextCursorRequest" ],
+            "type" : "object",
+            "properties" : {
+              "applicants" : {
+                "type" : "array",
+                "items" : {
+                  "required" : [ "id", "status" ],
+                  "type" : "object",
+                  "properties" : {
+                    "id" : {
+                      "type" : "number",
+                      "description" : "신청의 ID(PK)"
+                    },
+                    "user" : {
+                      "required" : [ "id", "name", "rating" ],
+                      "type" : "object",
+                      "properties" : {
+                        "rating" : {
+                          "type" : "number",
+                          "description" : "신청자의 별점"
+                        },
+                        "name" : {
+                          "type" : "string",
+                          "description" : "신청자의 닉네임"
+                        },
+                        "profileImage" : {
+                          "type" : "string",
+                          "description" : "신청자의 프로필 이미지 경로",
+                          "nullable" : true
+                        },
+                        "id" : {
+                          "type" : "number",
+                          "description" : "신청자의 ID(PK)"
+                        }
+                      }
+                    },
+                    "status" : {
+                      "type" : "boolean",
+                      "description" : "신청 수락 여부 | true: 수락, false: 수락 대기"
+                    }
+                  }
+                }
+              },
+              "nextCursorRequest" : {
+                "required" : [ "key", "size" ],
+                "type" : "object",
+                "properties" : {
+                  "size" : {
+                    "type" : "number",
+                    "description" : "다음 요청 cursor의 size"
+                  },
+                  "key" : {
+                    "type" : "number",
+                    "description" : "다음 요청 cursor의 key"
+                  }
+                },
+                "description" : "다음 요청 cursor 정보(받은 값 그대로 다음 요청에 사용할 것)"
+              },
+              "applicantNumber" : {
+                "type" : "number",
+                "description" : "총 신청자의 수"
+              }
+            },
+            "description" : "응답 body"
+          },
+          "errorMessage" : {
+            "type" : "string",
+            "description" : "에러 메시지",
+            "nullable" : true
+          },
+          "status" : {
+            "type" : "number",
+            "description" : "응답 상태 정보"
+          }
+        }
+      },
+      "댓글 등록 요청 DTO" : {
+        "title" : "댓글 등록 요청 DTO",
+        "required" : [ "content" ],
+        "type" : "object",
+        "properties" : {
+          "content" : {
+            "type" : "string",
+            "description" : "등록할 댓글 내용"
+          }
+        }
+      },
+      "사용자 기록(경기수, 평균점수) 조회 응답 DTO" : {
+        "title" : "사용자 기록(경기수, 평균점수) 조회 응답 DTO",
+        "required" : [ "status" ],
+        "type" : "object",
+        "properties" : {
+          "response" : {
+            "required" : [ "average", "game", "maximum", "minimum", "name" ],
+            "type" : "object",
+            "properties" : {
+              "average" : {
+                "type" : "number",
+                "description" : "볼링 게임 평균 점수(참여 기록 없을 시 0)"
+              },
+              "game" : {
+                "type" : "number",
+                "description" : "참여 게임 수"
+              },
+              "name" : {
+                "type" : "string",
+                "description" : "사용자의 이름(닉네임)"
+              },
+              "maximum" : {
+                "type" : "number",
+                "description" : "볼링 게임 최고 점수(참여 기록 없을 시 0)"
+              },
+              "minimum" : {
+                "type" : "number",
+                "description" : "볼링 게임 최저 점수(참여 기록 없을 시 0)"
+              }
+            },
+            "description" : "응답 body"
+          },
+          "errorMessage" : {
+            "type" : "string",
+            "description" : "에러 메시지",
+            "nullable" : true
+          },
+          "status" : {
+            "type" : "number",
+            "description" : "응답 상태 정보"
+          }
+        }
+      },
+      "읍-면-동 조회 응답 DTO" : {
+        "title" : "읍-면-동 조회 응답 DTO",
+        "required" : [ "status" ],
+        "type" : "object",
+        "properties" : {
+          "response" : {
+            "required" : [ "districts" ],
+            "type" : "object",
+            "properties" : {
+              "districts" : {
+                "type" : "array",
+                "description" : "읍/면/동(district)정보 list",
+                "items" : {
+                  "required" : [ "id", "name" ],
+                  "type" : "object",
+                  "properties" : {
+                    "name" : {
+                      "type" : "string",
+                      "description" : "읍/면/동(district)의 이름"
+                    },
+                    "id" : {
+                      "type" : "number",
+                      "description" : "읍/면/동(district)의 ID"
+                    }
+                  }
+                }
+              }
+            },
+            "description" : "응답 body"
+          },
+          "errorMessage" : {
+            "type" : "string",
+            "description" : "에러 메시지",
+            "nullable" : true
+          },
+          "status" : {
+            "type" : "number",
+            "description" : "응답 상태 정보"
+          }
+        }
+      },
+      "참여 기록 조회 응답 DTO" : {
+        "title" : "참여 기록 조회 응답 DTO",
+        "required" : [ "status" ],
+        "type" : "object",
+        "properties" : {
+          "response" : {
+            "required" : [ "nextCursorRequest" ],
+            "type" : "object",
+            "properties" : {
+              "nextCursorRequest" : {
+                "required" : [ "key", "size" ],
+                "type" : "object",
+                "properties" : {
+                  "size" : {
+                    "type" : "number",
+                    "description" : "다음 요청 cursor의 size"
+                  },
+                  "key" : {
+                    "type" : "number",
+                    "description" : "다음 요청 cursor의 key"
+                  }
+                },
+                "description" : "다음 요청 cursor 정보(받은 값 그대로 다음 요청에 사용할 것)"
+              },
+              "posts" : {
+                "type" : "array",
+                "items" : {
+                  "required" : [ "applicantId", "currentNumber", "districtName", "dueTime", "id", "isClose", "members", "scores", "startTime", "title" ],
+                  "type" : "object",
+                  "properties" : {
+                    "isClose" : {
+                      "type" : "boolean",
+                      "description" : "모집글 마감 여부"
+                    },
+                    "districtName" : {
+                      "type" : "string",
+                      "description" : "지역"
+                    },
+                    "scores" : {
+                      "type" : "array",
+                      "description" : "스코어 정보",
+                      "items" : {
+                        "type" : "object",
+                        "properties" : {
+                          "score" : {
+                            "type" : "number",
+                            "description" : "등록된 사용자 스코어",
+                            "nullable" : true
+                          },
+                          "scoreImage" : {
+                            "type" : "string",
+                            "description" : "등록된 사용자 스코어 사진 경로 | 사진이 없을 경우 null",
+                            "nullable" : true
+                          },
+                          "id" : {
+                            "type" : "number",
+                            "description" : "스코어 ID",
+                            "nullable" : true
+                          }
+                        }
+                      }
+                    },
+                    "members" : {
+                      "type" : "array",
+                      "description" : "모집 멤버 정보",
+                      "items" : {
+                        "type" : "object",
+                        "properties" : {
+                          "isRated" : {
+                            "type" : "boolean",
+                            "description" : "모집 멤버 별점 입력 여부",
+                            "nullable" : true
+                          },
+                          "name" : {
+                            "type" : "string",
+                            "description" : "모집 멤버 이름",
+                            "nullable" : true
+                          },
+                          "profileImage" : {
+                            "type" : "string",
+                            "description" : "모집 멤버 프로필 사진 경로 | 사진이 없을 경우 null",
+                            "nullable" : true
+                          },
+                          "id" : {
+                            "type" : "number",
+                            "description" : "모집 멤버 ID",
+                            "nullable" : true
+                          }
+                        }
+                      }
+                    },
+                    "startTime" : {
+                      "type" : "string",
+                      "description" : "게임 예정 일시 "
+                    },
+                    "currentNumber" : {
+                      "type" : "number",
+                      "description" : "현재 모집 확정 인원 수"
+                    },
+                    "id" : {
+                      "type" : "number",
+                      "description" : "모집글 ID"
+                    },
+                    "dueTime" : {
+                      "type" : "string",
+                      "description" : "게임 마감 일시 "
+                    },
+                    "title" : {
+                      "type" : "string",
+                      "description" : "모집글 제목 "
+                    },
+                    "applicantId" : {
+                      "type" : "number",
+                      "description" : "조회하고자 하는 유저의 ID가 모집글에 신청한 ID"
+                    }
+                  }
+                }
+              }
+            },
+            "description" : "응답 body"
+          },
+          "errorMessage" : {
+            "type" : "string",
+            "description" : "에러 메시지",
+            "nullable" : true
+          },
+          "status" : {
+            "type" : "number",
+            "description" : "응답 상태 정보"
+          }
+        }
+      },
+      "쪽지 보내기 요청 DTO" : {
+        "title" : "쪽지 보내기 요청 DTO",
+        "required" : [ "content" ],
+        "type" : "object",
+        "properties" : {
+          "content" : {
+            "type" : "string",
+            "description" : "송신할 쪽지 내용"
+          }
+        }
+      },
+      "시-도 조회 응답 DTO" : {
+        "title" : "시-도 조회 응답 DTO",
+        "required" : [ "status" ],
+        "type" : "object",
+        "properties" : {
+          "response" : {
+            "required" : [ "cities" ],
+            "type" : "object",
+            "properties" : {
+              "cities" : {
+                "type" : "array",
+                "description" : "시/도(city)정보 list",
+                "items" : {
+                  "required" : [ "id", "name" ],
+                  "type" : "object",
+                  "properties" : {
+                    "name" : {
+                      "type" : "string",
+                      "description" : "시/도(city)의 이름"
+                    },
+                    "id" : {
+                      "type" : "number",
+                      "description" : "시/도(city)의 ID"
+                    }
+                  }
+                }
+              }
+            },
+            "description" : "응답 body"
+          },
+          "errorMessage" : {
+            "type" : "string",
+            "description" : "에러 메시지",
+            "nullable" : true
+          },
+          "status" : {
+            "type" : "number",
+            "description" : "응답 상태 정보"
+          }
+        }
+      },
+      "사용자 상세 조회 응답 DTO" : {
+        "title" : "사용자 상세 조회 응답 DTO",
+        "required" : [ "status" ],
+        "type" : "object",
+        "properties" : {
+          "response" : {
+            "required" : [ "address", "averageScore", "districtId", "email", "id", "name", "rating", "verification" ],
+            "type" : "object",
+            "properties" : {
+              "address" : {
+                "type" : "string",
+                "description" : "설정한 기본 지역의 전체 명칭"
+              },
+              "districtId" : {
+                "type" : "number",
+                "description" : "사용자가 설정한 기본 지역(행정구역 id)"
+              },
+              "rating" : {
+                "type" : "number",
+                "description" : "별점(매너 점수) | 별점 받은 적 없는 경우 0"
+              },
+              "name" : {
+                "type" : "string",
+                "description" : "사용자의 이름(닉네임)"
+              },
+              "profileImage" : {
+                "type" : "string",
+                "description" : "사용자의 프로필 이미지 링크 | 이미지 설정 안한 경우 null",
+                "nullable" : true
+              },
+              "id" : {
+                "type" : "number",
+                "description" : "사용자의 id(PK)"
+              },
+              "verification" : {
+                "type" : "boolean",
+                "description" : "이메일 인증 여부"
+              },
+              "email" : {
+                "type" : "string",
+                "description" : "사용자의 이메일"
+              },
+              "averageScore" : {
+                "type" : "number",
+                "description" : "볼링 게임 평균 점수"
+              }
+            },
+            "description" : "응답 body"
+          },
+          "errorMessage" : {
+            "type" : "string",
+            "description" : "에러 메시지",
+            "nullable" : true
+          },
+          "status" : {
+            "type" : "number",
+            "description" : "응답 상태 정보"
+          }
+        }
+      },
+      "모집자의 신청 수락 요청 DTO" : {
+        "title" : "모집자의 신청 수락 요청 DTO",
+        "required" : [ "status" ],
+        "type" : "object",
+        "properties" : {
+          "status" : {
+            "type" : "boolean",
+            "description" : "변경하고자 하는 신청의 상태 | true: 승낙, false: 승낙 대기"
+          }
+        }
+      },
+      "회원가입 요청 DTO" : {
+        "title" : "회원가입 요청 DTO",
+        "required" : [ "districtId", "email", "name", "password" ],
+        "type" : "object",
+        "properties" : {
+          "password" : {
+            "type" : "string",
+            "description" : "비밀번호 | 영문,숫자, 특수문자가 모두 포함 / 8자에서 64자 이내"
+          },
+          "districtId" : {
+            "type" : "number",
+            "description" : "행정 구역 ID"
+          },
+          "name" : {
+            "type" : "string",
+            "description" : "닉네임 | 한글, 영문, 숫자만 가능/ 최대 20글자"
+          },
+          "email" : {
+            "type" : "string",
+            "description" : "이메일 | 이메일(^[\\w.%+-]+@[\\w.-]+\\.[A-Za-z]{2,}$) 최대 100자"
+          }
+        }
+      },
+      "시-군-구 조회 응답 DTO" : {
+        "title" : "시-군-구 조회 응답 DTO",
+        "required" : [ "status" ],
+        "type" : "object",
+        "properties" : {
+          "response" : {
+            "required" : [ "countries" ],
+            "type" : "object",
+            "properties" : {
+              "countries" : {
+                "type" : "array",
+                "description" : "시/군/구(country)정보 list",
+                "items" : {
+                  "required" : [ "id", "name" ],
+                  "type" : "object",
+                  "properties" : {
+                    "name" : {
+                      "type" : "string",
+                      "description" : "시/군/구(country)의 이름"
+                    },
+                    "id" : {
+                      "type" : "number",
+                      "description" : "시/군/구(country)의 ID"
+                    }
+                  }
+                }
+              }
+            },
+            "description" : "응답 body"
+          },
+          "errorMessage" : {
+            "type" : "string",
+            "description" : "에러 메시지",
+            "nullable" : true
+          },
+          "status" : {
+            "type" : "number",
+            "description" : "응답 상태 정보"
+          }
+        }
+      },
+      "모집글 목록 조회 응답 DTO" : {
+        "title" : "모집글 목록 조회 응답 DTO",
+        "required" : [ "status" ],
+        "type" : "object",
+        "properties" : {
+          "response" : {
+            "required" : [ "nextCursorRequest" ],
+            "type" : "object",
+            "properties" : {
+              "nextCursorRequest" : {
+                "required" : [ "key", "size" ],
+                "type" : "object",
+                "properties" : {
+                  "size" : {
+                    "type" : "number",
+                    "description" : "다음 요청 cursor의 size"
+                  },
+                  "key" : {
+                    "type" : "number",
+                    "description" : "다음 요청 cursor의 key"
+                  }
+                },
+                "description" : "다음 요청 cursor 정보(받은 값 그대로 다음 요청에 사용할 것)"
+              },
+              "posts" : {
+                "type" : "array",
+                "items" : {
+                  "required" : [ "currentNumber", "districtName", "dueTime", "id", "isClose", "startTime", "title", "userName" ],
+                  "type" : "object",
+                  "properties" : {
+                    "isClose" : {
+                      "type" : "boolean",
+                      "description" : "모집글 마감 여부"
+                    },
+                    "districtName" : {
+                      "type" : "string",
+                      "description" : "조회된 모집글 행정구역"
+                    },
+                    "startTime" : {
+                      "type" : "string",
+                      "description" : "조회된 모집글 게임 예정 일시"
+                    },
+                    "currentNumber" : {
+                      "type" : "number",
+                      "description" : "조회된 모집글 참석 인원"
+                    },
+                    "profileImage" : {
+                      "type" : "string",
+                      "description" : "조회된 모집글 작성자 프로필 사진 경로 | 사진이 없을 경우 null",
+                      "nullable" : true
+                    },
+                    "id" : {
+                      "type" : "number",
+                      "description" : "조회된 모집글 ID"
+                    },
+                    "userName" : {
+                      "type" : "string",
+                      "description" : "조회된 모집글 작성자 이름 "
+                    },
+                    "dueTime" : {
+                      "type" : "string",
+                      "description" : "조회된 모집글 모집 마감기한"
+                    },
+                    "title" : {
+                      "type" : "string",
+                      "description" : "조회된 모집글 제목 "
+                    }
+                  }
+                }
+              }
+            },
+            "description" : "응답 body"
+          },
+          "errorMessage" : {
+            "type" : "string",
+            "description" : "에러 메시지",
+            "nullable" : true
+          },
+          "status" : {
+            "type" : "number",
+            "description" : "응답 상태 정보"
+          }
+        }
+      },
+      "댓글 조회 응답 DTO" : {
+        "title" : "댓글 조회 응답 DTO",
+        "required" : [ "status" ],
+        "type" : "object",
+        "properties" : {
+          "response" : {
+            "required" : [ "comments", "nextCursorRequest" ],
+            "type" : "object",
+            "properties" : {
+              "comments" : {
+                "type" : "array",
+                "description" : "댓글",
+                "items" : {
+                  "required" : [ "childComments", "content", "createdAt", "editedAt", "id" ],
+                  "type" : "object",
+                  "properties" : {
+                    "createdAt" : {
+                      "type" : "string",
+                      "description" : "댓글 생성 시간"
+                    },
+                    "editedAt" : {
+                      "type" : "string",
+                      "description" : "댓글 마지막 수정 시간"
+                    },
+                    "profileImage" : {
+                      "type" : "string",
+                      "description" : "댓글 작성자 프로필 이미지 경로",
+                      "nullable" : true
+                    },
+                    "id" : {
+                      "type" : "number",
+                      "description" : "댓글의 ID(PK)"
+                    },
+                    "userName" : {
+                      "type" : "string",
+                      "description" : "댓글 작성자의 닉네임 | 삭제된 댓글의 경우 null",
+                      "nullable" : true
+                    },
+                    "childComments" : {
+                      "type" : "array",
+                      "description" : "대댓글",
+                      "items" : {
+                        "required" : [ "content", "createdAt", "editedAt", "id", "profileImage", "userId", "userName" ],
+                        "type" : "object",
+                        "properties" : {
+                          "createdAt" : {
+                            "type" : "string",
+                            "description" : "대댓글 생성 시간"
+                          },
+                          "editedAt" : {
+                            "type" : "string",
+                            "description" : "대댓글 마지막 수정 시간"
+                          },
+                          "id" : {
+                            "type" : "number",
+                            "description" : "대댓글 ID"
+                          },
+                          "userName" : {
+                            "type" : "string",
+                            "description" : "대댓글 작성자의 닉네임"
+                          },
+                          "userId" : {
+                            "type" : "number",
+                            "description" : "대댓글 작성자의 ID(PK)"
+                          },
+                          "content" : {
+                            "type" : "string",
+                            "description" : "대댓글 내용"
+                          }
+                        }
+                      }
+                    },
+                    "userId" : {
+                      "type" : "number",
+                      "description" : "댓글 작성자의 ID(PK) | 삭제된 댓글의 경우 null",
+                      "nullable" : true
+                    },
+                    "content" : {
+                      "type" : "string",
+                      "description" : "댓글 내용 | 삭제된 댓글의 경우 '삭제된 댓글입니다.'"
+                    }
+                  }
+                }
+              },
+              "nextCursorRequest" : {
+                "required" : [ "key", "size" ],
+                "type" : "object",
+                "properties" : {
+                  "size" : {
+                    "type" : "number",
+                    "description" : "다음 요청 cursor의 size"
+                  },
+                  "key" : {
+                    "type" : "number",
+                    "description" : "다음 요청 cursor의 key"
+                  }
+                },
+                "description" : "다음 요청 cursor 정보(받은 값 그대로 다음 요청에 사용할 것)"
+              }
+            },
+            "description" : "응답 body"
+          },
+          "errorMessage" : {
+            "type" : "string",
+            "description" : "에러 메시지",
+            "nullable" : true
+          },
+          "status" : {
+            "type" : "number",
+            "description" : "응답 상태 정보"
+          }
+        }
+      },
+      "모집글 수정 요청 DTO" : {
+        "title" : "모집글 수정 요청 DTO",
+        "required" : [ "content", "dueTime", "startTime", "title" ],
+        "type" : "object",
+        "properties" : {
+          "startTime" : {
+            "type" : "string",
+            "description" : "게임 예정 일시"
+          },
+          "dueTime" : {
+            "type" : "string",
+            "description" : "모집 마감기한"
+          },
+          "title" : {
+            "type" : "string",
+            "description" : "모집글 제목"
+          },
+          "content" : {
+            "type" : "string",
+            "description" : "모집글 내용"
+          }
+        }
+      },
+      "대화방 목록 조회 응답 DTO" : {
+        "title" : "대화방 목록 조회 응답 DTO",
+        "required" : [ "status" ],
+        "type" : "object",
+        "properties" : {
+          "response" : {
+            "required" : [ "nextCursorRequest" ],
+            "type" : "object",
+            "properties" : {
+              "messages" : {
+                "type" : "array",
+                "items" : {
+                  "required" : [ "countNew", "opponentUserId", "opponentUserName", "opponentUserProfileImage", "recentMessage", "recentTime" ],
+                  "type" : "object",
+                  "properties" : {
+                    "recentMessage" : {
+                      "type" : "string",
+                      "description" : "쪽지 상대와의 가장 최근 메시지 내용"
+                    },
+                    "countNew" : {
+                      "type" : "number",
+                      "description" : "안 앍은 메시지의 수"
+                    },
+                    "opponentUserId" : {
+                      "type" : "number",
+                      "description" : "쪽지 상대 유저 ID"
+                    },
+                    "recentTime" : {
+                      "type" : "string",
+                      "description" : "쪽지 상대와의 가장 최근 송수신 시각"
+                    },
+                    "opponentUserName" : {
+                      "type" : "string",
+                      "description" : "쪽지 상대 유저 이름"
+                    }
+                  }
+                }
+              },
+              "nextCursorRequest" : {
+                "required" : [ "key", "size" ],
+                "type" : "object",
+                "properties" : {
+                  "size" : {
+                    "type" : "number",
+                    "description" : "다음 요청 cursor의 size"
+                  },
+                  "key" : {
+                    "type" : "number",
+                    "description" : "다음 요청 cursor의 key"
+                  }
+                },
+                "description" : "다음 요청 cursor 정보(받은 값 그대로 다음 요청에 사용할 것)"
+              }
+            },
+            "description" : "응답 body"
+          },
+          "errorMessage" : {
+            "type" : "string",
+            "description" : "에러 메시지",
+            "nullable" : true
+          },
+          "status" : {
+            "type" : "number",
+            "description" : "응답 상태 정보"
+          }
+        }
+      },
+      "참여자에게 별점 등록 요청 DTO" : {
+        "title" : "참여자에게 별점 등록 요청 DTO",
+        "required" : [ "rating", "targetId" ],
+        "type" : "object",
+        "properties" : {
+          "targetId" : {
+            "type" : "number",
+            "description" : "평가 대상 사용자의 id(PK)"
+          },
+          "rating" : {
+            "type" : "number",
+            "description" : "별점 | 1 ~ 5 범위 가능"
+          }
+        }
+      },
+      "모집글 등록 요청 DTO" : {
+        "title" : "모집글 등록 요청 DTO",
+        "required" : [ "content", "districtId", "dueTime", "startTime", "title" ],
+        "type" : "object",
+        "properties" : {
+          "districtId" : {
+            "type" : "number",
+            "description" : "모집글 행정구역 ID"
+          },
+          "startTime" : {
+            "type" : "string",
+            "description" : "게임 예정 일시"
+          },
+          "dueTime" : {
+            "type" : "string",
+            "description" : "모집 마감기한"
+          },
+          "title" : {
+            "type" : "string",
+            "description" : "모집글 제목"
+          },
+          "content" : {
+            "type" : "string",
+            "description" : "모집글 내용"
+          }
+        }
+      }
+    },
+    "securitySchemes" : {
+      "bearerAuthJWT" : {
+        "type" : "http",
+        "scheme" : "bearer",
+        "bearerFormat" : "JWT"
+      }
+    }
+  }
+}
