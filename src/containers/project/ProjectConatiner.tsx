@@ -16,7 +16,7 @@ export default function ProjectContainer({ title, projects }: { title: string; p
             <Link
               key={project.id}
               to={`/projects/${project.frontmatter.slug}`}
-              className="relative w-full h-full bg-gradient-to-bl to-gray-300 from-gray-100 drop-shadow-lg flex items-center justify-center max-h-96 group"
+              className="relative w-full h-full bg-gradient-to-bl to-gray-300 from-gray-100 drop-shadow-lg flex items-center justify-center group"
             >
               {image ? (
                 <GatsbyImage
