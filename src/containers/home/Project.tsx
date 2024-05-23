@@ -40,14 +40,14 @@ export default function Project() {
             <Link
               key={project.id}
               to={`/projects/${project.frontmatter.slug}`}
-              className="relative w-full h-full bg-gradient-to-bl to-gray-300 from-gray-100 drop-shadow-lg flex items-center justify-center group"
+              className="relative w-full bg-gradient-to-bl to-gray-300 from-gray-100 drop-shadow-lg flex items-center justify-center group"
             >
               {image ? (
                 <GatsbyImage
                   alt={`${project.frontmatter.title} 대표 이미지`}
                   loading="eager"
                   image={image}
-                  className="max-h-full group-hover:scale-90 transition-all duration-500"
+                  className="group-hover:scale-90 transition-all duration-500"
                   objectFit="contain"
                 />
               ) : null}
