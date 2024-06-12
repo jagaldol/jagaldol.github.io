@@ -25,6 +25,12 @@ export default function Navigator() {
         RESUME
       </a>
       <a
+        href="https://github.com/jagaldol"
+        className="mx-3 text-lg transition-all hover:text-main-theme hover:-translate-y-[2px] duration-1000"
+      >
+        GITHUB
+      </a>
+      <a
         href="https://blog.jagaldol.com/"
         className="mx-3 text-lg transition-all hover:text-main-theme hover:-translate-y-[2px] duration-1000"
       >

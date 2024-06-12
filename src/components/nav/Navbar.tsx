@@ -75,6 +75,9 @@ export default function Navbar({ isNavOpen, close }: { isNavOpen: boolean; close
           <a href="/files/resume.pdf" className="text-lg transition-all hover:text-main-theme duration-1000">
             RESUME
           </a>
+          <a href="https://github.com/jagaldol" className="text-lg transition-all hover:text-main-theme duration-1000">
+            GITHUB
+          </a>
           <a href="https://blog.jagaldol.com/" className="text-lg transition-all hover:text-main-theme duration-1000">
             BLOG
           </a>
