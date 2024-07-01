@@ -1,6 +1,6 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faGithub } from '@fortawesome/free-brands-svg-icons'
+import { faGithub, faLinkedinIn } from '@fortawesome/free-brands-svg-icons'
 import { faBlog, faCakeCandles, faUser } from '@fortawesome/free-solid-svg-icons'
 import { faEnvelope } from '@fortawesome/free-regular-svg-icons'
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
@@ -69,6 +69,7 @@ export default function Profile() {
             <ContactElement content="2000.01.29." icon={faCakeCandles} />
             <ContactElement content="jagaldol.dev@gmail.com" icon={faEnvelope} link="mailto:jagaldol.dev@gmail.com" />
             <ContactElement content="@jagadol" icon={faGithub} link="https://github.com/jagaldol/" />
+            <ContactElement content="LinkedIn" icon={faLinkedinIn} link="https://www.linkedin.com/in/hye-jun/" />
             <ContactElement content="자갈돌의 devLog" icon={faBlog} link="https://blog.jagaldol.com/" />
           </ProfileContent>
           {profileImage ? (
@@ -79,11 +80,11 @@ export default function Profile() {
         </div>
 
         <ProfileContent title="Education">
+          <Paragraph content="구글 머신러닝 부트캠프 2024" description="2024.07. ~ 2024.10." />
+          <Paragraph content="카카오 테크 캠퍼스 1기" description="2023.04. ~ 2023.11." />
           <Paragraph content="부산대학교 정보컴퓨터공학부" description="2018.03. ~ 2024.08.">
             <p className={paragraphDescriptionClassName}>학점: 4.00 / 4.5</p>
           </Paragraph>
-
-          <Paragraph content="카카오 테크 캠퍼스 1기" description="2023.04. ~ 2023.11." />
         </ProfileContent>
 
         <ProfileContent title="Awards">
