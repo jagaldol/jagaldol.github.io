@@ -80,8 +80,9 @@ export default function Profile() {
         </div>
 
         <ProfileContent title="Education">
+          <Paragraph content="네이버 부스트 캠프 AI Tech 7기 - NLP 트랙" description="2024.08. ~ 2025.02." />
           <Paragraph content="구글 머신러닝 부트캠프 2024" description="2024.07. ~ 2024.10." />
-          <Paragraph content="카카오 테크 캠퍼스 1기" description="2023.04. ~ 2023.11." />
+          <Paragraph content="카카오 테크 캠퍼스 1기 Backend" description="2023.04. ~ 2023.11." />
           <Paragraph content="부산대학교 정보컴퓨터공학부" description="2018.03. ~ 2025.02.">
             <p className={paragraphDescriptionClassName}>학점: 4.00 / 4.5</p>
           </Paragraph>
