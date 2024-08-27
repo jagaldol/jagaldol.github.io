@@ -2,9 +2,9 @@ import remarkGfm from 'remark-gfm'
 
 const config = {
   siteMetadata: {
-    title: `Backend Developer`,
+    title: `ML Engineer`,
     name: `Hyejun An`,
-    description: `백엔드 개발자 포트폴리오`,
+    description: `머신 러닝 엔지니어 웹 포트폴리오`,
     siteUrl: `https://jagaldol.com`,
   },
   // More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.
