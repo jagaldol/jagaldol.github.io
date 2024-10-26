@@ -1,12 +1,12 @@
 ---
 title: ChatFoodie
-subtitle: LLM을 이용한 음식 추천 챗봇
+subtitle: LLM 음식 추천 챗봇 서비스
 slug: chat-foodie
-stack: ["spring boot", "Next.js"]
+stack: ["huggingface", "lora"]
 image: ../../images/projects/chat-foodie/thumbnail.png
 banner: ../../images/projects/chat-foodie/banner.png
 start_date: 2023-05-09 00:00:00 +0900
-end_date: 2023-08-31 00:00:00 +0900
+end_date: 2023-10-06 00:00:00 +0900
 deploy_link: https://chatfoodie.net
 image_list_path: projects/chat-foodie/images/**
 ---
@@ -18,19 +18,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
 
 
-LLM(Large Language Model)을 파인튜닝한 **음식 추천을 위한 챗봇 서비스**입니다.
+푸디 AI는 `KoAlpaca-polyglot-5.8B의 베이스 모델` 을 `LoRA` 방식으로 파인튜닝하여 만든 **Local LLM 기반의 음식 추천 챗봇**입니다. SNS 대화 데이터(AI hub)와 Wikipedia의 음식 정보를 바탕으로 **GPT를 사용한 self-instruct** 학습을 진행했으며, 최종적으로 `8,000개의 학습 데이터`를 통해 모델을 완성했습니다.
 
-푸디 AI는 `KoAlpaca-polyglot-5.8B의 베이스 모델` 위에서 `fine-tuning(LoRA)`을 거쳐 만들어졌습니다. SNS 대화 데이터(AI hub)와 Wikipedia의 음식 정보를 바탕으로 **GPT를 사용한 self-instruct**를 수행하였고 최종 `8,000개의 학습 데이터`를 이용하였습니다.
+저는 프로젝트 리더로서 팀을 구성하고, AI 모델 연구와 파인튜닝 작업을 주도했습니다.  특히 한국어 자료가 부족한 시점에서 LLM 파인튜닝과 관련된 다양한 오픈소스 프로젝트(`text-generation-webui`, `fastchat`, `nanoGPT`, `llama.cpp` 등)을 연구하고 적용하는 과정에서 많은 기술적 성장을 이루었습니다. 이 경험을 통해 새로운 기술을 학습하는 자신감을 얻게 되었습니다.
 
-프로젝트 리더로써 동기들과 3인 팀을 결성하여 Local LLM 챗봇 웹 서비스를 만들었습니다. 개인적으로 AI, 특히 언어 모델들에 관심이 많았고 직접 ChatGPT와 같은 서비스를 만들어보고 싶었습니다. 졸업과제를 기회로 삼아 AI에 관심이 있는 동기들과 팀을 만들었고 챗푸디를 만들게 되었습니다. 3인 팀 중 웹 개발을 해본 사람이 저 밖에 없는 상황이였습니다. 프로젝트 진행에 앞서 팀원들에게 개발 프레임워크들을 가르쳤습니다.  막 웹 개발을 배운 팀원들의 코드는 코드 리뷰를 통해 모든 코드를 저를 거쳐 병합되도록 하였습니다.
-
-chatGPT로 LLM이 유명해지기 시작하던 시기여서 언어 모델 파인튜닝에 대한 한국어 자료가 적어 주로 github의 오픈 소스들(`text-generation-webui`, `fastchat`, `nanoGPT`, `llama.cpp` 등)을 참고하여 학습하였습니다. 이 과정에서 모르는 기술에 대한 자신감을 얻을 수 있었습니다.
-
-회원들의 `정보 관리`, `채팅방`, `채팅내역 관리`, `채팅 전송`과 `챗봇 응답에 대한 전처리/후처리`를 하는 **spring boot 서버를 개발**하였습니다. `server side rendering`을 간편하게 적용하기 위해 **Next.js를 사용하여 프론트 화면을 개발**하였습니다. 개발은 `typescript`를 사용하였고, 프로젝트 협업을 편하게 하기 위해 `eslint(airbnb)`, `prettier`를 적용하였습니다. **제가 담당한 부분**은 프로젝트의 전체적인 `구조 설계`와 `뼈대 구축`, `spring security`, `db 연결`, `웹소켓 api` 등을, UI 작업에서는 `채팅 UI`, `실시간으로 출력되는 AI의 대답 렌더링` 등 입니다.
+프로젝트에서는 **Spring Boot 기반의 서버 개발**과 **AI 응답 처리 시스템**을 설계하고 구현하였습니다. 팀원들의 코드에 대한 **코드 리뷰**를 진행하며 코드 품질을 유지하고, 프로젝트의 모든 코드가 원활하게 통합되도록 병합 작업을 주도했습니다.
 
 > **현재 chatfoodie.net 도메인을 통해 배포**되고 있으며, 구글과 네이버 검색엔진에 등록되어있습니다.
 >
 > 2023년 부산대학교 정보컴퓨터공학부 졸업과제
+
+[//]: # (회원들의 `정보 관리`, `채팅방`, `채팅내역 관리`, `채팅 전송`과 `챗봇 응답에 대한 전처리/후처리`를 하는 **spring boot 서버를 개발**하였습니다. `server side rendering`을 간편하게 적용하기 위해 **Next.js를 사용하여 프론트 화면을 개발**하였습니다. 개발은 `typescript`를 사용하였고, 프로젝트 협업을 편하게 하기 위해 `eslint&#40;airbnb&#41;`, `prettier`를 적용하였습니다. **제가 담당한 부분**은 프로젝트의 전체적인 `구조 설계`와 `뼈대 구축`, `spring security`, `db 연결`, `웹소켓 api` 등을, UI 작업에서는 `채팅 UI`, `실시간으로 출력되는 AI의 대답 렌더링` 등 입니다.)
 
 <br />
 
@@ -39,9 +37,11 @@ chatGPT로 LLM이 유명해지기 시작하던 시기여서 언어 모델 파인
 </div>
 
 <Stacks>
+  ![Python](https://img.shields.io/badge/python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+  ![huggingface](https://img.shields.io/badge/huggingface-FFD21E?style=for-the-badge&logo=huggingface&logoColor=black)
+  ![LoRA](https://img.shields.io/badge/LoRA-40B5A4?style=for-the-badge&logo=LoRA&logoColor=white)
   ![spring boot](https://img.shields.io/badge/Spring%20boot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white)
   ![java](https://img.shields.io/badge/-Java-ED8B00?style=for-the-badge&logo=java&logoColor=white)
-  ![Python](https://img.shields.io/badge/python-3776AB?style=for-the-badge&logo=python&logoColor=white)
   ![mysql](https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white)
   ![AWS EC2](https://img.shields.io/badge/AWS%20EC2-FF9900?style=for-the-badge&logo=amazonec2&logoColor=white)
   ![nginx](https://img.shields.io/badge/nginx-009639?style=for-the-badge&logo=nginx&logoColor=white)
