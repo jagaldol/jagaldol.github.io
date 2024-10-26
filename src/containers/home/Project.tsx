@@ -58,7 +58,7 @@ export default function Project() {
       </div>
 
       <AnchorLink
-        to="/projects/#Sub_Project"
+        to="/projects/#Main_Project"
         className={`
         flex justify-center items-center rounded-full
         text-lg max-md:text-base
