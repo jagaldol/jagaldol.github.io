@@ -50,9 +50,9 @@ export default function Title() {
               <b>무에서 유를 창조하는 개발자</b>, 안혜준입니다.
             </p>
             <p className="max-md:block flex flex-col">
-              <span>최근 백엔드 개발자에서 ML 엔지니어로 직무를 변환하였습니다. </span>
+              <span>최근 백엔드 개발자에서 AI 엔지니어로 직무를 변환하였습니다. </span>
               <span>
-                현재 ML 엔지니어로 거듭나기 위해 부트캠프 과정 중입니다. 더욱 다양한 경험을 통해 성장해나가고 싶습니다!
+                현재 AI 엔지니어로 거듭나기 위해 부트캠프 과정 중입니다. 더욱 다양한 경험을 통해 성장해나가고 싶습니다!
               </span>
             </p>
           </div>

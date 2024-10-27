@@ -2,7 +2,7 @@ import remarkGfm from 'remark-gfm'
 
 const config = {
   siteMetadata: {
-    title: `ML Engineer`,
+    title: `AI Engineer`,
     name: `Hyejun An`,
     description: `머신 러닝 엔지니어 웹 포트폴리오`,
     siteUrl: `https://jagaldol.com`,
