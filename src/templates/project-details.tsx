@@ -73,10 +73,14 @@ export default function ProjectDetails({ data, children }: any) {
   // eslint-disable-next-line @typescript-eslint/naming-convention
   const { title, subtitle, stack, banner, start_date, end_date, deploy_link } = data.mdx.frontmatter
   const bannerImage = getImage(banner)
-  const start = new Date(start_date)
-  const end = new Date(end_date)
 
-  const dateString = `${start.getFullYear()}.${start.getMonth() + 1}.${start.getDate()}. ~ ${end.getFullYear()}.${end.getMonth() + 1}.${end.getDate()}.`
+  const start = new Date(start_date)
+  const startDateString = `${start.getFullYear()}.${start.getMonth() + 1}.${start.getDate()}.`
+
+  const end = new Date(end_date)
+  const endDateString = end_date ? `${end.getFullYear()}.${end.getMonth() + 1}.${end.getDate()}.` : '진행중'
+
+  const dateString = `${startDateString} ~ ${endDateString}`
 
   const imageList = data.imageList.edges.map((edge: any) => getImage(edge.node))
 
