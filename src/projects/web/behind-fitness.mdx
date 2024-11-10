@@ -1,0 +1,91 @@
+---
+title: "Behind Fitness"
+subtitle: "운동 기록 및 관리, 통계 프로그램"
+slug: behind-fitness
+stack: ["spring boot", "next.js"]
+image: ../../images/projects/behind-fitness/thumbnail.png
+banner: ../../images/projects/behind-fitness/banner.png
+start_date: 2024-03-30 00:00:00 +0900
+deploy_link: https://behind-fitness.jagaldol.com
+image_list_path: projects/behind-fitness/images/**
+---
+
+import Stacks from '../../containers/project/Stacks'
+
+제 취미는 **웨이트 트레이닝**입니다. 하지만 기존 앱 스토어에 존재하는 운동 기록 어플들은 제가 원하는 운동을 자유롭게 추가할 수 있는 기능이 부족하고, 기록에 대한 **통계 제공** 역시 미흡했습니다.
+
+"**내가 원하는 게 없다면 직접 만들어보자!**"는 생각으로, 웨이트 트레이닝에 특화된 **운동 기록**, **캘린더**, **통계**, **메모** 기능을 갖춘 프로그램을 개발하게 되었습니다.
+
+---
+
+**Behind-Fitness**는 언제 어디서나 웹으로 운동 관리를 할 수 있도록 개발된 웹 애플리케이션입니다. 특히, **PWA**(Progressive Web App)를 적용하여 모바일 환경에서도 크롬 브라우저를 통해 간접적으로 설치할 수 있도록 설계되어, 어플리케이션처럼 편리하게 활용할 수 있습니다. 앞으로도 지속적인 업데이트를 통해 내가 사용하기에 정말로 편한 서비스를 완성하는 게 목표입니다!
+
+아래의 **체험하기** 항목을 통해 **Behind-Fitness**에서 제공하는 기능을 직접 확인해보세요!
+
+> **참고:** 회원가입 기능은 개발하지 않았으며, 현재는 주변 지인들에게 계정을 생성해주어 소수의 사용자(2024.11 기준 5명)만 존재합니다.
+>
+> 제 서버를 함께 사용하고 싶은 분은 직접 문의해주시면 서버 한도 내에서 계정을 생성해드리겠습니다.
+
+## **Behind 프로젝트**
+
+Behind-Fitness는 **Behind 프로젝트**의 첫 번째 도전입니다. 이 프로젝트는 일상 속 불편함을 자동화하여 하나의 통합 플랫폼에서 관리할 수 있도록 하는 목표를 가지고 있습니다. Behind-Fitness를 시작으로, **운동 관리**를 위한 새로운 도전을 시작했습니다.
+
+## **Behind-Fitness 체험하기**
+
+Behind-Fitness의 내부 구현과 주요 기능을 직접 체험할 수 있습니다. 아래 링크를 통해 접속하시고, 제공된 테스트 계정으로 로그인해주세요.
+
+- **웹 애플리케이션 링크:** [https://behind-fitness.jagaldol.com](https://behind-fitness.jagaldol.com)
+- **테스트 계정**
+  - **아이디:** `test@test.com`
+  - **비밀번호:** `test`
+
+
+## **기술 스택 및 개발 특징**
+
+### **프론트엔드**
+- **Next.js**와 **TypeScript**를 활용한 사용자 친화적 UI 구현
+- **PWA**(Progressive Web App) 적용으로 모바일 환경에서도 어플리케이션처럼 사용 가능
+- **React Query**를 활용하여 **무한 스크롤**과 **자동 데이터 갱신** 기능 구현
+- **Swipe 기능**을 통해 직관적이고 편리한 UX 제공
+- 이전 기록을 기억하여 자동 완성 기능으로 사용자 경험(UX) 개선
+- **GitHub Actions**와 **GitHub Pages**를 통한 자동 배포 **CD 파이프라인** 구축
+
+### **백엔드**
+- **Kotlin**을 사용하여 **Spring Boot**로 개발 (Java가 아닌 Kotlin으로 첫 도전)
+- **JWT** 기반 인증 시스템으로 지속적인 로그인 유지
+  - **Redis**를 활용해 **리프레시 토큰**을 관리, 세션 유효성을 유지하며 다중 기기(최대 5개) 동시 로그인 지원
+- **GitHub Actions**를 이용하여 백엔드 업데이트 시 **Docker Hub**에 이미지를 자동 빌드 및 업로드
+- **AWS**에서 Docker 이미지를 **pull**하여 서버를 자동 재구동하는 **CD 파이프라인** 구축
+
+<Stacks>
+  ![spring boot](https://img.shields.io/badge/Spring%20boot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white)
+  ![kotlin](https://img.shields.io/badge/-kotlin-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white)
+  ![mysql](https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white)
+  ![redis](https://img.shields.io/badge/Redis-DC382D?style=for-the-badge&logo=Redis&logoColor=white)
+
+  ![docker](https://img.shields.io/badge/docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+  ![AWS EC2](https://img.shields.io/badge/AWS%20EC2-FF9900?style=for-the-badge&logo=amazonec2&logoColor=white)
+  ![nginx](https://img.shields.io/badge/nginx-009639?style=for-the-badge&logo=nginx&logoColor=white)
+  ![github actions](https://img.shields.io/badge/github%20actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white)
+
+  ![Next.js](https://img.shields.io/badge/-Next.js-000000?style=for-the-badge&logo=next.js)
+  ![typescript](https://img.shields.io/badge/-typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
+  ![react query](https://img.shields.io/badge/-react%20query-FF4154?style=for-the-badge&logo=reactquery&logoColor=white)
+  ![recoil](https://img.shields.io/badge/-recoil-3578E5?style=for-the-badge&logo=recoil&logoColor=white)
+  ![pwa](https://img.shields.io/badge/-pwa-5A0FC8?style=for-the-badge&logo=pwa&logoColor=white)
+  ![Tailwind CSS](https://img.shields.io/badge/-Tailwind%20css-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)
+  ![ESLint](https://img.shields.io/badge/-ESLint-4B32C3?style=for-the-badge&logo=ESLint&logoColor=white)
+  ![Prettier](https://img.shields.io/badge/-Prettier-F7B93E?style=for-the-badge&logo=Prettier&logoColor=white)
+</Stacks>
+
+## **현재 구현된 주요 기능**
+
+- **운동 기록** 및 **캘린더 뷰**
+- **인바디 통계** 관리
+- 지속적으로 새로운 기능 개발 중
+
+
+## **GitHub 저장소**
+
+- **프론트엔드:** [Behind-Fitness Client](https://github.com/jagaldol/behind-fitness-client)
+- **백엔드:** [Behind-Fitness Server](https://github.com/jagaldol/behind-fitness-server)
