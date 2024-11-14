@@ -95,10 +95,10 @@ export default function Profile() {
         </ProfileContent>
 
         <ProfileContent title="Certificate">
+          <Paragraph content="TOPCIT - 수준 4[730점]" description="2024.10.12." />
           <Paragraph content="정보처리기사" description="2024.06.18." />
           <Paragraph content="PCCP - Python level 3(700점)" description="2024.06.01." />
-          <Paragraph content="TOEIC - 830점" description="2023.12.10." />
-          <Paragraph content="TOPCIT - 수준 3(608점)" description="2023.05.20." />
+          <Paragraph content="TOEIC[830점]" description="2023.12.10." />
         </ProfileContent>
       </div>
     </Block>
