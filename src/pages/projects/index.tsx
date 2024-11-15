@@ -6,7 +6,7 @@ import SEO from '@/components/SEO'
 import ProjectContainer from '@/containers/project/ProjectConatiner'
 
 const IndexPage: React.FC<PageProps> = ({ data }: { data: any }) => {
-  const mainProjects = data.main.nodes
+  const aiProjects = data.ai.nodes
   const webProjects = data.web.nodes
   const subProjects = data.sub.nodes
   const toyProjects = data.toy.nodes
@@ -15,7 +15,7 @@ const IndexPage: React.FC<PageProps> = ({ data }: { data: any }) => {
     <Layout>
       <div className="mt-5 flex flex-col text-center">
         <h1 className="text-3xl my-8">Project List</h1>
-        <ProjectContainer title="Main Project" projects={mainProjects} />
+        <ProjectContainer title="AI Project" projects={aiProjects} />
         <ProjectContainer title="Web Project" projects={webProjects} />
         <ProjectContainer title="Sub Project" projects={subProjects} />
         <ProjectContainer title="Toy Project" projects={toyProjects} />
@@ -28,9 +28,9 @@ export default IndexPage
 
 export const query = graphql`
   query Projects {
-    main: allMdx(
+    ai: allMdx(
       sort: { frontmatter: { end_date: DESC } }
-      filter: { internal: { contentFilePath: { glob: "**/src/projects/main/*.mdx" } } }
+      filter: { internal: { contentFilePath: { glob: "**/src/projects/ai/*.mdx" } } }
     ) {
       nodes {
         id
@@ -114,6 +114,6 @@ export const Head: HeadFC = ({ data }: any) => (
     title="Project"
     description="지금까지 수행해온 프로젝트 모음입니다."
     pathname="/projects/"
-    image={data.main.nodes[0].frontmatter.image.childImageSharp.original.src}
+    image={data.ai.nodes[0].frontmatter.image.childImageSharp.original.src}
   />
 )

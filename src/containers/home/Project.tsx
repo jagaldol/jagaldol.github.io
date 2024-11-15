@@ -10,7 +10,7 @@ export default function Project() {
     query HomeProject {
       allMdx(
         sort: { frontmatter: { end_date: DESC } }
-        filter: { internal: { contentFilePath: { glob: "**/src/projects/main/*.mdx" } } }
+        filter: { internal: { contentFilePath: { glob: "**/src/projects/ai/*.mdx" } } }
       ) {
         nodes {
           id
