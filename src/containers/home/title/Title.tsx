@@ -40,7 +40,7 @@ export default function Title() {
       <div className="h-[700px] flex flex-col text-center">
         <div className="flex flex-col flex-1 items-center justify-center ">
           <h1 className="text-5xl flex gap-4 max-md:gap-2 max-md:flex-col max-md:text-3xl">
-            <span>안녕하세요</span>
+            <span>안녕하세요 </span>
             <span>
               <b>안혜준</b>입니다.
             </span>
