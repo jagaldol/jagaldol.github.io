@@ -4,7 +4,7 @@ const config = {
   siteMetadata: {
     title: `AI Engineer`,
     name: `Hyejun An`,
-    description: `머신 러닝 엔지니어 웹 포트폴리오`,
+    description: `AI 엔지니어 안혜준의 개발자 포트폴리오`,
     siteUrl: `https://jagaldol.com`,
   },
   // More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.
