@@ -95,7 +95,7 @@ export default function Profile() {
         </ProfileContent>
 
         <ProfileContent title="Certificate">
-          <Paragraph content="SQL개발자(SQLD)" description="2024.11.17." />
+          <Paragraph content="SQL개발자(SQLD)" description="2024.12.13." />
           <Paragraph content="TOPCIT - 수준 4[730점]" description="2024.10.12." />
           <Paragraph content="정보처리기사" description="2024.06.18." />
           <Paragraph content="PCCP - Python level 3(700점)" description="2024.06.01." />
