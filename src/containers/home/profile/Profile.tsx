@@ -89,9 +89,10 @@ export default function Profile() {
         </ProfileContent>
 
         <ProfileContent title="Awards">
-          <Paragraph content="카카오 테크 캠퍼스 신규 서비스 개발 프로젝트 - 대상" description="2023.11.17." />
+          <Paragraph content="2024년 TOPCIT 성적우수자 - 부산대학교총장상" description="2024.12.26." />
           <Paragraph content="2023년 TOPCIT 성적우수자 - 한국정보산업연합회장상" description="2023.12.22." />
           <Paragraph content="제 1회 PNU Coding Challenge - 우수상" description="2023.12.20." />
+          <Paragraph content="카카오 테크 캠퍼스 신규 서비스 개발 프로젝트 - 대상" description="2023.11.17." />
         </ProfileContent>
 
         <ProfileContent title="Certificate">
