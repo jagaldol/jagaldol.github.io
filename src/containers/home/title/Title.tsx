@@ -51,7 +51,7 @@ export default function Title() {
             </p>
             <p>인공지능, 프론트엔드, 백엔드 등 어떤 분야든 만들고 싶은 것을 직접 구현하는 것을 즐깁니다.</p>
             <p className="max-md:block flex flex-col">
-              <span>LLM 에이전트를 활용해 문제를 자동화하고 해결하는 데 관심이 많습니다. </span>
+              <span>LLM 에이전트를 활용해 문제를 해결하고, 반복적인 과정을 자동화하는 것에 관심이 많습니다. </span>
               <span>성장하는 AI 엔지니어로 다양한 경험을 통해 실력을 쌓아가고 싶습니다!</span>
             </p>
           </div>
