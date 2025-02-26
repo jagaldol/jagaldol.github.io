@@ -18,7 +18,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
 
 
-TBD
+매일메일은 **LLM Agent** 기반의 **Chrome Extension 서비스**로, 하루 동안 쌓이는 방대한 이메일 데이터를 요약 및 분류하여 사용자가 중요한 정보를 한눈에 파악할 수 있도록 하는 **메일 보고서 비서**입니다.
+
+**Reflexion 기법**을 적용해 생성된 요약문을 반복적으로 검증·개선하며, 첨부파일 및 이미지 분석을 위해 **Upstage Document Parse**를 활용해 **비정형 데이터**까지 처리합니다.
+
+저는 **네이버 부스트캠프 Upstage 기업 해커톤**에서 **개발리더**로서 프로젝트 기획 및 **LLM Agent**를 활용한 파이프라인 설계와 서비스 구현을 이끌었습니다. 특히 **Reflexion 기법**의 고도화에 집중하여, **생성 결과에 대한 자동 평가 및 피드백 루프를 구축하여 AI 모델이 스스로 개선할 수 있는 체계를 마련**했습니다. 이를 통해 최종 보고서의 품질을 크게 향상시킬 수 있었습니다. 또한, 전체적인 서비스 운영을 위해 `MySQL` 데이터베이스와 `Chrome Extension` 서비스를 위한 `FastAPI` 백엔드 서버 및 `React` 기반의 프론트엔드까지 통합적으로 구현하였습니다.
+
+프로젝트 결과, **G-eval 점수가 3.75에서 4.19로 0.44점** 향상되었고, 메일 요약의 **ROUGE-1**과 **BERTScore** 역시 각각 **24\~30%p, 5\~6%p** 상승했습니다. 이를 통해 매일 쌓이는 이메일의 핵심 정보만 빠르게 파악하고, 업무 효율성을 높이는 **통합 메일 관리 솔루션**을 제시할 수 있었습니다.
+
+> 네이버 부스트캠프 7기 Upstage 기업 해커톤 최종 발표 프로젝트
+
 
 <Stacks>
   ![Python](https://img.shields.io/badge/-Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
