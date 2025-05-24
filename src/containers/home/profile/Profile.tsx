@@ -63,21 +63,21 @@ export default function Profile() {
   return (
     <Block title="Profile">
       <div className="grid grid-cols-2 gap-y-10 max-lg:grid-cols-1 px-10 max-md:px-0">
-        <div className="flex max-sm:flex-col-reverse">
-          <ProfileContent title="Contact">
-            <ContactElement content="안혜준(Hyejun An)" icon={faUser} />
-            <ContactElement content="2000.01.29." icon={faCakeCandles} />
-            <ContactElement content="jagaldol.dev@gmail.com" icon={faEnvelope} link="mailto:jagaldol.dev@gmail.com" />
-            <ContactElement content="@jagadol" icon={faGithub} link="https://github.com/jagaldol/" />
-            <ContactElement content="LinkedIn" icon={faLinkedinIn} link="https://www.linkedin.com/in/hye-jun/" />
-            <ContactElement content="자갈돌의 devLog" icon={faBlog} link="https://blog.jagaldol.com/" />
-          </ProfileContent>
-          {profileImage ? (
-            <div className="flex items-center justify-center">
-              <GatsbyImage className="ml-[10%] max-sm:mx-[10%] rounded-xl" alt="프로필 사진" image={profileImage} />
+        {profileImage ? (
+          <div className="pl-[20%] max-xl:pl-[10%] max-sm:pl-0">
+            <div className="max-w-sm">
+              <GatsbyImage className="rounded-xl " alt="프로필 사진" image={profileImage} />
             </div>
-          ) : null}
-        </div>
+          </div>
+        ) : null}
+        <ProfileContent title="Contact">
+          <ContactElement content="안혜준(Hyejun An)" icon={faUser} />
+          <ContactElement content="2000.01.29." icon={faCakeCandles} />
+          <ContactElement content="jagaldol.dev@gmail.com" icon={faEnvelope} link="mailto:jagaldol.dev@gmail.com" />
+          <ContactElement content="@jagadol" icon={faGithub} link="https://github.com/jagaldol/" />
+          <ContactElement content="LinkedIn" icon={faLinkedinIn} link="https://www.linkedin.com/in/hye-jun/" />
+          <ContactElement content="자갈돌의 devLog" icon={faBlog} link="https://blog.jagaldol.com/" />
+        </ProfileContent>
 
         <ProfileContent title="Education">
           <Paragraph content="네이버 부스트 캠프 AI Tech 7기 - NLP 트랙" description="2024.08. ~ 2025.02." />
