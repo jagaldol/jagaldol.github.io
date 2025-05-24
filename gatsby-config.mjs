@@ -17,7 +17,7 @@ const config = {
     'gatsby-plugin-sitemap',
     'gatsby-remark-responsive-iframe',
     {
-      resolve: "gatsby-plugin-breakpoints",
+      resolve: 'gatsby-plugin-breakpoints',
       options: {
         queries: {
           xs: '(max-width: 320px)',
@@ -33,8 +33,8 @@ const config = {
       resolve: 'gatsby-plugin-robots-txt',
       options: {
         sitemap: 'https://jagaldol.com/sitemap-index.xml',
-        policy: [{userAgent: '*', allow: '/'}]
-      }
+        policy: [{ userAgent: '*', allow: '/' }],
+      },
     },
     {
       resolve: 'gatsby-plugin-manifest',
@@ -58,23 +58,23 @@ const config = {
             resolve: `gatsby-remark-images`,
             options: {
               maxWidth: 1300,
-            }
+            },
           },
           {
             resolve: `gatsby-remark-katex`,
             options: {
               // Add any KaTeX options from https://github.com/KaTeX/KaTeX/blob/master/docs/options.md here
-              strict: `ignore`
-            }
+              strict: `ignore`,
+            },
           },
         ],
       },
     },
     {
-      resolve: "gatsby-plugin-anchor-links",
+      resolve: 'gatsby-plugin-anchor-links',
       options: {
-        offset: -100
-      }
+        offset: -100,
+      },
     },
     'gatsby-plugin-sharp',
     'gatsby-transformer-sharp',
@@ -100,14 +100,6 @@ const config = {
       options: {
         alias: { '@': 'src' },
         extensions: ['tsx'],
-      },
-    },
-    {
-      resolve: 'gatsby-plugin-react-svg',
-      options: {
-        rule: {
-          include: /\.inline\.svg$/,
-        },
       },
     },
   ],
