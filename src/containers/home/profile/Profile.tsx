@@ -79,6 +79,10 @@ export default function Profile() {
           <ContactElement content="자갈돌의 devLog" icon={faBlog} link="https://blog.jagaldol.com/" />
         </ProfileContent>
 
+        <ProfileContent title="Work Experience">
+          <Paragraph content="[Upstage] AI Research Engineer Intern" description="2025.05. ~ Present" />
+        </ProfileContent>
+
         <ProfileContent title="Education">
           <Paragraph content="네이버 부스트 캠프 AI Tech 7기 - NLP 트랙" description="2024.08. ~ 2025.02." />
           <Paragraph content="구글 머신러닝 부트캠프 2024" description="2024.07. ~ 2024.10." />
