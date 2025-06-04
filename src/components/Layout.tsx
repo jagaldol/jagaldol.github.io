@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'gatsby'
-import { faBlog } from '@fortawesome/free-solid-svg-icons'
+import { faArrowUpLong, faBlog } from '@fortawesome/free-solid-svg-icons'
 import { faEnvelope } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
@@ -47,7 +47,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           max-xl:right-7 max-xl:w-10 max-xl:h-10 max-lg:bottom-20 max-md:bottom-12`}
         onClick={toggleScroll}
       >
-        <BottomArrow className={`stroke-white h-6 max-2xl:h-5 transition-all ${atBottom ? 'rotate-180' : ''}`} />
+        <FontAwesomeIcon
+          size="lg"
+          icon={faArrowUpLong}
+          color="white"
+          className={`stroke-white transition-all ${atBottom ? 'rotate-180' : ''}`}
+        />
       </button>
 
       <main className="px-5 pb-40">{children}</main>
