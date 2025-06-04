@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'gatsby'
-import { faArrowUpLong, faBlog } from '@fortawesome/free-solid-svg-icons'
+import { faArrowDownLong, faBlog } from '@fortawesome/free-solid-svg-icons'
 import { faEnvelope } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
 import Header from '@/components/nav/Header'
-import BottomArrow from '@/svgs/bottom-arrow.inline.svg'
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [atBottom, setAtBottom] = useState(false)
@@ -49,9 +48,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       >
         <FontAwesomeIcon
           size="lg"
-          icon={faArrowUpLong}
+          icon={faArrowDownLong}
           color="white"
-          className={`stroke-white transition-all ${atBottom ? 'rotate-180' : ''}`}
+          className={`transition-all ${atBottom ? 'rotate-180' : ''}`}
         />
       </button>
 

@@ -1,7 +1,8 @@
 import React from 'react'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { graphql, useStaticQuery } from 'gatsby'
-import BottomArrow from '@/svgs/bottom-arrow.inline.svg'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowDownLong } from '@fortawesome/free-solid-svg-icons'
 
 export default function Title() {
   const data = useStaticQuery(graphql`
@@ -62,8 +63,8 @@ export default function Title() {
             className="flex flex-col justify-center items-center animate-moveUpDown"
             onClick={scrollDown}
           >
-            <p>더보기</p>
-            <BottomArrow />
+            <p className="pb-3">더보기</p>
+            <FontAwesomeIcon size="xl" icon={faArrowDownLong} />
           </button>
         </div>
       </div>
