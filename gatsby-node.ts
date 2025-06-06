@@ -45,20 +45,3 @@ exports.createPages = async ({ graphql, actions, reporter }: any) => {
     })
   })
 }
-
-exports.onCreateWebpackConfig = ({ actions, getConfig }: any) => {
-  const config = getConfig()
-
-  const fileLoaderRule = config.module.rules.find((rule: any) => rule.test?.toString().includes('svg'))
-
-  if (fileLoaderRule) {
-    fileLoaderRule.exclude = /\.inline\.svg$/
-  }
-
-  config.module.rules.push({
-    test: /\.inline\.svg$/,
-    use: ['@svgr/webpack'],
-  })
-
-  actions.replaceWebpackConfig(config)
-}
