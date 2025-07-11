@@ -6,3 +6,5 @@ src/gatsby-types.d.ts
 .idea/
 
 node_modules/
+
+.vscode/
