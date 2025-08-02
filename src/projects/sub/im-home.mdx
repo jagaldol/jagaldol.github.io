@@ -2,7 +2,7 @@
 title: 아임 홈🏠
 subtitle: "'I'들을 위한 일상공유 플랫폼"
 slug: im-home
-stack: ["android studio", "Next.js"]
+stack: ['android studio', 'kotlin']
 image: ../../images/projects/im-home/thumbnail.png
 banner: ../../images/projects/im-home/banner.png
 start_date: 2022-08-13 13:00:00 +0900
@@ -15,7 +15,6 @@ import Stacks from '../../containers/project/Stacks'
 import MemberContainer from '../../containers/project/MemberContainer'
 import MemberGrid from '../../containers/project/MemberGrid'
 
-
 **제 1회 놀다가는 앞마당 해커톤** 프론트(안드로이드) 참가 결과물입니다. 이전까지 학교 강의만 들으며 제대로된 프로젝트 개발 경험이 없었습니다. 사람들과 협업하여 개발하는 경험을 해보고 싶어 해커튼을 알아보고 참가하였습니다.
 
 팀은 4인으로 **프론트엔드 2명, 백엔드 2명**으로 매칭되었습니다. 팀원들과 상의하며 **서로의 공통점을 바탕으로 주제를 탐색**하였습니다. 팀원들은 전부 내향적인 사람으로 혼자 놀기를 좋아하였습니다. 이에 착안하여 혼자 노는 모습을 공유하고 혼자 갈 만한 장소, 맛집 등을 공유할 수 있는 **'I'들만의 플랫폼**을 만들어보기로 하였습니다.
@@ -23,44 +22,47 @@ import MemberGrid from '../../containers/project/MemberGrid'
 이 프로젝트를 통해 저는 `git`과 `github`을 활용한 협업을 경험할 수 있었습니다. 또한, `figma`를 통해 `UI 디자인`을 하고 이를 실제로 구현하는 과정을 전부 경험해볼 수 있었습니다.
 
 <Stacks>
-  ![android studio](https://img.shields.io/badge/android%20studio-3DDC84?style=for-the-badge&logo=androidstudio&logoColor=white)
+  ![android_studio](https://img.shields.io/badge/android%20studio-3DDC84?style=for-the-badge&logo=androidstudio&logoColor=white)
   ![kotlin](https://img.shields.io/badge/kotlin-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white)
   ![RxJava](https://img.shields.io/badge/kotlin-B7178C?style=for-the-badge&logo=reactivex&logoColor=white)
   ![firebase](https://img.shields.io/badge/firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=white)
 </Stacks>
 
-
 <MemberContainer>
   <h3 className="text-center">Android</h3>
-  <MemberGrid members={[
-    {
-      imageSrc: 'https://github.com/gogumac.png',
-      link: 'https://github.com/gogumac',
-      name: '김유빈',
-      description: '안드로이드 앱 개발'
-    },
-    {
-      imageSrc: 'https://github.com/jagaldol.png',
-      link: 'https://github.com/jagaldol',
-      name: '안혜준',
-      description: '안드로이드 앱 개발'
-    },
-  ]} />
+  <MemberGrid
+    members={[
+      {
+        imageSrc: 'https://github.com/gogumac.png',
+        link: 'https://github.com/gogumac',
+        name: '김유빈',
+        description: '안드로이드 앱 개발',
+      },
+      {
+        imageSrc: 'https://github.com/jagaldol.png',
+        link: 'https://github.com/jagaldol',
+        name: '안혜준',
+        description: '안드로이드 앱 개발',
+      },
+    ]}
+  />
   <div className="mt-20">
     <h3 className="text-center">Backend</h3>
   </div>
-  <MemberGrid members={[
-    {
-      imageSrc: 'https://github.com/goohanseo.png',
-      link: 'https://github.com/goohanseo',
-      name: '구한서',
-      description: '백엔드 개발'
-    },
-    {
-      imageSrc: 'https://github.com/suhyun0918.png',
-      link: 'https://github.com/suhyun0918',
-      name: '김수현',
-      description: '백엔드 개발'
-    },
-  ]} />
+  <MemberGrid
+    members={[
+      {
+        imageSrc: 'https://github.com/goohanseo.png',
+        link: 'https://github.com/goohanseo',
+        name: '구한서',
+        description: '백엔드 개발',
+      },
+      {
+        imageSrc: 'https://github.com/suhyun0918.png',
+        link: 'https://github.com/suhyun0918',
+        name: '김수현',
+        description: '백엔드 개발',
+      },
+    ]}
+  />
 </MemberContainer>
