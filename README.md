@@ -1,4 +1,8 @@
-# jagaldol.github.io
+# jagaldol.github.io (Deprecated)
+
+> ⚠️ This repository contains my old portfolio built with **Gatsby**.  
+> It is no longer maintained.  
+> Please visit my new portfolio built with **Next.js** here: [jagaldol-com](https://github.com/jagaldol/jagaldol-com)
 
 ![Banner](https://github.com/jagaldol/jagaldol.github.io/assets/84557643/964f63b1-9aa9-4fd6-ade7-956bdcf7aae1)
 
